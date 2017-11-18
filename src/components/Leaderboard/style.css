@@ -1,0 +1,7 @@
+.leaderboard {
+  flex: 2.6;
+  box-sizing: border-box;
+  border: solid 1px black;
+  padding: 2rem;
+  margin: 2rem;
+}

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
 import Sidebar from '../Sidebar';
+// import Leaderboard from '../Leaderboard';
+import NewSession from '../Session/NewSession';
 
 import css from './style.css';
 
@@ -16,9 +18,7 @@ export default class Overview extends Component {
     return (
       <div className={css.overview}>
         <Sidebar />
-        <div className={css.content}>
-          Content
-        </div>
+        <NewSession />
       </div>
     );
   }

@@ -5,3 +5,36 @@
   margin: 2rem;
   border: solid 1px black;
 }
+
+.header {
+  width: 100%;
+  display: flex;
+
+  h2 {
+    flex: 1;
+  }
+
+  button {
+    cursor: pointer;
+  }
+}
+
+.session {
+  cursor: pointer;
+  border-bottom: solid 1px transparent;
+  margin-bottom: .2rem;
+  display: flex;
+
+  div {
+    flex: 1;
+  }
+
+  &:hover {
+    border-bottom: solid 1px black;
+
+    &::after {
+      content: '>';
+      align-self: center;
+    }
+  }
+}
