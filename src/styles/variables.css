@@ -1,0 +1,35 @@
+@import './fonts.css';
+
+:root {
+  --color-white: #fff;
+  --color-wild-sand: #f5f5f5;
+  --color-concrete: #f3f3f3;
+  --color-mercury: #e1e1e1;
+  --color-alto: #cecece;
+  --color-nobel: #b6b6b6;
+  --color-silver-chalice: #aaa;
+  --color-dusty-gray: #979797;
+  --color-gray: #828282;
+  --color-boulder: #767676;
+  --color-dove-gray: #666;
+  --color-tundora: #494949;
+  --color-mine-shaft: #3a3a3a;
+  --color-azure-dodger-blue: #3b99fd;
+  --color-azure-radiance: #0094fc;
+  --color-malibu: #80b0fc;
+  --color-cornflower-blue: #2ba6fa;
+  --color-anakiwa: #93d4ff;
+  --color-carribean-green: #00d08c;
+  --color-energy-yellow: #f6d658;
+  --color-bittersweet: #ff726a;
+  --color-radical-red: #f36;
+  --color-tabasco: #b02011;
+  --color-turqoise: #45d7d6;
+  --border-radius: 0.125rem;
+  --box-shadow: 0 0.0625rem 0.125rem var(--color-nobel);
+  --box-shadow-dark: 0 0.0625rem 0.125rem var(--color-mine-shaft);
+}
+
+:root {
+  --font-primary: var(--font-avenir);
+}
