@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import EnterRealm from '../EnterRealm';
-// import css from './style.css';
+import css from './style.css';
 
 export default class App extends Component {
   constructor() {
@@ -13,7 +13,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className={css.app}>
         <EnterRealm />
       </div>
     );

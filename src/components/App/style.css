@@ -1,30 +1,8 @@
 @import '../../styles/variables.css';
 
-body {
-  background: #f3f3f3;
-}
-
-.addComp {
-  background: url('../../assets/vectors/cross-gray.svg') no-repeat center center;
-  background-size: 2rem;
-  height: 2rem;
-  width: 2rem;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  transform: rotateZ(45deg);
-  margin: 2rem;
-}
-
-.body {
-  font-family: var(--font-primary);
-  flex: auto;
-  width: 37.5rem;
-  margin: 0 auto 2rem auto;
-}
-
-@media only screen and (min-width: 1280px) {
-  .body {
-    width: 55rem;
-  }
+.app {
+  font-size: 1.6rem;
+  background-color: #f3f3f3;
+  width: 100vw;
+  height: 100vh;
 }

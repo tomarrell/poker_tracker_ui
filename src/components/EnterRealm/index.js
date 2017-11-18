@@ -4,8 +4,22 @@ import css from './style.css';
 
 const EnterRealm = () =>  {
   return (
-    <div className={css.EnterRealm}>
-      Enter Realm
+    <div className={css.enterRealm}>
+      {/* Enter realm form */}
+      <form>
+        <span>Enter Realm</span>
+        <input />
+        <button
+          type="submit"
+        >
+          Submit
+        </button>
+      </form>
+
+      <ul className={css.previousRealms}>
+        <li>Something</li>
+        <li>SomethingElse</li>
+      </ul>
     </div>
   );
 }
