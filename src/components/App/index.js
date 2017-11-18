@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-// import style from './style.css';
+import EnterRealm from '../EnterRealm';
+// import css from './style.css';
 
 export default class App extends Component {
   constructor() {
@@ -11,7 +12,11 @@ export default class App extends Component {
   }
 
   render() {
-    return <div>Hello World</div>;
+    return (
+      <div>
+        <EnterRealm />
+      </div>
+    );
   }
 }
 

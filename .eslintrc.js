@@ -12,5 +12,6 @@ module.exports = {
     'jsx-a11y/click-events-have-key-events': 'off',
     'arrow-parens': 'off',
     'import/no-named-as-default': 'off',
+    'arrow-body-style': 'off',
   },
 };
