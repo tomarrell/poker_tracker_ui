@@ -4,28 +4,57 @@
   padding: 2rem;
   margin: 2rem;
   border: solid 1px black;
+
+  form {
+    field {
+      display: table-row;
+      * {
+        display: table-cell;
+        padding: 0.4rem;
+      }
+    }
+    button {
+      margin: 2rem 0;
+    }
+  }
 }
 
 .peopleList {
+  width: 100%;
   list-style: none;
   padding-left: 0;
+  -webkit-border-horizontal-spacing: 0;
+  -webkit-border-vertical-spacing: 0;
 
-  li {
-    margin: 0.2rem 0;
-
-    .checkbox {
-    }
-    .name {
-    }
-    .buyin {
-      input {
-        width: 0.4rem;
-      }
-    }
-
+  td {
+    padding: 0.4rem;
   }
 
-  input {
-    margin-right: 1rem;
+  tr:nth-of-type(2n + 1) {
+    background-color: #ccc;
+  }
+
+  tr:nth-of-type(0) {
+    background-color: transparent;
   }
 }
+
+.checkbox {
+  width: 2rem;
+  text-align: center;
+}
+
+.buyin, .walkout {
+  text-align: center;
+  width: 8rem;
+
+  input {
+    margin: 0 0.2rem;
+    width: 3rem;
+  }
+}
+
+.newPerson {
+  margin: 2rem 0;
+}
+
