@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-// import EnterRealm from '../EnterRealm';
-import Overview from '../Overview';
 import css from './style.css';
 
 export default class App extends Component {
@@ -13,11 +12,17 @@ export default class App extends Component {
   }
 
   render() {
+    const { children } = this.props;
+
     return (
       <div className={css.app}>
-        <Overview />
+        {children}
       </div>
     );
   }
 }
+
+App.propTypes = {
+  children: PropTypes.arrayOf(PropTypes.node),
+};
 

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "React application for tracking poker wins/losses",
   "author": "Tom Arrell <me@tomarrell.com>",
+  "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-core": "^6.21.0",
@@ -40,6 +41,7 @@
     "react-flip-move": "^2.9.17",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "react-tether": "^0.5.7",
     "redux": "^3.7.2",
     "webpack": "^3.8.1"
