@@ -5,3 +5,27 @@
   margin: 2rem;
   border: solid 1px black;
 }
+
+.peopleList {
+  list-style: none;
+  padding-left: 0;
+
+  li {
+    margin: 0.2rem 0;
+
+    .checkbox {
+    }
+    .name {
+    }
+    .buyin {
+      input {
+        width: 0.4rem;
+      }
+    }
+
+  }
+
+  input {
+    margin-right: 1rem;
+  }
+}
