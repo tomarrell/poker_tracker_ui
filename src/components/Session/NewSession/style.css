@@ -35,6 +35,10 @@
 .played {
   width: 2rem;
   text-align: center;
+
+  input {
+    padding: 1rem;
+  }
 }
 
 .buyin, .walkout {

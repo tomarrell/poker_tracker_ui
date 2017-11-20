@@ -1,4 +1,5 @@
 import React from 'react';
+import { Prompt } from 'react-router-dom';
 
 import css from './style.css';
 
@@ -39,7 +40,7 @@ const renderTable = (people) => (
             {person.name}
           </td>
           <td className={css.buyin}>
-            $<input type="number" value={DEFAULT_BUYIN} step={0.01} min={0} />
+            $<input type="number" defaultValue={DEFAULT_BUYIN} step={0.01} min={0} />
           </td>
           <td className={css.walkout}>
             $<input type="number" step={0.01} />
@@ -53,6 +54,10 @@ const renderTable = (people) => (
 const NewSession = () => {
   return (
     <div className={css.newSession}>
+      <Prompt 
+        when
+        message="Are you sure you want to leave?"
+      />
       <h2>New Session</h2>
       <hr />
       {renderTable(peopleList)}

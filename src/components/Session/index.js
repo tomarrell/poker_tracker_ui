@@ -37,6 +37,10 @@ const renderTable = (people) => (
     <tbody>
       {people.map(person => {
         const { buyin, walkout, name } = person;
+        const net = 
+          (buyin && walkout && walkout - buyin)
+          || 'N/A';
+        const isNetNegative = typeof net === 'number' && net < 0;
 
         return (
           <tr key={person.id}>
@@ -49,9 +53,8 @@ const renderTable = (people) => (
               $<span>{walkout}</span>
             </td>
             <td className={css.net}>
-              $<span>{
-                (buyin && walkout && walkout - buyin) || 'N/A'
-              }</span>
+              {isNetNegative ? '-$' : '$'}
+              <span>{Math.abs(net)}</span>
             </td>
           </tr>
         );
@@ -63,7 +66,7 @@ const renderTable = (people) => (
 const ViewSession = () => {
   return (
     <div className={css.newSession}>
-      <h2>New Session</h2>
+      <h2>Session Info</h2>
       <hr />
       {renderTable(peopleList)}
       <form>
