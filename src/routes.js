@@ -12,7 +12,7 @@ import Overview from './components/Overview';
 const Routes = () => (
   <Router>
     <App>
-      <Route path="/" component={EnterRealm} />
+      <Route exact path="/" component={EnterRealm} />
       <Route path="/overview" component={Overview} />
     </App>
   </Router>

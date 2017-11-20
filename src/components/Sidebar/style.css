@@ -38,3 +38,11 @@
     }
   }
 }
+
+.newSession {
+  color: white;
+  padding: 0.4rem 1rem;
+  background-color: red;
+  border-radius: 4px;
+  text-decoration: none;
+}

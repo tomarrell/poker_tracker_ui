@@ -1,0 +1,61 @@
+.newSession {
+  box-sizing: border-box;
+  flex: 2.6;
+  padding: 2rem;
+  margin: 2rem;
+  border: solid 1px black;
+
+  form {
+    margin-top: 2rem;
+    field {
+      display: table-row;
+      * {
+        display: table-cell;
+        padding: 0.4rem;
+      }
+    }
+    button {
+      margin: 2rem 0;
+    }
+  }
+}
+
+.peopleList {
+  width: 100%;
+  list-style: none;
+  padding-left: 0;
+  -webkit-border-horizontal-spacing: 0;
+  -webkit-border-vertical-spacing: 0;
+
+  td {
+    padding: 0.4rem;
+  }
+
+  tr:nth-of-type(2n + 1) {
+    background-color: #ccc;
+  }
+
+  tr:nth-of-type(0) {
+    background-color: transparent;
+  }
+}
+
+.played {
+  width: 2rem;
+  text-align: center;
+}
+
+.buyin, .walkout, .net {
+  text-align: center;
+  width: 8rem;
+
+  input {
+    margin: 0 0.2rem;
+    width: 3rem;
+  }
+}
+
+.newPerson {
+  margin: 2rem 0;
+}
+

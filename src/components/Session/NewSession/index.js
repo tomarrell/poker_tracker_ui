@@ -3,9 +3,18 @@ import React from 'react';
 import css from './style.css';
 
 const peopleList = [
-  { name: 'Tom' },
-  { name: 'Liam' },
-  { name: 'Hannah' },
+  {
+    id: 1,
+    name: 'Tom'
+  },
+  {
+    id: 2,
+    name: 'Liam'
+  },
+  {
+    id: 3,
+    name: 'Hannah'
+  },
 ];
 
 const DEFAULT_BUYIN = 5;
@@ -13,14 +22,16 @@ const DEFAULT_BUYIN = 5;
 const renderTable = (people) => (
   <table className={css.peopleList}>
     <thead>
-      <th>Played</th>
-      <th>Name</th>
-      <th>Buyin</th>
-      <th>Walkout</th>
+      <tr>
+        <th>Played</th>
+        <th>Name</th>
+        <th>Buyin</th>
+        <th>Walkout</th>
+      </tr>
     </thead>
     {people.map(person => (
-      <tr>
-        <td className={css.checkbox}>
+      <tr key={person.id}>
+        <td className={css.played}>
           <input type="checkbox" />
         </td>
         <td className={css.name}>
