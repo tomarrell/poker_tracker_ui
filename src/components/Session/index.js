@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import css from './style.css';
 
@@ -77,6 +78,7 @@ const ViewSession = () => {
           <span>Session Time: 6:40pm</span>
         </field>
       </form>
+      <Link to="/overview">Close</Link>
     </div>
   );
 };

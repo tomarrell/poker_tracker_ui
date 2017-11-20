@@ -27,7 +27,7 @@
     padding: 0.4rem;
   }
 
-  tbody tr:nth-of-type(2n + 1) {
+  tbody tr:nth-of-type(odd) {
     background-color: #ccc;
   }
 }
@@ -49,6 +49,11 @@
     margin: 0 0.2rem;
     width: 3rem;
   }
+}
+
+.close {
+  margin-right: 1rem;
+  background-color: #f97a8f;
 }
 
 .newPerson, .create {

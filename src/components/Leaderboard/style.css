@@ -1,7 +1,59 @@
 .leaderboard {
   flex: 2.6;
+  flex-direction: column;
+  display: flex;
   box-sizing: border-box;
   border: solid 1px black;
   padding: 2rem;
   margin: 2rem;
 }
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.champs {
+  flex: 1;
+  margin: auto;
+
+  .title {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+}
+
+.losers {
+  flex: 1;
+  margin: auto;
+
+  .title {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+}
+
+.stats {
+  flex: 1;
+}
+
+.highlightField {
+  display: flex;
+
+  * {
+    flex: 1;
+    align-self: baseline;
+  }
+
+  span {
+    flex: 0.9;
+    text-align: right;
+  }
+
+  .standoutName {
+    padding-left: 1rem;
+    font-size: 2rem;
+  }
+}
+

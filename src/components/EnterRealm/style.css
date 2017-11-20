@@ -28,15 +28,19 @@
     }
 
     button {
-      width: 8rem;
-      margin: auto;
+      margin: 0 0.5rem;
       padding: 0.6rem 1.6rem;
       background-color: #ccc;
       border: none;
       border-radius: 4px;
     }
+
+    .createRealm {
+      background-color: #a6de8a;
+    }
   }
 }
+
 
 .recentTitle {
   margin: 3rem 0 1rem 0;

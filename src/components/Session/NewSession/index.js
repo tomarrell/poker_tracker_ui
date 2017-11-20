@@ -1,5 +1,5 @@
 import React from 'react';
-import { Prompt } from 'react-router-dom';
+import { Prompt, Link } from 'react-router-dom';
 
 import css from './style.css';
 
@@ -71,6 +71,7 @@ const NewSession = () => {
           <span>Session Time: </span>
           <input type="date" className={css.dateField} />
         </field>
+        <Link to="/overview" className={css.close}>Close</Link>
         <button className={css.create} type="submit">Create Session ✔</button>
       </form>
     </div>

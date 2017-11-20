@@ -25,6 +25,8 @@
     flex: 1;
     background-color: transparent;
     padding-left: 0;
+    text-align: left;
+    font-size: 1.4rem;
   }
 
   &:hover {
@@ -39,5 +41,4 @@
 
 .newSession {
   align-self: center;
-  padding: 0.4rem 1rem;
 }

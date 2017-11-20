@@ -31,7 +31,7 @@
     padding: 0.4rem;
   }
 
-  tbody tr:nth-of-type(2n + 1) {
+  tbody tr:nth-of-type(odd) {
     background-color: #ccc;
   }
 }
