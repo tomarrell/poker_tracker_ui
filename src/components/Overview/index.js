@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import Sidebar from '../Sidebar';
@@ -23,9 +23,11 @@ export default class Overview extends Component {
     return (
       <div className={css.overview}>
         <Sidebar />
-        <Route exact path={`${match.url}`} component={Leaderboard} />
-        <Route path={`${match.url}/:id`} component={ViewSession} />
-        <Route path={`${match.url}/new`} component={NewSession} />
+        <Switch>
+          <Route exact path={`${match.url}`} component={Leaderboard} />
+          <Route path={`${match.url}/new`} component={NewSession} />
+          <Route path={`${match.url}/:id`} component={ViewSession} />
+        </Switch>
       </div>
     );
   }

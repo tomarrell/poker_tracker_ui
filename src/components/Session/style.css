@@ -31,12 +31,8 @@
     padding: 0.4rem;
   }
 
-  tr:nth-of-type(2n + 1) {
+  tbody tr:nth-of-type(2n + 1) {
     background-color: #ccc;
-  }
-
-  tr:nth-of-type(0) {
-    background-color: transparent;
   }
 }
 

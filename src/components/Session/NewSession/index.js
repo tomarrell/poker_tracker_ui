@@ -29,22 +29,24 @@ const renderTable = (people) => (
         <th>Walkout</th>
       </tr>
     </thead>
-    {people.map(person => (
-      <tr key={person.id}>
-        <td className={css.played}>
-          <input type="checkbox" />
-        </td>
-        <td className={css.name}>
-          {person.name}
-        </td>
-        <td className={css.buyin}>
-          $<input type="number" value={DEFAULT_BUYIN} step={0.01} min={0} />
-        </td>
-        <td className={css.walkout}>
-          $<input type="number" step={0.01} />
-        </td>
-      </tr>
-    ))}
+    <tbody>
+      {people.map(person => (
+        <tr key={person.id}>
+          <td className={css.played}>
+            <input type="checkbox" />
+          </td>
+          <td className={css.name}>
+            {person.name}
+          </td>
+          <td className={css.buyin}>
+            $<input type="number" value={DEFAULT_BUYIN} step={0.01} min={0} />
+          </td>
+          <td className={css.walkout}>
+            $<input type="number" step={0.01} />
+          </td>
+        </tr>
+      ))}
+    </tbody>
   </table>
 );
 
@@ -64,7 +66,7 @@ const NewSession = () => {
           <span>Session Time: </span>
           <input type="date" className={css.dateField} />
         </field>
-        <button type="submit">Create Session ✔</button>
+        <button className={css.create} type="submit">Create Session ✔</button>
       </form>
     </div>
   );

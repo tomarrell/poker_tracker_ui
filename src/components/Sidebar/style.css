@@ -25,8 +25,10 @@
   margin-bottom: .2rem;
   display: flex;
 
-  div {
+  a {
     flex: 1;
+    color: black;
+    text-decoration: none;
   }
 
   &:hover {
@@ -40,9 +42,9 @@
 }
 
 .newSession {
-  color: white;
+  color: black;
   padding: 0.4rem 1rem;
-  background-color: red;
+  background-color: #ccc;
   border-radius: 4px;
   text-decoration: none;
 }
