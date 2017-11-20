@@ -38,7 +38,30 @@
   }
 }
 
+.recentTitle {
+  margin: 3rem 0 1rem 0;
+  text-align: left;
+}
 
 .previousRealms {
+  margin: 0;
   text-align: left;
+  padding-left: 2rem;
+
+  button {
+    background-color: transparent;
+    border: none;
+    padding: 0 0.4rem;
+    font-family: 'Avenir';
+    font-size: 1.6rem;
+    outline: none;
+
+    &:focus {
+      background-color: #ccc;
+    }
+
+    &:active {
+      background-color: #aaa;
+    }
+  }
 }

@@ -13,22 +13,18 @@
   h2 {
     flex: 1;
   }
-
-  button {
-    cursor: pointer;
-  }
 }
 
 .session {
   cursor: pointer;
   border-bottom: solid 1px transparent;
-  margin-bottom: .2rem;
+  margin-bottom: 0.2rem;
   display: flex;
 
   a {
     flex: 1;
-    color: black;
-    text-decoration: none;
+    background-color: transparent;
+    padding-left: 0;
   }
 
   &:hover {
@@ -42,9 +38,6 @@
 }
 
 .newSession {
-  color: black;
+  align-self: center;
   padding: 0.4rem 1rem;
-  background-color: #ccc;
-  border-radius: 4px;
-  text-decoration: none;
 }
