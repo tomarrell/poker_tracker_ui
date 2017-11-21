@@ -40,10 +40,10 @@ const renderTable = (people) => (
             {person.name}
           </td>
           <td className={css.buyin}>
-            $<input type="number" defaultValue={DEFAULT_BUYIN} step={0.01} min={0} />
+            $<input type="number" defaultValue={DEFAULT_BUYIN} step={0.10} min={0} />
           </td>
           <td className={css.walkout}>
-            $<input type="number" step={0.01} />
+            $<input type="number" step={0.10} />
           </td>
         </tr>
       ))}
