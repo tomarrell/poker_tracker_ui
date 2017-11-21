@@ -25,7 +25,16 @@ button, a {
 }
 
 input {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
+  font-family: 'Avenir', serif;
+  outline: none;
+  border: none;
+  border: solid 2px transparent;
+  padding: 0.4rem;
+  
+  &:focus {
+    border: solid 2px #aaa;
+  }
 }
 
 hr {
