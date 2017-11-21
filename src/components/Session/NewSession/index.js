@@ -69,7 +69,7 @@ const NewSession = () => {
         </field>
         <field>
           <span>Session Time: </span>
-          <input type="date" className={css.dateField} />
+          <input type="time" className={css.dateField} />
         </field>
         <Link to="/overview" className={css.close}>Close</Link>
         <button className={css.create} type="submit">Create Session ✔</button>
