@@ -7,13 +7,12 @@
 
   form {
     margin-top: 2rem;
+    border-spacing: 0 0.4rem;
+
     field {
       display: table-row;
-      * {
-        display: table-cell;
-        padding: 0.4rem;
-      }
     }
+
     button {
       margin: 2rem 0;
     }
@@ -55,3 +54,6 @@
   margin: 2rem 0;
 }
 
+.close {
+  margin-top: 2rem;
+}

@@ -78,7 +78,7 @@ const ViewSession = () => {
           <span>Session Time: 6:40pm</span>
         </field>
       </form>
-      <Link to="/overview">Close</Link>
+      <Link className={css.close} to="/overview">Close</Link>
     </div>
   );
 };

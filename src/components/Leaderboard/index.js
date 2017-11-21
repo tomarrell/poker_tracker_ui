@@ -74,7 +74,7 @@ const Leaderboard = () => {
 
         {/* BOTTOM 3 */}
         <div className={css.losers}>
-          <h3 className={css.title}>Bottom 3</h3>
+          <h3 className={css.title}>BOTTOM 3</h3>
           {bottom3.map((person, index) => (
             <field className={css.highlightField}>
               <span>{BOTTOM_AWARDS[index]}</span>
@@ -84,9 +84,15 @@ const Leaderboard = () => {
         </div>
       </div>
 
-      {/* Losing */}
+      {/* Stats */}
       <div className={css.stats}>
-        Stats
+        <ul>
+          <li>Sessions Played: </li>
+          <li>Total Player Buyins: </li>
+          <li>Net Money Transferred: </li>
+          <li>Number Unique Players: </li>
+          <li>Largest Session (no. of Players): </li>
+        </ul>
       </div>
     </div>
   );
