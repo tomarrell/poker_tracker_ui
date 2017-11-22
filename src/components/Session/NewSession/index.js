@@ -87,7 +87,7 @@ export default class NewSession extends Component {
 
     return (
       <div className={css.newSession}>
-        <Prompt 
+        <Prompt
           when
           message={LEAVE_PROMPT}
         />
