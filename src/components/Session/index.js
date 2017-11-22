@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import Chart from '../Chart';
 import css from './style.css';
 
 const peopleList = [
@@ -38,7 +39,7 @@ const renderTable = (people) => (
     <tbody>
       {people.map(person => {
         const { buyin, walkout, name } = person;
-        const net = 
+        const net =
           (buyin && walkout && walkout - buyin)
           || 'N/A';
         const isNetNegative = typeof net === 'number' && net < 0;
@@ -69,6 +70,17 @@ const ViewSession = () => {
     <div className={css.newSession}>
       <h2>Session Info</h2>
       <hr />
+      <Chart
+        title="Bar Chart"
+        type="bar"
+        data={{
+          labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+          datasets: [{
+            title: 'Some Data',
+            values: Array.from({ length: 10 }, () => Math.floor(Math.random() * 100)),
+          }],
+        }}
+      />
       {renderTable(peopleList)}
       <form>
         <field>

@@ -1,3 +1,13 @@
+/*
+ * Anything coming from ./node_modules will be
+ * excluded from being run through the css-modules
+ * loader. This is configured as a special case in
+ * the webpack.config.js. Therefore, globally
+ * imported styles for packages shall be placed
+ * here.
+ * */
+@import 'frappe-charts/dist/frappe-charts.min.css';
+
 html {
   font-size: 10px;
 }
@@ -31,7 +41,7 @@ input {
   border: none;
   border: solid 2px transparent;
   padding: 0.4rem;
-  
+
   &:focus {
     border: solid 2px #aaa;
   }

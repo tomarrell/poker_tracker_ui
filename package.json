@@ -30,6 +30,7 @@
   "dependencies": {
     "babel-preset-stage-2": "^6.24.1",
     "classnames": "2.2.5",
+    "frappe-charts": "0.0.7",
     "fuse.js": "^3.2.0",
     "lodash": "^4.17.4",
     "precss": "^2.0.0",

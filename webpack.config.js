@@ -39,6 +39,16 @@ module.exports = {
         ],
       },
       {
+        test: /\.css$/,
+        include: [resolve('node_modules')],
+        use: [
+          { loader: 'style-loader' },
+          {
+            loader: 'postcss-loader',
+          },
+        ],
+      },
+      {
         test: /\.svg$/,
         use: 'svg-url-loader',
       },
