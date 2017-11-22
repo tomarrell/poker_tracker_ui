@@ -14,5 +14,6 @@ module.exports = {
     'arrow-parens': 'off',
     'import/no-named-as-default': 'off',
     'arrow-body-style': 'off',
+    'import/prefer-default-export': 'off',
   },
 };

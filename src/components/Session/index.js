@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { formatCurrency } from '../../utils/money';
 import Chart from '../Chart';
 import css from './style.css';
 
@@ -39,25 +40,17 @@ const renderTable = (people) => (
     <tbody>
       {people.map(person => {
         const { buyin, walkout, name } = person;
-        const net =
-          (buyin && walkout && walkout - buyin)
-          || 'N/A';
-        const isNetNegative = typeof net === 'number' && net < 0;
+        const net = buyin
+          && walkout
+          && (walkout - buyin);
 
         return (
           <tr key={person.id}>
             <td className={css.played}>✔</td>
             <td className={css.name}>{name}</td>
-            <td className={css.buyin}>
-              $<span>{buyin}</span>
-            </td>
-            <td className={css.walkout}>
-              $<span>{walkout}</span>
-            </td>
-            <td className={css.net}>
-              {isNetNegative ? '-$' : '$'}
-              <span>{Math.abs(net)}</span>
-            </td>
+            <td className={css.buyin}>{formatCurrency(buyin)}</td>
+            <td className={css.walkout}>{formatCurrency(walkout)}</td>
+            <td className={css.net}>{formatCurrency(net)}</td>
           </tr>
         );
       })}

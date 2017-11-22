@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { formatCurrency } from '../../utils/money';
 import css from './style.css';
 
 const TOP_AWARDS = [
@@ -9,9 +10,9 @@ const TOP_AWARDS = [
 ];
 
 const BOTTOM_AWARDS = [
-  '3rd/last',
-  '2nd/last',
   'last',
+  '2nd/last',
+  '3rd/last',
 ];
 
 const TOP_3_PLAYERS = [
@@ -64,10 +65,10 @@ const Leaderboard = () => {
         {/* TOP 3 */}
         <div className={css.champs}>
           <h3 className={css.title}>TOP 3</h3>
-          {top3.map((person, index) => (
-            <field className={css.highlightField}>
+          {top3.sort((a, b) => b.net - a.net).map((person, index) => (
+            <field key={person.id} className={css.highlightField}>
               <span>{TOP_AWARDS[index]}</span>
-              <h3 className={css.standoutName}>{person.name} - ${person.net}</h3>
+              <h3 className={css.standoutName}>{person.name}: {formatCurrency(person.net)}</h3>
             </field>
           ))}
         </div>
@@ -75,10 +76,10 @@ const Leaderboard = () => {
         {/* BOTTOM 3 */}
         <div className={css.losers}>
           <h3 className={css.title}>BOTTOM 3</h3>
-          {bottom3.map((person, index) => (
-            <field className={css.highlightField}>
+          {bottom3.sort((a, b) => a.net - b.net).map((person, index) => (
+            <field key={person.id} className={css.highlightField}>
               <span>{BOTTOM_AWARDS[index]}</span>
-              <h3 className={css.standoutName}>{person.name} - ${person.net}</h3>
+              <h3 className={css.standoutName}>{person.name}: {formatCurrency(person.net)}</h3>
             </field>
           ))}
         </div>
