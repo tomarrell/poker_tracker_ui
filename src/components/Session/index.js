@@ -26,6 +26,9 @@ const peopleList = [
   },
 ];
 
+const fakeLabels = Array.from({ length: 10 }, (v, i) => i);
+const fakeData = Array.from({ length: 10 }, () => Math.floor(Math.random() * 100) - 30);
+
 const renderTable = (people) => (
   <table className={css.peopleList}>
     <thead>
@@ -67,10 +70,10 @@ const ViewSession = () => {
         title="Bar Chart"
         type="bar"
         data={{
-          labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+          labels: fakeLabels,
           datasets: [{
             title: 'Some Data',
-            values: Array.from({ length: 10 }, () => Math.floor(Math.random() * 100)),
+            values: fakeData,
           }],
         }}
       />
