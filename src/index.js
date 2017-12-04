@@ -1,12 +1,25 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+
+// Charts Styling
 import 'frappe-charts/dist/frappe-charts.min.css';
 
+// Redux Setup
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import combinedReducers from './reducers';
+
+// Routes
 import Routes from './routes';
+// Root styles
 import './style.css';
 
-ReactDOM.render(
-  <Routes />,
+const store = createStore(combinedReducers);
+
+render(
+  <Provider store={store}>
+    <Routes />
+  </Provider>,
   // eslint-disable-next-line
   document.getElementById('root'),
 );
