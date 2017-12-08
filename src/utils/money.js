@@ -1,8 +1,5 @@
 export const formatCurrency = (value) => {
-  if (!value) {
-    console.error('Invalid currency');
-    return null;
-  }
+  if (!value) return null;
   
   if (typeof value !== 'number') {
     return 'N/A';
