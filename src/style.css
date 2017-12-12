@@ -7,6 +7,9 @@
  * here.
  * */
 @import 'frappe-charts/dist/frappe-charts.min.css';
+@import './styles/variables.css';
+
+/* GLOBAL STYLES */
 
 html {
   font-size: 10px;
@@ -15,7 +18,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Avenir', serif;
+  font-family: var(--font-primary), serif;
 }
 
 button, a {
@@ -25,7 +28,7 @@ button, a {
   background-color: #ccc;
   border: none;
   padding: 0.4rem 0.8rem;
-  font-family: 'Avenir';
+  font-family: var(--font-primary), serif;
   font-size: 1.3rem;
   outline: none;
   cursor: pointer;
@@ -36,7 +39,7 @@ button, a {
 
 input {
   font-size: 1.4rem;
-  font-family: 'Avenir', serif;
+  font-family: var(--font-primary), serif;
   outline: none;
   border: none;
   border: solid 2px transparent;
