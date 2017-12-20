@@ -1,5 +1,12 @@
 import { combineReducers } from 'redux';
 
-export default combineReducers({
+function testReducer(state = {}, action) {
+  switch (action.type) {
+    default:
+      return state;
+  }
+}
 
+export default combineReducers({
+  testReducer,
 });

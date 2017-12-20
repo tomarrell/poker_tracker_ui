@@ -68,7 +68,15 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['latest', 'react', 'stage-2'],
+            presets: [
+              'react',
+              'stage-2',
+              ['env', {
+                targets: {
+                  browsers: ['last 2 Chrome versions'],
+                }
+              }],
+            ],
           },
         },
       },

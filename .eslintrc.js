@@ -1,5 +1,8 @@
 module.exports = {
   extends: ['airbnb', 'prettier'],
+  env: {
+    browser: true,
+  },
   plugins: ['prettier'],
   rules: {
     'react/jsx-filename-extension': 'off',

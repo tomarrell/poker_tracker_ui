@@ -1,21 +1,12 @@
 import React, { Component } from 'react';
 
-import css from './style.css';
+import {
+  getRecentRealms,
+  addRecentRealm,
+} from '../../utils/localstorage';
+import { createRealm } from './api';
 
-const REALMS = [
-  {
-    id: 1,
-    title: 'Movio',
-  },
-  {
-    id: 2,
-    title: 'Skycity',
-  },
-  {
-    id: 3,
-    title: 'Home Tournament',
-  }
-];
+import css from './style.css';
 
 export default class EnterRealm extends Component {
   constructor() {
@@ -23,7 +14,7 @@ export default class EnterRealm extends Component {
 
     this.state = {
       realm: '',
-      password: '',
+      // password: '',
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -37,17 +28,19 @@ export default class EnterRealm extends Component {
     }
   }
 
-  createRealm() {
-    console.log('Create Realm');
-  }
+  createRealm = async () => {
+    const { realm } = this.state;
+    const { history } = this.props;
 
-  loginRealm() {
-    console.log('Login Realm');
+    // TODO take realm title during realm creation
+    createRealm(realm, undefined);
+    await addRecentRealm(realm)
+    history.push(`/overview/${realm}`)
   }
 
   render() {
     const { realm: realmInput } = this.state;
-    const realms = REALMS;
+    const realms = getRecentRealms() || [];
 
     return (
       <div className={css.enterRealm}>
@@ -61,13 +54,13 @@ export default class EnterRealm extends Component {
               type="password"
             />}
           <button type="submit">Login</button>
-          <button className={css.createRealm}>+ Create</button>
+          <button onClick={this.createRealm} className={css.createRealm}>+ Create</button>
         </form>
 
         <h3 className={css.recentTitle}>Recent Realms</h3>
         <ul className={css.previousRealms}>
-          {realms.map(realm => (
-            <li key={realm.id}><button>{realm.title}</button></li>
+          {realms.map((realm, index) => (
+            <li key={index}><button>{realm}</button></li>
           ))}
         </ul>
       </div>
