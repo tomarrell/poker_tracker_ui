@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
+import { fetchRealmInfo } from './actions';
 
 import Sidebar from '../Sidebar';
 import Leaderboard from '../Leaderboard';
@@ -9,7 +12,7 @@ import NewSession from '../Session/NewSession';
 
 import css from './style.css';
 
-export default class Overview extends Component {
+class Overview extends Component {
   constructor() {
     super()
 
@@ -24,9 +27,9 @@ export default class Overview extends Component {
       <div className={css.overview}>
         <Sidebar />
         <Switch>
-          <Route exact path={`${match.url}`} component={Leaderboard} />
+          <Route exact path={`${match.url}/:realmName`} component={Leaderboard} />
           <Route path={`${match.url}/new`} component={NewSession} />
-          <Route path={`${match.url}/:id`} component={ViewSession} />
+          <Route path={`${match.url}/session/:id`} component={ViewSession} />
         </Switch>
       </div>
     );
@@ -36,3 +39,10 @@ export default class Overview extends Component {
 Overview.propTypes = {
   match: PropTypes.object,
 };
+
+export default connect(
+  null,
+  dispatch => ({
+    fetchRealmInfo: () => dispatch(fetchRealmInfo()),
+  }),
+)(Overview);

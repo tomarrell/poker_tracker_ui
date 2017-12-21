@@ -1,12 +1,8 @@
 import { combineReducers } from 'redux';
 
-function testReducer(state = {}, action) {
-  switch (action.type) {
-    default:
-      return state;
-  }
-}
+// Individual reducers
+import loginReducer from './components/Login/reducer';
 
 export default combineReducers({
-  testReducer,
+  login: loginReducer,
 });

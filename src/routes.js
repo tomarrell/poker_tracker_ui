@@ -5,13 +5,13 @@ import {
 } from 'react-router-dom';
 
 import App from './components/App';
-import EnterRealm from './components/EnterRealm';
+import Login from './components/Login';
 import Overview from './components/Overview';
 
 const Routes = () => (
   <Router>
     <App>
-      <Route exact path="/" component={EnterRealm} />
+      <Route exact path="/" component={Login} />
       <Route path="/overview" component={Overview} />
     </App>
   </Router>

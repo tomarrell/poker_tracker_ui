@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import {
   getRecentRealms,
   addRecentRealm,
 } from '../../utils/localstorage';
-import { createRealm } from './api';
+
+import { createRealm } from './actions';
 
 import css from './style.css';
 
-export default class EnterRealm extends Component {
+class Login extends Component {
   constructor() {
     super()
 
@@ -30,16 +32,15 @@ export default class EnterRealm extends Component {
 
   createRealm = async () => {
     const { realm } = this.state;
-    const { history } = this.props;
+    const { dispatchCreateRealm, history } = this.props;
 
     // TODO take realm title during realm creation
-    createRealm(realm, undefined);
-    await addRecentRealm(realm)
+    await dispatchCreateRealm(realm, undefined);
     history.push(`/overview/${realm}`)
   }
 
   render() {
-    const { realm: realmInput } = this.state;
+    const { realm } = this.state;
     const realms = getRecentRealms() || [];
 
     return (
@@ -47,7 +48,7 @@ export default class EnterRealm extends Component {
         <form>
           <span>Enter Realm</span>
           <input onChange={this.handleInputChange('realm')} placeholder="Realm" />
-          {realmInput.length > 0 &&
+          {realm.length > 0 &&
             <input
               onChange={this.handleInputChange('password')}
               placeholder="Password"
@@ -67,3 +68,10 @@ export default class EnterRealm extends Component {
     );
   }
 }
+
+export default connect(
+  null,
+  (dispatch) => ({
+    dispatchCreateRealm: (name, title) => dispatch(createRealm(name, title)),
+  }),
+)(Login);
