@@ -22,7 +22,12 @@ const buyinWalkout = [
 ];
 
 // Table structure
-const renderTable = (players, isAddingPerson, handleNewPersonChange) => (
+const Table = ({
+  players,
+  isAddingPerson,
+  handleNewPersonChange,
+  newPlayerName,
+}) => (
   <table className={css.peopleList}>
     <thead>
       <tr>
@@ -33,8 +38,8 @@ const renderTable = (players, isAddingPerson, handleNewPersonChange) => (
       </tr>
     </thead>
     <tbody>
-      {players.map(player => (
-        <tr key={player.id}>
+      {players.map((player, index) => (
+        <tr key={index}>
           <td className={css.played}><input type="checkbox" /></td>
           <td className={css.name}>{player.name}</td>
           {buyinWalkout}
@@ -47,6 +52,7 @@ const renderTable = (players, isAddingPerson, handleNewPersonChange) => (
             <input
               placeholder="Name..."
               onChange={handleNewPersonChange}
+              value={newPlayerName}
             />
           </td>
           {buyinWalkout}
@@ -62,13 +68,13 @@ class NewSession extends Component {
 
     this.state = {
       isAddingPerson: false,
-      newPersonName: null,
+      newPlayerName: '',
     };
   }
 
   handleNewPersonChange = (event) => {
     this.setState({
-      newPersonName: event.target.value,
+      newPlayerName: event.target.value,
     });
   }
 
@@ -82,13 +88,14 @@ class NewSession extends Component {
 
   createPlayer = () => {
     const { createPlayer: dispatchCreatePlayer } = this.props;
-    const { newPersonName } = this.state;
+    const { newPlayerName } = this.state;
 
-    dispatchCreatePlayer(newPersonName);
+    dispatchCreatePlayer(newPlayerName);
+    this.setState({ newPlayerName: '' });
   }
 
   render() {
-    const { isAddingPerson } = this.state;
+    const { isAddingPerson, newPlayerName } = this.state;
     const { players } = this.props;
 
     const buttonMessage = isAddingPerson ? 'x Cancel' : '+ Add person';
@@ -103,7 +110,12 @@ class NewSession extends Component {
 
         <hr />
 
-        {renderTable(players, isAddingPerson, this.handleNewPersonChange)}
+        <Table
+          players={players}
+          isAddingPerson={isAddingPerson}
+          handleNewPersonChange={this.handleNewPersonChange}
+          newPlayerName={newPlayerName}
+        />
         <button
           onClick={this.handleAddPerson}
           className={css.newPerson}
@@ -128,6 +140,13 @@ class NewSession extends Component {
     );
   }
 }
+
+Table.propTypes = {
+  players: PropTypes.array.isRequired,
+  isAddingPerson: PropTypes.bool.isRequired,
+  newPlayerName: PropTypes.string.isRequired,
+  handleNewPersonChange: PropTypes.func.isRequired,
+};
 
 NewSession.propTypes = {
   players: PropTypes.array.isRequired,
