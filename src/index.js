@@ -17,7 +17,9 @@ import Routes from './routes';
 import './style.css';
 
 const sagaMiddleware = createSagaMiddleware();
+// eslint-disable-next-line
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 // TODO https://github.com/reactjs/react-router-redux
 const store = createStore(
   combinedReducers,

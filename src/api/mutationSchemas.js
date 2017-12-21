@@ -1,6 +1,6 @@
 // Create realm given name and title
 export const createRealmSchema = `
-  mutation createRealm(name: String!, title: String) {
+  mutation createRealm($name: String!, $title: String) {
     createRealm(name: $name, title: $title) {
       id
       name
@@ -11,7 +11,7 @@ export const createRealmSchema = `
 
 // Create player given name and realmId
 export const createPlayerSchema = `
-  mutation createPlayer(name: String!, realmId: ID!) {
+  mutation createPlayer($name: String!, $realmId: ID!) {
     createPlayer(name: $name, realmId: $realmId) {
       id
       name
@@ -23,10 +23,10 @@ export const createPlayerSchema = `
 // Create player given name and realmId
 export const createSessionSchema = `
   mutation createPlayer(
-    name: String!,
-    realmId: ID!,
-    time: String!,
-    playerSessions: [CreatePlayerSession]!
+    $name: String!,
+    $realmId: ID!,
+    $time: String!,
+    $playerSessions: [CreatePlayerSession]!
   ) {
     createPlayer(
       name: $name,

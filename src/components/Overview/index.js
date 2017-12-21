@@ -13,11 +13,12 @@ import NewSession from '../Session/NewSession';
 import css from './style.css';
 
 class Overview extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super();
 
-    this.state = {
-    };
+    props.fetchRealmInfo();
+
+    this.state = {};
   }
 
   render() {
@@ -27,9 +28,9 @@ class Overview extends Component {
       <div className={css.overview}>
         <Sidebar />
         <Switch>
+          <Route exact path={`${match.url}/new`} component={NewSession} />
+          <Route exact path={`${match.url}/session/:id`} component={ViewSession} />
           <Route exact path={`${match.url}/:realmName`} component={Leaderboard} />
-          <Route path={`${match.url}/new`} component={NewSession} />
-          <Route path={`${match.url}/session/:id`} component={ViewSession} />
         </Switch>
       </div>
     );
@@ -37,6 +38,7 @@ class Overview extends Component {
 }
 
 Overview.propTypes = {
+  fetchRealmInfo: PropTypes.func.isRequired,
   match: PropTypes.object,
 };
 

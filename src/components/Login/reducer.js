@@ -1,6 +1,8 @@
 import { CREATE_REALM } from './actions';
 
-const initialState = {};
+const initialState = {
+  realm: null,
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -9,7 +11,8 @@ export default (state = initialState, action) => {
         realm: action.payload,
       };
     }
-    default:
+    default: {
       return state;
+    }
   }
 }

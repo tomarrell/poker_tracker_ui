@@ -1,38 +1,28 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Prompt, Link } from 'react-router-dom';
 
-import css from './style.css';
+import { createPlayer } from '../actions';
+import { playersSelector } from '../../Overview/selectors';
 
-const peopleList = [
-  {
-    id: 1,
-    name: 'Tom'
-  },
-  {
-    id: 2,
-    name: 'Liam'
-  },
-  {
-    id: 3,
-    name: 'Hannah'
-  },
-];
+import css from './style.css';
 
 const DEFAULT_BUYIN = 5;
 const LEAVE_PROMPT = "Are you sure you want to leave?";
 
 // Buyin/Walkout cols
 const buyinWalkout = [
-  <td className={css.buyin}>
+  <td key="buyin" className={css.buyin}>
     $<input type="number" defaultValue={DEFAULT_BUYIN} step={0.10} min={0} />
   </td>,
-  <td className={css.walkout}>
+  <td key="walkout" className={css.walkout}>
     $<input type="number" step={0.10} />
   </td>
 ];
 
 // Table structure
-const renderTable = (people, isAddingPerson) => (
+const renderTable = (players, isAddingPerson, handleNewPersonChange) => (
   <table className={css.peopleList}>
     <thead>
       <tr>
@@ -43,17 +33,22 @@ const renderTable = (people, isAddingPerson) => (
       </tr>
     </thead>
     <tbody>
-      {people.map(person => (
-        <tr key={person.id}>
+      {players.map(player => (
+        <tr key={player.id}>
           <td className={css.played}><input type="checkbox" /></td>
-          <td className={css.name}>{person.name}</td>
+          <td className={css.name}>{player.name}</td>
           {buyinWalkout}
         </tr>
       ))}
       {isAddingPerson &&
-        <tr>
+        <tr key="newPlayer">
           <td className={css.played} />
-          <td className={css.newPersonName}><input placeholder="Name..." /></td>
+          <td className={css.newPersonName}>
+            <input
+              placeholder="Name..."
+              onChange={handleNewPersonChange}
+            />
+          </td>
           {buyinWalkout}
         </tr>
       }
@@ -61,18 +56,23 @@ const renderTable = (people, isAddingPerson) => (
   </table>
 );
 
-export default class NewSession extends Component {
+class NewSession extends Component {
   constructor() {
     super();
 
     this.state = {
       isAddingPerson: false,
+      newPersonName: null,
     };
-
-    this.handleAddPerson = this.handleAddPerson.bind(this);
   }
 
-  handleAddPerson() {
+  handleNewPersonChange = (event) => {
+    this.setState({
+      newPersonName: event.target.value,
+    });
+  }
+
+  handleAddPerson = () => {
     const { isAddingPerson } = this.state;
 
     this.setState({
@@ -80,8 +80,16 @@ export default class NewSession extends Component {
     });
   }
 
+  createPlayer = () => {
+    const { createPlayer: dispatchCreatePlayer } = this.props;
+    const { newPersonName } = this.state;
+
+    dispatchCreatePlayer(newPersonName);
+  }
+
   render() {
     const { isAddingPerson } = this.state;
+    const { players } = this.props;
 
     const buttonMessage = isAddingPerson ? 'x Cancel' : '+ Add person';
 
@@ -95,14 +103,14 @@ export default class NewSession extends Component {
 
         <hr />
 
-        {renderTable(peopleList, isAddingPerson)}
+        {renderTable(players, isAddingPerson, this.handleNewPersonChange)}
         <button
           onClick={this.handleAddPerson}
           className={css.newPerson}
         >
           {buttonMessage}
         </button>
-        {isAddingPerson && <button>Save new user ✔</button>}
+        {isAddingPerson && <button onClick={this.createPlayer}>Save new user ✔</button>}
 
         <form>
           <field>
@@ -121,3 +129,16 @@ export default class NewSession extends Component {
   }
 }
 
+NewSession.propTypes = {
+  players: PropTypes.array.isRequired,
+  createPlayer: PropTypes.func.isRequired,
+};
+
+export default connect(
+  state => ({
+    players: playersSelector(state),
+  }),
+  dispatch => ({
+    createPlayer: (name) => dispatch(createPlayer(name)),
+  }),
+)(NewSession);

@@ -10,24 +10,25 @@ import {
 
 export function* fetchSessions(realmId) {
   const sessions = yield call(fetchSessionsByRealmId, realmId);
-  console.log('Fetched sessions');
 
   yield put(fetchSessionsSuccess(sessions));
 }
 
 export function* fetchPlayers(realmId) {
+  // TODO fetchPlayersByRealmId IS NOT DEFINED YET
   const players = yield call(fetchPlayersByRealmId, realmId);
-  console.log('Fetched players');
 
   yield put(fetchPlayersSuccess(players));
 }
 
 export function* fetchRealmInfo() {
-  const { realmId } = yield select(realmSelector);
+  const realmId = yield select(realmSelector);
 
   yield [
-    fork(fetchSessions, realmId),
-    fork(fetchPlayers, realmId),
+    // TODO allow fetching of these, careful when they navigate
+    // directly to session page as realm won't be set in state
+    // fork(fetchSessions, realmId),
+    // fork(fetchPlayers, realmId),
   ];
 }
 

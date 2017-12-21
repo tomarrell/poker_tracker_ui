@@ -1,3 +1,3 @@
-import { createSelector } from 'reselect';
+// import { createSelector } from 'reselect';
 
-export const realmSelector = createSelector(state => state.login.realm);
+export const realmSelector = state => state.login.realm;
