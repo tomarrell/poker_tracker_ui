@@ -18,10 +18,10 @@ const getCookie = (key) => {
   return JSON.parse(storage.getItem(key));
 }
 
-export const addRecentRealm = (name) => {
+export const addRecentRealm = (id, name, title) => {
   let recentRealms = getCookie(RECENT_REALMS) || [];
 
-  recentRealms.unshift(name);
+  recentRealms.unshift({ id, name, title });
   recentRealms = recentRealms.slice(0, RECENT_REALM_LENGTH);
 
   setCookie(RECENT_REALMS, recentRealms);

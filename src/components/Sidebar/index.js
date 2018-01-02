@@ -1,20 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
+import { sessionsSelector } from '../Overview/selectors';
 
 import css from './style.css';
 
-const sessions = [
-  {
-    id: 1,
-    date: 'Fri 17th Oct',
-  },
-  {
-    id: 2,
-    date: 'Fri 24th Oct',
-  },
-];
-
 const constructSessions = (sessionsArray) => {
+  if (!sessionsArray.length) {
+    return "No sessions yet!";
+  }
+
   return sessionsArray.map((session) => (
     <div key={session.id} className={css.session}>
       <Link to={`/overview/${session.id}`}>{session.date}</Link>
@@ -22,7 +19,7 @@ const constructSessions = (sessionsArray) => {
   ));
 };
 
-const Sidebar = () => {
+const Sidebar = ({ sessions }) => {
   return (
     <div className={css.sidebar}>
       <div className={css.header}>
@@ -35,4 +32,14 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+Sidebar.propTypes = {
+  sessions: PropTypes.array,
+};
+
+export default connect(
+  (state) => ({
+    sessions: sessionsSelector(state),
+  }),
+  null,
+)(Sidebar);
+

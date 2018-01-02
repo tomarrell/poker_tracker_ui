@@ -1,7 +1,7 @@
-export const postGQL = (query, variables) => {
+export const postGQL = async (query, variables) => {
   if (!query) throw new Error('Graphql request requires a query');
 
-  return fetch('/graphql', {
+  const res = await fetch('/graphql', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -12,4 +12,6 @@ export const postGQL = (query, variables) => {
       variables,
     }),
   });
+
+  return res.json();
 };

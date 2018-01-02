@@ -1,4 +1,4 @@
-import { CREATE_REALM } from './actions';
+import { SUCCESS_ENTER_REALM } from './actions';
 
 const initialState = {
   realm: null,
@@ -6,7 +6,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case CREATE_REALM: {
+    case SUCCESS_ENTER_REALM: {
       return {
         realm: action.payload,
       };

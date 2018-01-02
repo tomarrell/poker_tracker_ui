@@ -36,7 +36,7 @@ class Login extends Component {
 
     // TODO take realm title during realm creation
     await dispatchCreateRealm(realm, undefined);
-    history.push(`/overview/${realm}`)
+    history.push(`/overview/${realm}`);
   }
 
   render() {
@@ -60,8 +60,12 @@ class Login extends Component {
 
         <h3 className={css.recentTitle}>Recent Realms</h3>
         <ul className={css.previousRealms}>
-          {realms.map((realm, index) => (
-            <li key={index}><button>{realm}</button></li>
+          {realms.map((realmData, index) => (
+            <li key={index}>
+              <button>
+                {realmData.name}
+              </button>
+            </li>
           ))}
         </ul>
       </div>
