@@ -13,17 +13,17 @@ import { realmSelector } from '../Login/selectors';
 import { createPlayer } from './api';
 
 // Sagas
-export function* createPlayerRequest({ payload: name }) {
+export function* createPlayerRequest({ payload: playerName }) {
   // TODO get the id back from the call and set it in the success payload
   // to be written in the store as Player: { name, id }
-  const realmId = (yield select(realmSelector)).id;
+  const realm = yield select(realmSelector);
 
-  if (!realmId) throw new Error('Failed to select realmId from store, check that it is present');
+  if (!realm) throw new Error('Failed to select realm from store, check that it is present');
 
-  yield call(createPlayer, realmId, name);
-  yield put(createPlayerSuccess({
-    name,
-  }));
+  const { id } = realm; 
+
+  yield call(createPlayer, id, playerName);
+  yield put(createPlayerSuccess({ player: playerName }));
 }
 
 export default function* watchSessionActions() {

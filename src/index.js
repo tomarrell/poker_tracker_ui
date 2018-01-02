@@ -11,20 +11,26 @@ import createSagaMiddleware from 'redux-saga';
 import combinedReducers from './reducers';
 import rootSaga from './rootSaga';
 
+import createHistory from 'history/createBrowserHistory';
+import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux';
+
 // Routes
 import Routes from './routes';
 // Root styles
 import './style.css';
 
+// React-router-redux setup
+const history = createHistory();
+const routeMiddleware = routerMiddleware(history);
+
 const sagaMiddleware = createSagaMiddleware();
-// eslint-disable-next-line
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; //eslint-disable-line
 
 // TODO https://github.com/reactjs/react-router-redux
 const store = createStore(
   combinedReducers,
   composeEnhancers(
-    applyMiddleware(sagaMiddleware),
+    applyMiddleware(sagaMiddleware, routeMiddleware),
   ),
 );
 
