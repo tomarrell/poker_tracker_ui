@@ -87,6 +87,11 @@ module.exports = {
     hot: true,
     inline: true,
     historyApiFallback: true,
+    proxy: {
+      '/graphql': {
+        target: 'http://localhost:8080',
+      },
+    }
   },
 
   plugins: [new webpack.HotModuleReplacementPlugin()],
