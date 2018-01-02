@@ -4,13 +4,14 @@ import { takeLatest, put, call, select } from 'redux-saga/effects';
 import {
   CREATE_PLAYER,
   createPlayerSuccess,
+  CREATE_SESSION,
 } from './actions';
 
-// Selectors 
+// Selectors
 import { realmSelector } from '../Login/selectors';
 
 // Api
-import { createPlayer } from './api';
+import { createPlayer, createSession } from './api';
 
 // Sagas
 export function* createPlayerRequest({ payload: playerName }) {
@@ -20,14 +21,30 @@ export function* createPlayerRequest({ payload: playerName }) {
 
   if (!realm) throw new Error('Failed to select realm from store, check that it is present');
 
-  const { id } = realm; 
+  const { id: realmId } = realm;
 
-  yield call(createPlayer, id, playerName);
-  yield put(createPlayerSuccess({ player: playerName }));
+  const response = yield call(createPlayer, realmId, playerName);
+  if (response.errors) throw new Error('Failed to create new player');
+  const { createPlayer: player } = response.data;
+
+  yield put(createPlayerSuccess(parseInt(player.id, 10), player.name));
+}
+
+export function* createSessionRequest({ payload }) {
+  const { name, time, playerSessions } = payload;
+  const realm = yield select(realmSelector);
+
+  if (!realm) throw new Error('Failed to select realm from store, check that it is present');
+
+  const { id: realmId } = realm;
+
+  yield call(createSession, realmId, name, time, playerSessions);
+  // TODO call success action and add new session to store
 }
 
 export default function* watchSessionActions() {
   yield [
     takeLatest(CREATE_PLAYER, createPlayerRequest),
+    takeLatest(CREATE_SESSION, createSessionRequest),
   ];
 }
