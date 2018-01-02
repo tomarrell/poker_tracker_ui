@@ -79,6 +79,8 @@ class NewSession extends Component {
       isAddingPerson: false,
       newPlayerName: '',
       players: props.players,
+      // time: null,
+      date: null,
     };
   }
 
@@ -100,10 +102,14 @@ class NewSession extends Component {
     });
   }
 
-  handleNewPersonChange = (event) => {
+  handleInputChange = (event, key) => {
     this.setState({
-      newPlayerName: event.target.value,
+      [key]: event.target.value,
     });
+  }
+
+  handleNewPersonChange = (event) => {
+    this.setState({ newPlayerName: event.target.value });
   }
 
   handleAddPerson = () => {
@@ -120,11 +126,17 @@ class NewSession extends Component {
     const oldPlayerInfo = players.find(p => p.id === player.id);
     const filteredPlayers = players.filter(p => p.id !== player.id);
 
+    const newPlayers = [...filteredPlayers, {
+      ...oldPlayerInfo,
+      [key]: event.target.value,
+    }].map(p => ({
+      ...p,
+      buyin: parseInt(p.buyin, 10),
+      walkout: parseInt(p.walkout, 10),
+    }));
+
     this.setState({
-      players: [...filteredPlayers, {
-        ...oldPlayerInfo,
-        [key]: event.target.value,
-      }],
+      players: newPlayers,
     });
   }
 
@@ -136,8 +148,22 @@ class NewSession extends Component {
     this.setState({ newPlayerName: '' });
   }
 
+  handleCreateSession = () => {
+    const { createSession: dispatchCreateSession } = this.props;
+    const { players: playerSessions, date } = this.state;
+
+    const playDate = new Date(date).toISOString();
+
+    playerSessions.map(player => {
+      if (player.walkout === null) throw new Error('Cannot have null walkout for player');
+      return null;
+    });
+
+    // TODO merge time and date together
+    dispatchCreateSession('fakeName', playDate, playerSessions);
+  }
+
   render() {
-    console.log(this.state.players);
     const { isAddingPerson, newPlayerName } = this.state;
     const { players } = this.props;
 
@@ -168,18 +194,32 @@ class NewSession extends Component {
         </button>
         {isAddingPerson && <button onClick={this.createPlayer}>Save new user ✔</button>}
 
-        <form>
-          <field>
+        <div>
+          <div>
             <span>Session Date:* </span>
-            <input type="date" className={css.dateField} required />
-          </field>
-          <field>
+            <input
+              onChange={event => this.handleInputChange(event, 'date')}
+              type="date"
+              className={css.dateField}
+              required
+            />
+          </div>
+          <div>
             <span>Session Time: </span>
-            <input type="time" className={css.dateField} />
-          </field>
+            <input
+              onChange={event => this.handleInputChange(event, 'time')}
+              type="time"
+              className={css.dateField}
+            />
+          </div>
           <Link to="/overview" className={css.close}>Close</Link>
-          <button className={css.create} type="submit">Create Session ✔</button>
-        </form>
+          <button
+            onClick={this.handleCreateSession}
+            className={css.create}
+          >
+            Create Session ✔
+          </button>
+        </div>
       </div>
     );
   }
@@ -196,6 +236,7 @@ Table.propTypes = {
 NewSession.propTypes = {
   players: PropTypes.array.isRequired,
   createPlayer: PropTypes.func.isRequired,
+  createSession: PropTypes.func.isRequired,
 };
 
 export default connect(

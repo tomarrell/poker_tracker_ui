@@ -22,13 +22,13 @@ export const createPlayerSchema = `
 
 // Create player given name and realmId
 export const createSessionSchema = `
-  mutation createPlayer(
+  mutation createSession(
     $name: String!,
     $realmId: ID!,
     $time: String!,
-    $playerSessions: [CreatePlayerSession]!
+    $playerSessions: [CreateSessionPlayerSession]!
   ) {
-    createPlayer(
+    createSession(
       name: $name,
       realmId: $realmId,
       time: $time,

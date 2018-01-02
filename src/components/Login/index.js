@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import {
-  getRecentRealms,
-  addRecentRealm,
-} from '../../utils/localstorage';
+import { getRecentRealms } from '../../utils/localstorage';
 
 import { createRealm } from './actions';
 
@@ -54,7 +51,7 @@ class Login extends Component {
               placeholder="Password"
               type="password"
             />}
-          <button type="submit">Login</button>
+          <button>Login</button>
           <button onClick={this.createRealm} className={css.createRealm}>+ Create</button>
         </form>
 
