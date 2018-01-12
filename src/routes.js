@@ -11,8 +11,8 @@ import Overview from './components/Overview';
 const Routes = () => (
   <Router>
     <App>
-      <Route exact path="/" component={Login} />
-      <Route path="/overview" component={Overview} />
+      <Route exact path="/poker_tracker_ui" component={Login} />
+      <Route path="/poker_tracker_ui/overview" component={Overview} />
     </App>
   </Router>
 );
