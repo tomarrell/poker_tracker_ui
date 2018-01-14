@@ -163,7 +163,8 @@ class NewSession extends Component {
     });
 
     // TODO merge time and date together
-    dispatchCreateSession('fakeName', playDate, playerInfo);
+    // TODO add name for session and pass it to API, currently just using time
+    dispatchCreateSession(null, playDate, playerInfo);
   }
 
   render() {

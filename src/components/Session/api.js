@@ -22,7 +22,7 @@ export const createSession = (realmId, name, time, playerSessions) => {
 
   return postGQL(createSessionSchema, {
     realmId,
-    name,
+    name: time,
     time,
     playerSessions,
   });
