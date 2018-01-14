@@ -4,10 +4,10 @@ import { takeLatest, call, put } from 'redux-saga/effects';
 import { addRecentRealm } from '../../utils/localstorage';
 
 // Actions
-import { CREATE_REALM, successEnterRealm } from './actions';
+import { CREATE_REALM, LOGIN_REALM, successEnterRealm } from './actions';
 
 // Api
-import { createRealm } from './api';
+import { createRealm, loginRealm } from './api';
 
 // Sagas
 export function* createRealmRequest({ payload }) {
@@ -21,8 +21,20 @@ export function* createRealmRequest({ payload }) {
   yield put(successEnterRealm(parseInt(realm.id, 10), realm.name, realm.title))
 }
 
+export function* loginRealmRequest({ payload }) {
+  const { name } = payload;
+  const response = yield call(loginRealm, name);
+
+  if (response.errors) throw new Error('Failed to login to realm');
+  const { realmByName: realm } = response.data;
+
+  yield call(addRecentRealm, realm.id, realm.name, realm.title)
+  yield put(successEnterRealm(parseInt(realm.id, 10), realm.name, realm.title))
+}
+
 export default function* watchEnterActions() {
   yield [
     takeLatest(CREATE_REALM, createRealmRequest),
+    takeLatest(LOGIN_REALM, loginRealmRequest),
   ];
 }

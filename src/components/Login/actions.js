@@ -1,4 +1,5 @@
 export const CREATE_REALM = 'login/CREATE_REALM';
+export const LOGIN_REALM = 'login/LOGIN_REALM';
 export const SUCCESS_ENTER_REALM = 'login/SUCCESS_ENTER_REALM';
 
 export const createRealm = (name, title) => ({
@@ -6,6 +7,13 @@ export const createRealm = (name, title) => ({
   payload: {
     name,
     title,
+  },
+});
+
+export const loginRealm = (name) => ({
+  type: LOGIN_REALM,
+  payload: {
+    name,
   },
 });
 

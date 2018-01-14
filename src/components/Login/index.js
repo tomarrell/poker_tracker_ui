@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { getRecentRealms } from '../../utils/localstorage';
 
-import { createRealm } from './actions';
+import { createRealm, loginRealm } from './actions';
 
 import css from './style.css';
 
@@ -13,6 +13,7 @@ class Login extends Component {
 
     this.state = {
       realm: '',
+      // TODO add password for login
       // password: '',
     };
 
@@ -25,6 +26,14 @@ class Login extends Component {
         [name]: event.target.value,
       });
     }
+  }
+
+  loginRealm = async () => {
+    const { realm } = this.state;
+    const { dispatchLoginRealm, history } = this.props;
+
+    await dispatchLoginRealm(realm);
+    history.push(`/overview/${realm}`);
   }
 
   createRealm = async () => {
@@ -51,7 +60,7 @@ class Login extends Component {
               placeholder="Password"
               type="password"
             />}
-          <button>Login</button>
+          <button onClick={this.loginRealm}>Login</button>
           <button onClick={this.createRealm} className={css.createRealm}>+ Create</button>
         </form>
 
@@ -73,6 +82,7 @@ class Login extends Component {
 export default connect(
   null,
   (dispatch) => ({
+    dispatchLoginRealm: (name) => dispatch(loginRealm(name)),
     dispatchCreateRealm: (name, title) => dispatch(createRealm(name, title)),
   }),
 )(Login);
