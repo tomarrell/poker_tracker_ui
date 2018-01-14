@@ -154,13 +154,16 @@ class NewSession extends Component {
 
     const playDate = new Date(date).toISOString();
 
-    playerSessions.map(player => {
+    const playerInfo = playerSessions.map(player => {
       if (player.walkout === null) throw new Error('Cannot have null walkout for player');
-      return null;
+      return {
+        ...player,
+        playerId: player.id,
+      };
     });
 
     // TODO merge time and date together
-    dispatchCreateSession('fakeName', playDate, playerSessions);
+    dispatchCreateSession('fakeName', playDate, playerInfo);
   }
 
   render() {

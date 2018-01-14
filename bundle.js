@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "414bc7028e6848035dd7"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "22be13698e6558c15199"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -3771,7 +3771,7 @@ const postGQL = exports.postGQL = (() => {
   var _ref = _asyncToGenerator(function* (query, variables) {
     if (!query) throw new Error('Graphql request requires a query');
 
-    const res = yield fetch('/graphql', {
+    const res = yield fetch('https://poker-tracker-api.herokuapp.com/graphql', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
