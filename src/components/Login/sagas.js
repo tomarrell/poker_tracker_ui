@@ -1,4 +1,5 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
+import { push } from 'react-router-redux';
 
 // Utils
 import { addRecentRealm } from '../../utils/localstorage';
@@ -30,6 +31,8 @@ export function* loginRealmRequest({ payload }) {
 
   yield call(addRecentRealm, realm.id, realm.name, realm.title)
   yield put(successEnterRealm(parseInt(realm.id, 10), realm.name, realm.title))
+  console.log(push('/overview/test'));
+  console.log('here');
 }
 
 export default function* watchEnterActions() {

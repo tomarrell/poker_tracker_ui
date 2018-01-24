@@ -4,7 +4,8 @@ import { combineReducers } from 'redux';
 import loginReducer from './components/Login/reducer';
 import overviewReducer from './components/Overview/reducer';
 
-export default combineReducers({
+export default (router) => combineReducers({
   login: loginReducer,
   overview: overviewReducer,
+  router,
 });

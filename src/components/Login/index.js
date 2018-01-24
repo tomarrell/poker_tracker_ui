@@ -30,19 +30,17 @@ class Login extends Component {
 
   loginRealm = async () => {
     const { realm } = this.state;
-    const { dispatchLoginRealm, history } = this.props;
+    const { dispatchLoginRealm } = this.props;
 
-    await dispatchLoginRealm(realm);
-    history.push(`/overview/${realm}`);
+    dispatchLoginRealm(realm);
   }
 
   createRealm = async () => {
     const { realm } = this.state;
-    const { dispatchCreateRealm, history } = this.props;
+    const { dispatchCreateRealm } = this.props;
 
     // TODO take realm title during realm creation
-    await dispatchCreateRealm(realm, undefined);
-    history.push(`/overview/${realm}`);
+    dispatchCreateRealm(realm, undefined);
   }
 
   render() {
@@ -51,7 +49,7 @@ class Login extends Component {
 
     return (
       <div className={css.enterRealm}>
-        <form>
+        <div>
           <span>Enter Realm</span>
           <input onChange={this.handleInputChange('realm')} placeholder="Realm" />
           {realm.length > 0 &&
@@ -62,7 +60,7 @@ class Login extends Component {
             />}
           <button onClick={this.loginRealm}>Login</button>
           <button onClick={this.createRealm} className={css.createRealm}>+ Create</button>
-        </form>
+        </div>
 
         <h3 className={css.recentTitle}>Recent Realms</h3>
         <ul className={css.previousRealms}>

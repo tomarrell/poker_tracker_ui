@@ -4,15 +4,17 @@ import { render } from 'react-dom';
 // Charts Styling
 import 'frappe-charts/dist/frappe-charts.min.css';
 
+// React-router-redux
+import createHistory from 'history/createBrowserHistory';
+import { routerReducer, routerMiddleware } from 'react-router-redux';
+
 // Redux Setup
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import combinedReducers from './reducers';
 import rootSaga from './rootSaga';
 
-import createHistory from 'history/createBrowserHistory';
-import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux';
 
 // Routes
 import Routes from './routes';
@@ -28,7 +30,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 // TODO https://github.com/reactjs/react-router-redux
 const store = createStore(
-  combinedReducers,
+  combinedReducers(routerReducer),
   composeEnhancers(
     applyMiddleware(sagaMiddleware, routeMiddleware),
   ),
