@@ -6,11 +6,11 @@ import 'frappe-charts/dist/frappe-charts.min.css';
 
 // React-router-redux
 import createHistory from 'history/createBrowserHistory';
-import { routerReducer, routerMiddleware } from 'react-router-redux';
+import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
 
 // Redux Setup
 import { Provider } from 'react-redux';
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import combinedReducers from './reducers';
 import rootSaga from './rootSaga';
@@ -40,7 +40,11 @@ sagaMiddleware.run(rootSaga);
 
 render(
   <Provider store={store}>
-    <Routes />
+    <ConnectedRouter history={history}>
+      <div>
+        <Routes />
+      </div>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root'),
 );

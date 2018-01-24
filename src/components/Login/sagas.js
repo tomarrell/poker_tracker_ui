@@ -31,8 +31,7 @@ export function* loginRealmRequest({ payload }) {
 
   yield call(addRecentRealm, realm.id, realm.name, realm.title)
   yield put(successEnterRealm(parseInt(realm.id, 10), realm.name, realm.title))
-  console.log(push('/overview/test'));
-  console.log('here');
+  yield put(push(`/overview/${realm.name}`));
 }
 
 export default function* watchEnterActions() {
