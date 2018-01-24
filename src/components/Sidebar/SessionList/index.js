@@ -13,7 +13,6 @@ const SessionList = ({ sessions }) => {
     return <div>No sessions yet!</div>
   }
 
-
   return sessions.map(s => (
     <div key={s.id} className={css.session}>
       <Link to={`/overview/session/${s.id}`}>{s.time}</Link>
