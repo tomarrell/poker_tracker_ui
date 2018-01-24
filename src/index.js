@@ -26,9 +26,9 @@ const history = createHistory();
 const routeMiddleware = routerMiddleware(history);
 
 const sagaMiddleware = createSagaMiddleware();
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; //eslint-disable-line
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ //eslint-disable-line
+  || compose;
 
-// TODO https://github.com/reactjs/react-router-redux
 const store = createStore(
   combinedReducers(routerReducer),
   composeEnhancers(

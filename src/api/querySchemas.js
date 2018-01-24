@@ -12,7 +12,7 @@ export const getRealmByNameSchema = `
 // Get session by session id
 export const getSessionByIdSchema = `
   query sessionById($id: ID!) {
-    sessionById(id: id) {
+    sessionById(id: $id) {
       id
       realmId
       name
@@ -23,8 +23,8 @@ export const getSessionByIdSchema = `
 
 // Get all sessions in realm by realm id
 export const getSessionsByRealmIdSchema = `
-  query sessionsByrealmId($realmId: ID!) {
-    sessionsByrealmId(realmId: realmId) {
+  query sessionsByRealmId($realmId: ID!) {
+    sessionsByRealmId(realmId: $realmId) {
       id
       realmId
       name
@@ -36,7 +36,7 @@ export const getSessionsByRealmIdSchema = `
 // Get player by player id
 export const getPlayerByIdSchema = `
   query playerById($id: ID!) {
-    playerById(id: id) {
+    playerById(id: $id) {
       id
       name
       realmId

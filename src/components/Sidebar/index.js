@@ -3,21 +3,10 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import SessionList from './SessionList';
 import { sessionsSelector } from '../Overview/selectors';
 
 import css from './style.css';
-
-const constructSessions = (sessionsArray) => {
-  if (!sessionsArray.length) {
-    return "No sessions yet!";
-  }
-
-  return sessionsArray.map((session) => (
-    <div key={session.id} className={css.session}>
-      <Link to={`/overview/${session.id}`}>{session.date}</Link>
-    </div>
-  ));
-};
 
 const Sidebar = ({ sessions }) => {
   return (
@@ -27,7 +16,7 @@ const Sidebar = ({ sessions }) => {
         <Link to="/overview/new" className={css.newSession}>New</Link>
       </div>
       <hr />
-      {constructSessions(sessions)}
+      <SessionList sessions={sessions} />
     </div>
   );
 };

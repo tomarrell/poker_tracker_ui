@@ -79,12 +79,12 @@ const ViewSession = () => {
       />
       {renderTable(peopleList)}
       <form>
-        <field>
+        <div>
           <span>Session Date: 17/10/2017</span>
-        </field>
-        <field>
+        </div>
+        <div>
           <span>Session Time: 6:40pm</span>
-        </field>
+        </div>
       </form>
       <Link className={css.close} to="/overview">Close</Link>
     </div>

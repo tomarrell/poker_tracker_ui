@@ -66,10 +66,10 @@ const Leaderboard = () => {
         <div className={css.champs}>
           <h3 className={css.title}>TOP 3</h3>
           {top3.sort((a, b) => b.net - a.net).map((person, index) => (
-            <field key={person.id} className={css.highlightField}>
+            <div key={person.id} className={css.highlightField}>
               <span>{TOP_AWARDS[index]}</span>
               <h3 className={css.standoutName}>{person.name}: {formatCurrency(person.net)}</h3>
-            </field>
+            </div>
           ))}
         </div>
 
@@ -77,10 +77,10 @@ const Leaderboard = () => {
         <div className={css.losers}>
           <h3 className={css.title}>BOTTOM 3</h3>
           {bottom3.sort((a, b) => a.net - b.net).map((person, index) => (
-            <field key={person.id} className={css.highlightField}>
+            <div key={person.id} className={css.highlightField}>
               <span>{BOTTOM_AWARDS[index]}</span>
               <h3 className={css.standoutName}>{person.name}: {formatCurrency(person.net)}</h3>
-            </field>
+            </div>
           ))}
         </div>
       </div>

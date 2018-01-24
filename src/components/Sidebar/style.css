@@ -15,30 +15,6 @@
   }
 }
 
-.session {
-  cursor: pointer;
-  border-bottom: solid 1px transparent;
-  margin-bottom: 0.2rem;
-  display: flex;
-
-  a {
-    flex: 1;
-    background-color: transparent;
-    padding-left: 0;
-    text-align: left;
-    font-size: 1.4rem;
-  }
-
-  &:hover {
-    border-bottom: solid 1px black;
-
-    &::after {
-      content: '>';
-      align-self: center;
-    }
-  }
-}
-
 .newSession {
   align-self: center;
 }
