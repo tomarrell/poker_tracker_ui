@@ -6,7 +6,7 @@
  * imported styles for packages shall be placed
  * here.
  * */
-@import 'frappe-charts/dist/frappe-charts.min.css';
+@import '../node_modules/frappe-charts/dist/frappe-charts.min.css';
 @import './styles/variables.css';
 
 /* GLOBAL STYLES */

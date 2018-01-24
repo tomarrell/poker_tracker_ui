@@ -1,4 +1,63 @@
-@import './fonts.css';
+@font-face {
+  font-family: 'Din17';
+  font-weight: normal;
+  font-style: normal;
+  src: url('assets/fonts/din17.otf');
+}
+
+@font-face {
+  font-family: 'AvenirLT';
+  font-weight: normal;
+  font-style: normal;
+  src: url('assets/fonts/Avenir/32F319_0_0.eot');
+  src: url('assets/fonts/Avenir/32F319_0_0.eot?#iefix')
+    format('embedded-opentype'),
+    url('assets/fonts/Avenir/32F319_0_0.woff2') format('woff2'),
+    url('assets/fonts/Avenir/32F319_0_0.woff') format('woff'),
+    url('assets/fonts/Avenir/32F319_0_0.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'AvenirLT';
+  font-weight: normal;
+  font-style: italic;
+  src: url('assets/fonts/Avenir/32F319_1_0.eot');
+  src: url('assets/fonts/Avenir/32F319_1_0.eot?#iefix')
+    format('embedded-opentype'),
+    url('assets/fonts/Avenir/32F319_1_0.woff2') format('woff2'),
+    url('assets/fonts/Avenir/32F319_1_0.woff') format('woff'),
+    url('assets/fonts/Avenir/32F319_1_0.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'AvenirLT-HeavyOblique';
+  src: url('assets/fonts/Avenir/32F319_2_0.eot');
+  src: url('assets/fonts/Avenir/32F319_2_0.eot?#iefix')
+    format('embedded-opentype'),
+    url('assets/fonts/Avenir/32F319_2_0.woff2') format('woff2'),
+    url('assets/fonts/Avenir/32F319_2_0.woff') format('woff'),
+    url('assets/fonts/Avenir/32F319_2_0.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'AvenirLT';
+  font-weight: bold;
+  font-style: normal;
+  src: url('assets/fonts/Avenir/32F319_3_0.eot');
+  src: url('assets/fonts/Avenir/32F319_3_0.eot?#iefix')
+    format('embedded-opentype'),
+    url('assets/fonts/Avenir/32F319_3_0.woff2') format('woff2'),
+    url('assets/fonts/Avenir/32F319_3_0.woff') format('woff'),
+    url('assets/fonts/Avenir/32F319_3_0.ttf') format('truetype');
+}
+
+:root {
+  --font-avenir: AvenirLT;
+  --font-avenir-heavy-oblique: AvenirLT-HeavyOblique;
+  --font-din: Din17;
+  --font-smoothing: antialiased;
+  --font-monospace: 'Ubuntu Mono', monospace;
+}
 
 :root {
   --color-white: #fff;

@@ -33,9 +33,7 @@ module.exports = {
               importLoaders: 1,
             },
           },
-          {
-            loader: 'postcss-loader',
-          },
+          { loader: 'postcss-loader' },
         ],
       },
       {
@@ -43,9 +41,7 @@ module.exports = {
         include: [resolve('node_modules')],
         use: [
           { loader: 'style-loader' },
-          {
-            loader: 'postcss-loader',
-          },
+          { loader: 'postcss-loader' },
         ],
       },
       {
