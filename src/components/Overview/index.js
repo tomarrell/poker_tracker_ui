@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 
 import { fetchRealmInfo } from './actions';
 
-import Toast from '../Toast';
 import Sidebar from '../Sidebar';
 import Leaderboard from '../Leaderboard';
 import ViewSession from '../Session';
@@ -27,7 +26,6 @@ class Overview extends Component {
 
     return (
       <div className={css.overview}>
-        <Toast />
         <Sidebar />
         <Switch>
           <Route exact path={`${match.url}/new`} component={NewSession} />

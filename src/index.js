@@ -18,6 +18,7 @@ import rootSaga from './rootSaga';
 
 // Routes
 import Routes from './routes';
+import Toast from './components/Toast';
 // Root styles
 import './style.css';
 
@@ -42,6 +43,7 @@ render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <div>
+        <Toast />
         <Routes />
       </div>
     </ConnectedRouter>
