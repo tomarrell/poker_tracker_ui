@@ -1,8 +1,9 @@
 import React from 'react';
+import { DateTime } from 'luxon';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import css from './styles.css';
+import css from './style.css';
 
 const SessionList = ({ sessions }) => {
   if (!sessions) {
@@ -13,11 +14,15 @@ const SessionList = ({ sessions }) => {
     return <div>No sessions yet!</div>
   }
 
-  return sessions.map(s => (
-    <div key={s.id} className={css.session}>
-      <Link to={`/overview/session/${s.id}`}>{s.time}</Link>
-    </div>
-  ));
+  return sessions.reverse().map(s => {
+    const dt = DateTime.fromISO(s.time);
+
+    return (
+      <div key={s.id} className={css.session}>
+        <Link to={`/overview/session/${s.id}`}>{dt.toHTTP()}</Link>
+      </div>
+    );
+  });
 };
 
 SessionList.propTypes = {

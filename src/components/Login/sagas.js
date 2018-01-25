@@ -1,3 +1,4 @@
+import { delay } from 'redux-saga';
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 
@@ -6,6 +7,7 @@ import { addRecentRealm } from '../../utils/localstorage';
 
 // Actions
 import { CREATE_REALM, LOGIN_REALM, successEnterRealm } from './actions';
+import { showToast, hideToast } from '../Toast/actions';
 
 // Api
 import { createRealm, loginRealm } from './api';
@@ -29,9 +31,15 @@ export function* loginRealmRequest({ payload }) {
   if (response.errors) throw new Error('Failed to login to realm');
   const { realmByName: realm } = response.data;
 
-  yield call(addRecentRealm, realm.id, realm.name, realm.title)
-  yield put(successEnterRealm(parseInt(realm.id, 10), realm.name, realm.title))
+  yield call(addRecentRealm, realm.id, realm.name, realm.title);
+  yield put(successEnterRealm(parseInt(realm.id, 10), realm.name, realm.title));
   yield put(push(`/overview/${realm.name}`));
+  yield put(showToast(`Successful login to realm: ${realm.name}`));
+
+  // Leave the toast message there for 3 seconds
+  yield delay(3000);
+
+  yield put(hideToast());
 }
 
 export default function* watchEnterActions() {

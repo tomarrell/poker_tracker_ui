@@ -37,6 +37,7 @@
     "fuse.js": "3.2.0",
     "history": "4.7.2",
     "lodash": "4.17.4",
+    "luxon": "^0.3.1",
     "precss": "3.1.0",
     "prop-types": "15.6.0",
     "react": "16.2.0",
