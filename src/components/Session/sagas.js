@@ -4,7 +4,8 @@ import { takeLatest, put, call, select } from 'redux-saga/effects';
 import {
   CREATE_PLAYER,
   createPlayerSuccess,
-  CREATE_SESSION,
+  CREATE_SESSION_REQUEST,
+  createSessionSuccess,
 } from './actions';
 
 // Selectors
@@ -38,13 +39,16 @@ export function* createSessionRequest({ payload }) {
 
   const { id: realmId } = realm;
 
-  yield call(createSession, realmId, name, time, playerSessions);
-  // TODO call success action and add new session to store
+  const response = yield call(createSession, realmId, name, time, playerSessions);
+
+  if (response.data) {
+  yield put(createSessionSuccess(response.data.createSession));
+  }
 }
 
 export default function* watchSessionActions() {
   yield [
     takeLatest(CREATE_PLAYER, createPlayerRequest),
-    takeLatest(CREATE_SESSION, createSessionRequest),
+    takeLatest(CREATE_SESSION_REQUEST, createSessionRequest),
   ];
 }

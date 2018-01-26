@@ -5,7 +5,7 @@ import { Prompt, Link } from 'react-router-dom';
 
 import Table from './Table';
 
-import { createPlayer, createSession } from '../actions';
+import { createPlayer, createSessionRequest } from '../actions';
 import { playersSelector } from '../../Overview/selectors';
 
 import css from './style.css';
@@ -89,7 +89,7 @@ class NewSession extends Component {
   }
 
   handleCreateSession = () => {
-    const { createSession: dispatchCreateSession } = this.props;
+    const { createSessionRequest: dispatchcreateSessionRequest } = this.props;
     const { players: playerSessions, date } = this.state;
 
     const playDate = new Date(date).toISOString();
@@ -104,7 +104,7 @@ class NewSession extends Component {
 
     // TODO merge time and date together
     // TODO add name for session and pass it to API, currently just using time
-    dispatchCreateSession(null, playDate, playerInfo);
+    dispatchcreateSessionRequest(null, playDate, playerInfo);
   }
 
   render() {
@@ -112,6 +112,9 @@ class NewSession extends Component {
     const { players } = this.props;
 
     const buttonMessage = isAddingPerson ? 'x Cancel' : '+ Add person';
+    const currentDate = new Date();
+    const currentDateString = currentDate.toJSON().slice(0,10);
+    const currentTimeString = currentDate.toTimeString().slice(0, 5);
 
     return (
       <div className={css.newSession}>
@@ -145,6 +148,7 @@ class NewSession extends Component {
               onChange={event => this.handleInputChange(event, 'date')}
               type="date"
               className={css.dateField}
+              value={currentDateString}
               required
             />
           </div>
@@ -154,6 +158,7 @@ class NewSession extends Component {
               onChange={event => this.handleInputChange(event, 'time')}
               type="time"
               className={css.dateField}
+              value={currentTimeString}
             />
           </div>
           <Link to="/overview" className={css.close}>Close</Link>
@@ -172,7 +177,7 @@ class NewSession extends Component {
 NewSession.propTypes = {
   players: PropTypes.array.isRequired,
   createPlayer: PropTypes.func.isRequired,
-  createSession: PropTypes.func.isRequired,
+  createSessionRequest: PropTypes.func.isRequired,
 };
 
 export default connect(
@@ -181,7 +186,7 @@ export default connect(
   }),
   dispatch => ({
     createPlayer: (name) => dispatch(createPlayer(name)),
-    createSession: (name, time, playerSessions) =>
-      dispatch(createSession(name, time, playerSessions)),
+    createSessionRequest: (name, time, playerSessions) =>
+      dispatch(createSessionRequest(name, time, playerSessions)),
   }),
 )(NewSession);
