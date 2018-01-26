@@ -21,8 +21,10 @@ const getCookie = (key) => {
 export const addRecentRealm = (id, name, title) => {
   let recentRealms = getCookie(RECENT_REALMS) || [];
 
-  recentRealms.unshift({ id, name, title });
-  recentRealms = recentRealms.slice(0, RECENT_REALM_LENGTH);
+  recentRealms = [
+    {id, name, title},
+    ...recentRealms.filter(realm => realm.id !== id)
+  ].slice(0, RECENT_REALM_LENGTH);
 
   setCookie(RECENT_REALMS, recentRealms);
 };
