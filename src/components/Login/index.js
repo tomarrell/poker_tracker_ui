@@ -45,6 +45,14 @@ class Login extends Component {
     dispatchCreateRealm(realm, undefined);
   }
 
+  handleRealmSelect = (name) => () => {
+    this.setState({
+      realm: name,
+    }, () => {
+      console.log(this.state.realm);
+    });
+  }
+
   render() {
     const { realm } = this.state;
     const { isLoading } = this.props;
@@ -54,7 +62,7 @@ class Login extends Component {
       <div className={css.enterRealm}>
         <div>
           <span>Enter Realm</span>
-          <input onChange={this.handleInputChange('realm')} placeholder="Realm" />
+          <input onChange={this.handleInputChange('realm')} placeholder="Realm" value={realm} />
           {realm.length > 0 &&
             <input
               onChange={this.handleInputChange('password')}
@@ -72,7 +80,7 @@ class Login extends Component {
         <ul className={css.previousRealms}>
           {realms.map((realmData, index) => (
             <li key={index}>
-              <button>
+              <button onClick={this.handleRealmSelect(realmData.name)}>
                 {realmData.name}
               </button>
             </li>

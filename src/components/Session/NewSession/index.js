@@ -102,6 +102,8 @@ class NewSession extends Component {
       };
     });
 
+    console.log(playDate);
+
     // TODO merge time and date together
     // TODO add name for session and pass it to API, currently just using time
     dispatchcreateSessionRequest(null, playDate, playerInfo);
