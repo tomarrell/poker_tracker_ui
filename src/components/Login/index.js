@@ -48,8 +48,6 @@ class Login extends Component {
   handleRealmSelect = (name) => () => {
     this.setState({
       realm: name,
-    }, () => {
-      console.log(this.state.realm);
     });
   }
 

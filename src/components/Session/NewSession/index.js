@@ -15,12 +15,16 @@ class NewSession extends Component {
   constructor(props) {
     super(props);
 
+    const localDate = new Date();
+    const currentDateString = localDate.toLocaleDateString().split('/').reverse().join('-');
+    const currentTimeString = localDate.toLocaleTimeString();
+
     this.state = {
       isAddingPerson: false,
       newPlayerName: '',
       players: props.players,
-      // time: null,
-      date: null,
+      time: currentTimeString,
+      date: currentDateString,
     };
   }
 
@@ -90,9 +94,9 @@ class NewSession extends Component {
 
   handleCreateSession = () => {
     const { createSessionRequest: dispatchcreateSessionRequest } = this.props;
-    const { players: playerSessions, date } = this.state;
+    const { players: playerSessions, date, time } = this.state;
 
-    const playDate = new Date(date).toISOString();
+    const playDate = new Date(`${date}T${time}`);
 
     const playerInfo = playerSessions.map(player => {
       if (player.walkout === null) throw new Error('Cannot have null walkout for player');
@@ -102,21 +106,15 @@ class NewSession extends Component {
       };
     });
 
-    console.log(playDate);
-
-    // TODO merge time and date together
     // TODO add name for session and pass it to API, currently just using time
     dispatchcreateSessionRequest(null, playDate, playerInfo);
   }
 
   render() {
-    const { isAddingPerson, newPlayerName } = this.state;
+    const { isAddingPerson, newPlayerName, date, time } = this.state;
     const { players } = this.props;
 
     const buttonMessage = isAddingPerson ? 'x Cancel' : '+ Add person';
-    const currentDate = new Date();
-    const currentDateString = currentDate.toJSON().slice(0,10);
-    const currentTimeString = currentDate.toTimeString().slice(0, 5);
 
     return (
       <div className={css.newSession}>
@@ -150,7 +148,7 @@ class NewSession extends Component {
               onChange={event => this.handleInputChange(event, 'date')}
               type="date"
               className={css.dateField}
-              value={currentDateString}
+              value={date}
               required
             />
           </div>
@@ -160,7 +158,7 @@ class NewSession extends Component {
               onChange={event => this.handleInputChange(event, 'time')}
               type="time"
               className={css.dateField}
-              value={currentTimeString}
+              value={time}
             />
           </div>
           <Link to="/overview" className={css.close}>Close</Link>
