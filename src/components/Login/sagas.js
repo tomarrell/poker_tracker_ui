@@ -18,8 +18,7 @@ export function* createRealmRequest({ payload }) {
   const response = yield call(createRealm, name, title);
 
   if (response.errors) {
-    console.log('fucked');
-    yield put(showToast('Failed to create realm. May already exist'));
+    yield put(showToast('Failed to create realm. May already exist', 'error'));
     yield delay(3000);
     yield put(hideToast());
     return null;

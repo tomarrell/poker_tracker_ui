@@ -17,3 +17,7 @@
 .close {
   padding: 1rem 1.4rem;
 }
+
+.error {
+  background-color: #fc5c65;
+}

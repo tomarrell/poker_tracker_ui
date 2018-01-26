@@ -14,7 +14,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         show: true,
-        message: action.payload,
+        message: action.payload.message,
+        type: action.payload.type,
       };
     }
     case HIDE_TOAST: {
@@ -22,6 +23,7 @@ export default (state = initialState, action) => {
         ...state,
         show: false,
         message: '',
+        type: '',
       };
     }
     default: {
