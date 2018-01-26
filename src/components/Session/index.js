@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import { formatCurrency } from '../../utils/money';
@@ -61,34 +61,40 @@ const renderTable = (people) => (
   </table>
 );
 
-const ViewSession = () => {
-  return (
-    <div className={css.newSession}>
-      <h2>Session Info</h2>
-      <hr />
-      <Chart
-        title="Bar Chart"
-        type="bar"
-        data={{
-          labels: fakeLabels,
-          datasets: [{
-            title: 'Some Data',
-            values: fakeData,
-          }],
-        }}
-      />
-      {renderTable(peopleList)}
-      <form>
-        <div>
-          <span>Session Date: 17/10/2017</span>
-        </div>
-        <div>
-          <span>Session Time: 6:40pm</span>
-        </div>
-      </form>
-      <Link className={css.close} to="/overview">Close</Link>
-    </div>
-  );
-};
+class ViewSession extends Component {
+  constructor() {
+    super();
+  }
+
+  render() {
+    return (
+      <div className={css.newSession}>
+        <h2>Session Info</h2>
+        <hr />
+        <Chart
+          title="Bar Chart"
+          type="bar"
+          data={{
+            labels: fakeLabels,
+            datasets: [{
+              title: 'Some Data',
+              values: fakeData,
+            }],
+          }}
+        />
+        {renderTable(peopleList)}
+        <form>
+          <div>
+            <span>Session Date: 17/10/2017</span>
+          </div>
+          <div>
+            <span>Session Time: 6:40pm</span>
+          </div>
+        </form>
+        <Link className={css.close} to="/overview">Close</Link>
+      </div>
+    );
+  }
+}
 
 export default ViewSession;
