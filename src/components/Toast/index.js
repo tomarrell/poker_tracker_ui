@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
+import { hideToast } from './actions';
+
 import css from './style.css';
 
-const Toast = ({ show, type='success', message }) => {
+const Toast = ({ show, type='success', message, dispatchHideToast }) => {
   if (!show) return null;
 
   return (
@@ -15,7 +17,10 @@ const Toast = ({ show, type='success', message }) => {
       )}
     >
       <div className={css.text}>{message}</div>
-      <i className={classnames("zmdi zmdi-close", css.close)} />
+      <i
+        onClick={() => dispatchHideToast()}
+        className={classnames("zmdi zmdi-close", css.close)}
+      />
     </div>
   );
 }
@@ -24,6 +29,7 @@ Toast.propTypes = {
   show: PropTypes.bool,
   message: PropTypes.string,
   type: PropTypes.string,
+  dispatchHideToast: PropTypes.func.isRequired,
 };
 
 export default connect(
@@ -32,7 +38,9 @@ export default connect(
     message: state.toast.message,
     type: state.toast.type,
   }),
-  null
+  dispatch => ({
+    dispatchHideToast: () => dispatch(hideToast()),
+  }),
 )(Toast);
 
 

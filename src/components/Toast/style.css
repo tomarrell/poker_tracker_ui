@@ -16,6 +16,7 @@
 
 .close {
   padding: 1rem 1.4rem;
+  cursor: pointer;
 }
 
 .error {
