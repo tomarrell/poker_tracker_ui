@@ -21,21 +21,25 @@ export function* createRealmRequest({ payload }) {
     yield put(showToast('Failed to create realm. May already exist', 'error'));
     yield delay(3000);
     yield put(hideToast());
-    return null;
+    return;
   }
 
   const { createRealm: realm } = response.data;
 
   yield call(addRecentRealm, realm.id, realm.name, realm.title)
   yield put(successEnterRealm(parseInt(realm.id, 10), realm.name, realm.title))
-  return null;
 }
 
 export function* loginRealmRequest({ payload }) {
   const { name } = payload;
   const response = yield call(loginRealm, name);
 
-  if (response.errors) throw new Error('Failed to login to realm');
+  if (response.errors) {
+    yield put(showToast('Failed to login to realm', 'error'));
+    yield delay(3000);
+    yield put(hideToast());
+    return;
+  }
   const { realmByName: realm } = response.data;
 
   yield call(addRecentRealm, realm.id, realm.name, realm.title);
