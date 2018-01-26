@@ -6,7 +6,7 @@ import { push } from 'react-router-redux';
 import { addRecentRealm } from '../../utils/localstorage';
 
 // Actions
-import { CREATE_REALM, LOGIN_REALM, successEnterRealm } from './actions';
+import { CREATE_REALM, LOGIN_REALM, successEnterRealm, enterRealmLoading } from './actions';
 import { showToast, hideToast } from '../Toast/actions';
 
 // Api
@@ -15,6 +15,9 @@ import { createRealm, loginRealm } from './api';
 // Sagas
 export function* createRealmRequest({ payload }) {
   const { name, title } = payload;
+
+  yield put(enterRealmLoading());
+
   const response = yield call(createRealm, name, title);
 
   if (response.errors) {
@@ -32,6 +35,9 @@ export function* createRealmRequest({ payload }) {
 
 export function* loginRealmRequest({ payload }) {
   const { name } = payload;
+
+  yield put(enterRealmLoading());
+
   const response = yield call(loginRealm, name);
 
   if (response.errors) {

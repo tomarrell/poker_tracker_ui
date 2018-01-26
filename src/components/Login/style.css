@@ -33,6 +33,7 @@
       background-color: #ccc;
       border: none;
       border-radius: 4px;
+      width: 8.5rem;
     }
 
     .createRealm {
@@ -67,4 +68,14 @@
       background-color: #aaa;
     }
   }
+}
+
+.spinner {
+  margin-top: 1rem;
+  font-size: 2rem;
+  animation: spinner 0.6s linear infinite;
+}
+
+@keyframes spinner {
+  to { transform: rotate(360deg); }
 }

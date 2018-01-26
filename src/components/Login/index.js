@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
 import { getRecentRealms } from '../../utils/localstorage';
 
@@ -45,6 +47,7 @@ class Login extends Component {
 
   render() {
     const { realm } = this.state;
+    const { isLoading } = this.props;
     const realms = getRecentRealms() || [];
 
     return (
@@ -60,6 +63,9 @@ class Login extends Component {
             />}
           <button onClick={this.loginRealm}>Login</button>
           <button onClick={this.createRealm} className={css.createRealm}>+ Create</button>
+          {isLoading && <div>
+            <i className={classnames("zmdi zmdi-spinner", css.spinner)} />
+          </div>}
         </div>
 
         <h3 className={css.recentTitle}>Recent Realms</h3>
@@ -77,8 +83,15 @@ class Login extends Component {
   }
 }
 
+Login.propTypes = {
+  dispatchLoginRealm: PropTypes.func,
+  dispatchCreateRealm: PropTypes.func,
+};
+
 export default connect(
-  null,
+  state => ({
+    isLoading: state.login.loading,
+  }),
   (dispatch) => ({
     dispatchLoginRealm: (name) => dispatch(loginRealm(name)),
     dispatchCreateRealm: (name, title) => dispatch(createRealm(name, title)),
