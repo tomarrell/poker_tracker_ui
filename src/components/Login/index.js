@@ -69,9 +69,11 @@ class Login extends Component {
             />}
           <button onClick={this.loginRealm}>Login</button>
           <button onClick={this.createRealm} className={css.createRealm}>+ Create</button>
-          {isLoading && <div>
-            <i className={classnames("zmdi zmdi-spinner", css.spinner)} />
-          </div>}
+          {isLoading &&
+            <div>
+              <i className={classnames("zmdi zmdi-spinner", css.spinner)} />
+            </div>
+          }
         </div>
 
         <h3 className={css.recentTitle}>Recent Realms</h3>
@@ -92,6 +94,7 @@ class Login extends Component {
 Login.propTypes = {
   dispatchLoginRealm: PropTypes.func,
   dispatchCreateRealm: PropTypes.func,
+  isLoading: PropTypes.bool,
 };
 
 export default connect(
