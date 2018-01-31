@@ -93,7 +93,7 @@ class NewSession extends Component {
   }
 
   handleCreateSession = () => {
-    const { createSessionRequest: dispatchcreateSessionRequest } = this.props;
+    const { createSessionRequest: dispatchCreateSessionRequest } = this.props;
     const { players: playerSessions, date, time } = this.state;
 
     const playDate = new Date(`${date}T${time}`);
@@ -107,7 +107,7 @@ class NewSession extends Component {
     });
 
     // TODO add name for session and pass it to API, currently just using time
-    dispatchcreateSessionRequest(null, playDate, playerInfo);
+    dispatchCreateSessionRequest(null, playDate, playerInfo);
   }
 
   render() {
