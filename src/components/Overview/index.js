@@ -8,7 +8,7 @@ import { fetchRealmInfo } from './actions';
 import Sidebar from '../Sidebar';
 import Leaderboard from '../Leaderboard';
 import ViewSession from '../Session';
-import NewSession from '../Session/NewSession';
+import NewSession from '../NewSession';
 
 import css from './style.css';
 

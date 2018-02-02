@@ -5,8 +5,8 @@ import { Prompt, Link } from 'react-router-dom';
 
 import Table from './Table';
 
-import { createPlayer, createSessionRequest } from '../actions';
-import { playersSelector } from '../../Overview/selectors';
+import { createPlayer, createSessionRequest } from '../Session/actions';
+import { playersSelector } from '../Overview/selectors';
 
 import css from './style.css';
 import { DEFAULT_BUYIN, LEAVE_PROMPT } from './constants';
