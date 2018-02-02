@@ -2,7 +2,7 @@ import {
   FETCH_SESSIONS_SUCCESS,
   FETCH_PLAYERS_SUCCESS,
 } from './actions';
-import { CREATE_PLAYER_SUCCESS, } from '../Session/actions';
+import { CREATE_PLAYER_SUCCESS, CREATE_SESSION_SUCCESS } from '../Session/actions';
 
 const initialState = {
   sessions: [],
@@ -28,6 +28,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         players: [...state.players, newPlayer],
+      }
+    }
+    case CREATE_SESSION_SUCCESS: {
+      return {
+        ...state,
+        sessions: [...state.sessions, action.payload],
       }
     }
     default: {

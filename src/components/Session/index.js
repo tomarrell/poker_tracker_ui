@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { formatCurrency } from '../../utils/money';
@@ -61,12 +61,7 @@ const renderTable = (people) => (
   </table>
 );
 
-class ViewSession extends Component {
-  constructor() {
-    super();
-  }
-
-  render() {
+const ViewSession = () => {
     return (
       <div className={css.newSession}>
         <h2>Session Info</h2>
@@ -94,7 +89,6 @@ class ViewSession extends Component {
         <Link className={css.close} to="/overview">Close</Link>
       </div>
     );
-  }
 }
 
 export default ViewSession;

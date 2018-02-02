@@ -45,6 +45,12 @@ class Login extends Component {
     dispatchCreateRealm(realm, undefined);
   }
 
+  handleRealmSelect = (name) => () => {
+    this.setState({
+      realm: name,
+    });
+  }
+
   render() {
     const { realm } = this.state;
     const { isLoading } = this.props;
@@ -54,7 +60,7 @@ class Login extends Component {
       <div className={css.enterRealm}>
         <div>
           <span>Enter Realm</span>
-          <input onChange={this.handleInputChange('realm')} placeholder="Realm" />
+          <input onChange={this.handleInputChange('realm')} placeholder="Realm" value={realm} />
           {realm.length > 0 &&
             <input
               onChange={this.handleInputChange('password')}
@@ -63,16 +69,18 @@ class Login extends Component {
             />}
           <button onClick={this.loginRealm}>Login</button>
           <button onClick={this.createRealm} className={css.createRealm}>+ Create</button>
-          {isLoading && <div>
-            <i className={classnames("zmdi zmdi-spinner", css.spinner)} />
-          </div>}
+          {isLoading &&
+            <div>
+              <i className={classnames("zmdi zmdi-spinner", css.spinner)} />
+            </div>
+          }
         </div>
 
         <h3 className={css.recentTitle}>Recent Realms</h3>
         <ul className={css.previousRealms}>
           {realms.map((realmData, index) => (
             <li key={index}>
-              <button>
+              <button onClick={this.handleRealmSelect(realmData.name)}>
                 {realmData.name}
               </button>
             </li>
@@ -86,6 +94,7 @@ class Login extends Component {
 Login.propTypes = {
   dispatchLoginRealm: PropTypes.func,
   dispatchCreateRealm: PropTypes.func,
+  isLoading: PropTypes.bool,
 };
 
 export default connect(

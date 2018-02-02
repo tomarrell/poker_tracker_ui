@@ -5,7 +5,7 @@ import { Prompt, Link } from 'react-router-dom';
 
 import Table from './Table';
 
-import { createPlayer, createSession } from '../actions';
+import { createPlayer, createSessionRequest } from '../actions';
 import { playersSelector } from '../../Overview/selectors';
 
 import css from './style.css';
@@ -15,12 +15,16 @@ class NewSession extends Component {
   constructor(props) {
     super(props);
 
+    const localDate = new Date();
+    const currentDateString = localDate.toLocaleDateString().split('/').reverse().join('-');
+    const currentTimeString = localDate.toLocaleTimeString();
+
     this.state = {
       isAddingPerson: false,
       newPlayerName: '',
       players: props.players,
-      // time: null,
-      date: null,
+      time: currentTimeString,
+      date: currentDateString,
     };
   }
 
@@ -89,10 +93,10 @@ class NewSession extends Component {
   }
 
   handleCreateSession = () => {
-    const { createSession: dispatchCreateSession } = this.props;
-    const { players: playerSessions, date } = this.state;
+    const { createSessionRequest: dispatchCreateSessionRequest } = this.props;
+    const { players: playerSessions, date, time } = this.state;
 
-    const playDate = new Date(date).toISOString();
+    const playDate = new Date(`${date}T${time}`);
 
     const playerInfo = playerSessions.map(player => {
       if (player.walkout === null) throw new Error('Cannot have null walkout for player');
@@ -102,13 +106,12 @@ class NewSession extends Component {
       };
     });
 
-    // TODO merge time and date together
     // TODO add name for session and pass it to API, currently just using time
-    dispatchCreateSession(null, playDate, playerInfo);
+    dispatchCreateSessionRequest(null, playDate, playerInfo);
   }
 
   render() {
-    const { isAddingPerson, newPlayerName } = this.state;
+    const { isAddingPerson, newPlayerName, date, time } = this.state;
     const { players } = this.props;
 
     const buttonMessage = isAddingPerson ? 'x Cancel' : '+ Add person';
@@ -145,6 +148,7 @@ class NewSession extends Component {
               onChange={event => this.handleInputChange(event, 'date')}
               type="date"
               className={css.dateField}
+              value={date}
               required
             />
           </div>
@@ -154,6 +158,7 @@ class NewSession extends Component {
               onChange={event => this.handleInputChange(event, 'time')}
               type="time"
               className={css.dateField}
+              value={time}
             />
           </div>
           <Link to="/overview" className={css.close}>Close</Link>
@@ -172,7 +177,7 @@ class NewSession extends Component {
 NewSession.propTypes = {
   players: PropTypes.array.isRequired,
   createPlayer: PropTypes.func.isRequired,
-  createSession: PropTypes.func.isRequired,
+  createSessionRequest: PropTypes.func.isRequired,
 };
 
 export default connect(
@@ -181,7 +186,7 @@ export default connect(
   }),
   dispatch => ({
     createPlayer: (name) => dispatch(createPlayer(name)),
-    createSession: (name, time, playerSessions) =>
-      dispatch(createSession(name, time, playerSessions)),
+    createSessionRequest: (name, time, playerSessions) =>
+      dispatch(createSessionRequest(name, time, playerSessions)),
   }),
 )(NewSession);
