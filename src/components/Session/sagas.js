@@ -40,7 +40,14 @@ export function* createSessionRequest({ payload }) {
 
   const { id: realmId } = realm;
 
-  const response = yield call(createSession, realmId, name, time, playerSessions);
+  // Convert dollar amounts from inputs to cents to send to API
+  const dollarsToCents = playerSessions.map(s => ({
+    ...s,
+    buyin: s.buyin * 100,
+    walkout: s.walkout * 100,
+  }));
+
+  const response = yield call(createSession, realmId, name, time, dollarsToCents);
 
   if (response.data) {
     yield put(createSessionSuccess(response.data.createSession));
