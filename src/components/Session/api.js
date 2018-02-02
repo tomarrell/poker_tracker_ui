@@ -3,6 +3,8 @@ import {
   createSessionSchema,
 } from '../../api/mutationSchemas';
 
+import { getSessionByIdSchema } from '../../api/querySchemas';
+
 import { postGQL } from '../../api/utils';
 
 export const createPlayer = (realmId, name) => {
@@ -28,5 +30,10 @@ export const createSession = (realmId, name, time, playerSessions) => {
   });
 };
 
+export const fetchSession = (sessionId) => {
+  if (!sessionId) throw new Error('SessionId must be present to fetch session');
 
-
+  return postGQL(getSessionByIdSchema, {
+    id: sessionId,
+  });
+};

@@ -6,13 +6,14 @@ import {
   createPlayerSuccess,
   CREATE_SESSION_REQUEST,
   createSessionSuccess,
+  FETCH_SESSION,
 } from './actions';
 
 // Selectors
 import { realmSelector } from '../Login/selectors';
 
 // Api
-import { createPlayer, createSession } from './api';
+import { createPlayer, createSession, fetchSession } from './api';
 
 // Sagas
 export function* createPlayerRequest({ payload: playerName }) {
@@ -46,9 +47,21 @@ export function* createSessionRequest({ payload }) {
   }
 }
 
+export function* fetchSessionRequest({ payload }) {
+  const { sessionId } = payload;
+
+  const response = yield call(fetchSession, sessionId);
+
+  if (response.data) {
+    console.log(response.data);
+    // yield put(fetchSessionSuccess(response.data.sessionById));
+  }
+}
+
 export default function* watchSessionActions() {
   yield [
     takeLatest(CREATE_PLAYER, createPlayerRequest),
     takeLatest(CREATE_SESSION_REQUEST, createSessionRequest),
+    takeLatest(FETCH_SESSION, fetchSessionRequest),
   ];
 }

@@ -17,6 +17,7 @@ export const getSessionByIdSchema = `
       realmId
       name
       time
+      playerSessions
     }
   }
 `;

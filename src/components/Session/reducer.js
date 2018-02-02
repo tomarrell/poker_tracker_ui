@@ -1,6 +1,8 @@
 import {} from './actions';
 
-const initialState = {};
+const initialState = {
+  currentSessions: null,
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {

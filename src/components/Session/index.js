@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { fetchCurrentSession } from './actions';
+
 import Table from './Table';
 import Chart from '../Chart';
 import css from './style.css';
@@ -35,13 +37,13 @@ class ViewSession extends Component {
   constructor(props) {
     super(props);
 
-    const { params, fetchCurrentSession } = props;
+    const { match, fetchCurrentSession } = props;
 
     this.state = {
-      sessionId: params.id,
+      sessionId: match.params.id,
     }
 
-    fetchCurrentSession(params.id);
+    fetchCurrentSession(match.params.id);
   }
 
   render() {
@@ -76,7 +78,7 @@ class ViewSession extends Component {
 }
 
 ViewSession.propTypes = {
-  params: PropTypes.object,
+  match: PropTypes.object,
   fetchCurrentSession: PropTypes.func.isRequired,
 };
 
