@@ -37,7 +37,7 @@ const Table = ({ people }) => (
 );
 
 Table.propTypes = {
-  people: PropTypes.object,
+  people: PropTypes.array,
 };
 
 export default Table;

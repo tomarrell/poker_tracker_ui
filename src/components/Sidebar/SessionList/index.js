@@ -19,7 +19,7 @@ const SessionList = ({ sessions }) => {
 
     return (
       <div key={s.id} className={css.session}>
-        <Link to={`/overview/session/${s.id}`}>{dt.toHTTP()}</Link>
+        <Link to={`${document.location.pathname}/${s.id}`}>{dt.toHTTP()}</Link>
       </div>
     );
   });

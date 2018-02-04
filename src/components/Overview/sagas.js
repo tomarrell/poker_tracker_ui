@@ -36,7 +36,13 @@ export function* fetchRealmInfo() {
 }
 
 export function* fetchRealmThenInfo() {
-  const realmName = document.location.pathname.replace('/overview/', '');
+  // Pull the realm name out of the path to fetch
+  // the important info. In the future, we will need to check
+  // local storage/cookie for auth details when navigating 
+  // direct via URL
+  const realmName = document.location.pathname
+    .replace('/overview/', '')
+    .split('/')[0];
 
   yield put(loginRealm(realmName));
 }
