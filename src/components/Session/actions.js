@@ -5,6 +5,7 @@ export const CREATE_SESSION_REQUEST = 'session/CREATE_NEW_SESSION';
 export const CREATE_SESSION_SUCCESS = 'session/CREATE_SESSION_SUCCESS';
 
 export const FETCH_SESSION = 'session/FETCH_SESSION';
+export const FETCH_SESSION_SUCCESS = 'session/FETCH_SESSION_SUCCESS';
 
 export const createPlayer = (name) => ({
   type: CREATE_PLAYER,
@@ -38,4 +39,9 @@ export const fetchCurrentSession = (sessionId) => ({
   payload: {
     sessionId,
   }
+});
+
+export const fetchSessionSuccess = (session) => ({
+  type: FETCH_SESSION_SUCCESS,
+  payload: session,
 });

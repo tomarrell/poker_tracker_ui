@@ -7,6 +7,7 @@ import {
   CREATE_SESSION_REQUEST,
   createSessionSuccess,
   FETCH_SESSION,
+  fetchSessionSuccess,
 } from './actions';
 
 // Selectors
@@ -60,8 +61,7 @@ export function* fetchSessionRequest({ payload }) {
   const response = yield call(fetchSession, sessionId);
 
   if (response.data) {
-    console.log(response.data);
-    // yield put(fetchSessionSuccess(response.data.sessionById));
+    yield put(fetchSessionSuccess(response.data.sessionById));
   }
 }
 

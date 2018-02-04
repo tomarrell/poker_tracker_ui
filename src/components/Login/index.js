@@ -51,6 +51,12 @@ class Login extends Component {
     });
   }
 
+  handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      this.loginRealm();
+    }
+  }
+
   render() {
     const { realm } = this.state;
     const { isLoading } = this.props;
@@ -60,7 +66,7 @@ class Login extends Component {
       <div className={css.enterRealm}>
         <div>
           <span>Enter Realm</span>
-          <input onChange={this.handleInputChange('realm')} placeholder="Realm" value={realm} />
+          <input onChange={this.handleInputChange('realm')} onKeyPress={this.handleKeyDown} placeholder="Realm" value={realm} />
           {realm.length > 0 &&
             <input
               onChange={this.handleInputChange('password')}
