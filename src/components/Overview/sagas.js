@@ -1,11 +1,12 @@
 import { fork, put, call, takeLatest, select } from 'redux-saga/effects';
 
 import { realmSelector } from '../Login/selectors';
-import { SUCCESS_ENTER_REALM } from '../Login/actions';
+import { SUCCESS_ENTER_REALM, loginRealm } from '../Login/actions';
 import { fetchSessionsByRealmId, fetchPlayersByRealmId } from './api';
 import {
   fetchSessionsSuccess,
   fetchPlayersSuccess,
+  FETCH_REALM_INFO,
 } from './actions';
 
 export function* fetchSessions(realmId) {
@@ -24,7 +25,7 @@ export function* fetchPlayers(realmId) {
 }
 
 export function* fetchRealmInfo() {
-  const { id }  = yield select(realmSelector);
+  const { id } = yield select(realmSelector);
 
   yield [
     // TODO allow fetching of these, careful when they navigate
@@ -34,8 +35,15 @@ export function* fetchRealmInfo() {
   ];
 }
 
+export function* fetchRealmThenInfo() {
+  const realmName = document.location.pathname.replace('/overview/', '');
+
+  yield put(loginRealm(realmName));
+}
+
 export default function* watchOverview() {
   yield [
     takeLatest(SUCCESS_ENTER_REALM, fetchRealmInfo),
+    takeLatest(FETCH_REALM_INFO, fetchRealmThenInfo),
   ];
 };
