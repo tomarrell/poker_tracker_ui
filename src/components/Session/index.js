@@ -10,23 +10,6 @@ import Table from './Table';
 import Chart from '../Chart';
 import css from './style.css';
 
-const peopleList = [{
-  id: 1,
-  name: 'Tom',
-  buyin: 5,
-  walkout: 10,
-}, {
-  id: 2,
-  name: 'Liam',
-  buyin: 10,
-  walkout: 20,
-}, {
-  id: 3,
-  name: 'Hannah',
-  buyin: 15,
-  walkout: 10,
-}];
-
 const fakeLabels = Array.from({ length: 10 }, (v, i) => i);
 const fakeData = Array.from({ length: 10 }, () => Math.floor(Math.random() * 100) - 30);
 
@@ -60,6 +43,7 @@ class ViewSession extends Component {
 
   render() {
     const { session } = this.state;
+    const { playerSessions } = session;
 
     const dt = DateTime.fromISO(session.time);
     console.log(session);
@@ -79,7 +63,7 @@ class ViewSession extends Component {
             }],
           }}
         />
-        <Table people={peopleList} />
+        <Table people={playerSessions || []} />
         <form>
           <div>
             <strong>Session Date: </strong>

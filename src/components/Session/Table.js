@@ -17,10 +17,11 @@ const Table = ({ people }) => (
     </thead>
     <tbody>
       {people.map(person => {
-        const { buyin, walkout, name } = person;
-        const net = buyin
-          && walkout
-          && (walkout - buyin);
+        const { name } = person.player;
+
+        const buyin = person.buyin / 100;
+        const walkout = person.walkout / 100;
+        const net = (walkout - buyin);
 
         return (
           <tr key={person.id}>

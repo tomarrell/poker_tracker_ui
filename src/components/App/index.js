@@ -23,6 +23,6 @@ export default class App extends Component {
 }
 
 App.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.node),
+  children: PropTypes.object,
 };
 
