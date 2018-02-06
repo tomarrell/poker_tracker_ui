@@ -16,15 +16,15 @@ const Table = ({ people }) => (
       </tr>
     </thead>
     <tbody>
-      {people.map(person => {
-        const { name } = person.player;
+      {people.map(playerSession => {
+        const { name } = playerSession.player;
 
-        const buyin = person.buyin / 100;
-        const walkout = person.walkout / 100;
+        const buyin = playerSession.buyin / 100;
+        const walkout = playerSession.walkout / 100;
         const net = (walkout - buyin);
 
         return (
-          <tr key={person.id}>
+          <tr key={playerSession.player.id}>
             <td className={css.played}>✔</td>
             <td className={css.name}>{name}</td>
             <td className={css.buyin}>{formatCurrency(buyin)}</td>

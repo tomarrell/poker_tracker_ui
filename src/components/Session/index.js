@@ -10,9 +10,6 @@ import Table from './Table';
 import Chart from '../Chart';
 import css from './style.css';
 
-const fakeLabels = Array.from({ length: 10 }, (v, i) => i);
-const fakeData = Array.from({ length: 10 }, () => Math.floor(Math.random() * 100) - 30);
-
 class ViewSession extends Component {
   constructor(props) {
     super(props);
@@ -43,26 +40,29 @@ class ViewSession extends Component {
 
   render() {
     const { session } = this.state;
-    const { playerSessions } = session;
+    const { playerSessions = [] } = session;
 
     const dt = DateTime.fromISO(session.time);
-    console.log(session);
+    const playerNet = playerSessions.map(ps => (ps.walkout - ps.buyin) / 100);
+    const playerLabels = playerSessions.map(ps => ps.player.name);
+    // console.log(session);
+    // console.log(playerNet, playerLabels);
 
     return (
       <div className={css.newSession}>
         <h2>Session Info</h2>
         <hr />
-        <Chart
+        {playerNet.length && <Chart
+          key={session.id}
           title="Bar Chart"
           type="bar"
           data={{
-            labels: fakeLabels,
+            labels: playerLabels,
             datasets: [{
-              title: 'Some Data',
-              values: fakeData,
+              values: playerNet,
             }],
           }}
-        />
+        />}
         <Table people={playerSessions || []} />
         <form>
           <div>
