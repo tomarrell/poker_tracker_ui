@@ -21,8 +21,8 @@ const Table = ({
       </tr>
     </thead>
     <tbody>
-      {players.map((player, index) => (
-        <tr key={index}>
+      {players.map(player => (
+        <tr key={player.id}>
           <td className={css.played}><input type="checkbox" /></td>
           <td className={css.name}>{player.name}</td>
           <td key="buyin" className={css.buyin}>
@@ -45,6 +45,18 @@ const Table = ({
           </td>
         </tr>
       ))}
+      
+      <tr key="nets">
+        <td className={css.played} />
+        <td className={css.name}>Totals:</td>
+        <td key="buyin" className={css.buyin}>
+          {players.reduce((acc, cur) => acc + (cur.buyin || 0), 0)}
+        </td>
+        <td key="walkout" className={css.walkout}>
+          {players.reduce((acc, cur) => acc + (cur.walkout || 0), 0)}
+        </td>
+      </tr>
+     
       {isAddingPerson &&
         <tr key="newPlayer">
           <td className={css.played} />

@@ -42,7 +42,8 @@ class NewSession extends Component {
       }));
 
     this.setState({
-      players: [...players, ...newPlayersFromStore],
+      players: [...players, ...newPlayersFromStore]
+        .sort((a, b) => a.name < b.name ? -1 : 1),
     });
   }
 
@@ -75,12 +76,12 @@ class NewSession extends Component {
       [key]: event.target.value,
     }].map(p => ({
       ...p,
-      buyin: parseInt(p.buyin, 10),
-      walkout: parseInt(p.walkout, 10),
+      buyin: parseFloat(p.buyin),
+      walkout: parseFloat(p.walkout),
     }));
 
     this.setState({
-      players: newPlayers,
+      players: newPlayers.sort((a, b) => a.name < b.name ? -1 : 1),
     });
   }
 
@@ -111,8 +112,7 @@ class NewSession extends Component {
   }
 
   render() {
-    const { isAddingPerson, newPlayerName, date, time } = this.state;
-    const { players } = this.props;
+    const { players, isAddingPerson, newPlayerName, date, time } = this.state;
 
     const buttonMessage = isAddingPerson ? 'x Cancel' : '+ Add person';
 
