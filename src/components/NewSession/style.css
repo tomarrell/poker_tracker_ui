@@ -54,12 +54,12 @@
 
 .buyin, .walkout {
   text-align: center;
-  width: 8rem;
+  width: 10rem;
 
   input {
     margin: 0 0.2rem;
-    width: 4rem;
-    padding: 0.2rem;
+    width: 6rem;
+    padding: 0.6rem;
   }
 }
 
