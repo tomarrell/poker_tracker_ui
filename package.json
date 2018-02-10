@@ -25,9 +25,9 @@
     "file-loader": "1.1.6",
     "postcss-loader": "2.0.10",
     "prettier": "1.10.2",
+    "react-svg-loader": "^2.1.0",
     "resolve-url-loader": "2.2.1",
     "style-loader": "0.19.1",
-    "svg-url-loader": "2.3.1",
     "url-loader": "0.6.2",
     "webpack-dev-server": "2.11.1"
   },
