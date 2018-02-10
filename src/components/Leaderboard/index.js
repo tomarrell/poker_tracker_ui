@@ -59,6 +59,8 @@ const Leaderboard = ({ loading, sessions }) => {
   const top3 = TOP_3_PLAYERS;
   const bottom3 = BOTTOM_3_PLAYERS;
 
+  // TODO: calculate stats from sessions/playerSessions
+
   return (
     <div className={css.leaderboard}>
       <h2>Leaderboard</h2>
