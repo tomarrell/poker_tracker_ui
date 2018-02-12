@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
+import Loading from '../Loading';
 
 import { formatCurrency } from '../../utils/money';
 import css from './style.css';
@@ -51,52 +55,65 @@ const BOTTOM_3_PLAYERS = [
   },
 ];
 
-const Leaderboard = () => {
+const Leaderboard = ({ loading, sessions }) => {
   const top3 = TOP_3_PLAYERS;
   const bottom3 = BOTTOM_3_PLAYERS;
+
+  // TODO: calculate stats from sessions/playerSessions
 
   return (
     <div className={css.leaderboard}>
       <h2>Leaderboard</h2>
       <hr />
-
+      <Loading isLoading={loading} />    
+      
       {/* Content */}
-      <div className={css.content}>
-        {/* TOP 3 */}
-        <div className={css.champs}>
-          <h3 className={css.title}>TOP 3</h3>
-          {top3.sort((a, b) => b.net - a.net).map((person, index) => (
-            <div key={person.id} className={css.highlightField}>
-              <span>{TOP_AWARDS[index]}</span>
-              <h3 className={css.standoutName}>{person.name}: {formatCurrency(person.net)}</h3>
-            </div>
-          ))}
-        </div>
+      {!loading && [
+        <div className={css.content}>
+          <div className={css.champs}>
+            <h3 className={css.title}>TOP 3</h3>
+            {top3.sort((a, b) => b.net - a.net).map((person, index) => (
+              <div key={person.id} className={css.highlightField}>
+                <span>{TOP_AWARDS[index]}</span>
+                <h3 className={css.standoutName}>{person.name}: {formatCurrency(person.net)}</h3>
+              </div>
+            ))}
+          </div>
 
-        {/* BOTTOM 3 */}
-        <div className={css.losers}>
-          <h3 className={css.title}>BOTTOM 3</h3>
-          {bottom3.sort((a, b) => a.net - b.net).map((person, index) => (
-            <div key={person.id} className={css.highlightField}>
-              <span>{BOTTOM_AWARDS[index]}</span>
-              <h3 className={css.standoutName}>{person.name}: {formatCurrency(person.net)}</h3>
-            </div>
-          ))}
+          {/* BOTTOM 3 */}
+          <div className={css.losers}>
+            <h3 className={css.title}>BOTTOM 3</h3>
+            {bottom3.sort((a, b) => a.net - b.net).map((person, index) => (
+              <div key={person.id} className={css.highlightField}>
+                <span>{BOTTOM_AWARDS[index]}</span>
+                <h3 className={css.standoutName}>{person.name}: {formatCurrency(person.net)}</h3>
+              </div>
+            ))}
+          </div>
+        </div>,
+        <div className={css.stats}>
+          <ul>
+            <li>Sessions Played: {sessions.length}</li>
+            <li>Total Player Buyins: </li>
+            <li>Net Money Transferred: </li>
+            <li>Number Unique Players: </li>
+            <li>Largest Session (no. of Players): </li>
+          </ul>
         </div>
-      </div>
-
-      {/* Stats */}
-      <div className={css.stats}>
-        <ul>
-          <li>Sessions Played: </li>
-          <li>Total Player Buyins: </li>
-          <li>Net Money Transferred: </li>
-          <li>Number Unique Players: </li>
-          <li>Largest Session (no. of Players): </li>
-        </ul>
-      </div>
+      ]}
     </div>
   );
 };
 
-export default Leaderboard;
+Leaderboard.propTypes = {
+  sessions: PropTypes.array,
+  loading: PropTypes.bool,
+};
+
+
+export default connect(
+  state => ({
+    loading: state.overview.loading,
+    sessions: state.overview.sessions,
+  })
+)(Leaderboard);

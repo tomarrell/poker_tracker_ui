@@ -14,11 +14,12 @@ import css from './style.css';
 
 class Overview extends Component {
   constructor(props) {
-    super();
-
-    props.fetchRealmInfo();
-
+    super(props);
     this.state = {};
+  }
+
+  componentDidMount() {
+    this.props.fetchRealmInfo();
   }
 
   render() {

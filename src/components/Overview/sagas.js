@@ -1,4 +1,4 @@
-import { fork, put, call, takeLatest, select } from 'redux-saga/effects';
+import { put, call, all, takeLatest, select } from 'redux-saga/effects';
 
 import { realmSelector } from '../Login/selectors';
 import { SUCCESS_ENTER_REALM, loginRealm } from '../Login/actions';
@@ -7,6 +7,7 @@ import {
   fetchSessionsSuccess,
   fetchPlayersSuccess,
   FETCH_REALM_INFO,
+  fetchRealmInfoSuccess,
 } from './actions';
 
 export function* fetchSessions(realmId) {
@@ -27,12 +28,14 @@ export function* fetchPlayers(realmId) {
 export function* fetchRealmInfo() {
   const { id } = yield select(realmSelector);
 
-  yield [
+  yield all([
     // TODO allow fetching of these, careful when they navigate
     // directly to session page as realm won't be set in state
-    fork(fetchSessions, `${id}`),
-    // fork(fetchPlayers, id),
-  ];
+    call(fetchSessions, `${id}`),
+    // call(fetchPlayers, id),
+  ]);
+
+  yield put(fetchRealmInfoSuccess());
 }
 
 export function* fetchRealmThenInfo() {

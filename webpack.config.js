@@ -46,7 +46,14 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        use: 'svg-url-loader',
+        use: [
+          {
+            loader: "babel-loader"
+          },
+          {
+            loader: "react-svg-loader",
+          }
+        ]
       },
       {
         test: /\.(jpe?g|pdf|gif|png|wav|mp3)$/,

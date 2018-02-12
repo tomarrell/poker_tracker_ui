@@ -37,6 +37,14 @@ export const getSessionsByRealmIdSchema = `
       realmId
       name
       time
+      playerSessions {
+        player {
+          id
+          name
+        }
+        buyin
+        walkout
+      }
     }
   }
 `;

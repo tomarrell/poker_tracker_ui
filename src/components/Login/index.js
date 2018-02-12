@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
 
 import { getRecentRealms } from '../../utils/localstorage';
 
 import { createRealm, loginRealm } from './actions';
+
+import Loading from '../Loading';
 
 import css from './style.css';
 
@@ -75,11 +76,7 @@ class Login extends Component {
             />}
           <button onClick={this.loginRealm}>Login</button>
           <button onClick={this.createRealm} className={css.createRealm}>+ Create</button>
-          {isLoading &&
-            <div>
-              <i className={classnames("zmdi zmdi-spinner", css.spinner)} />
-            </div>
-          }
+          <Loading isLoading={isLoading} small />
         </div>
 
         <h3 className={css.recentTitle}>Recent Realms</h3>
