@@ -16,9 +16,9 @@ const Leaderboard = ({ loading, realm }) => {
     (p1, p2) => p2.historicalBalance - p1.historicalBalance,
   );
   const top3 = sortByHistoricalBalance.slice(0, 3);
-  const bottom3 = sortByHistoricalBalance.slice(
-    sortByHistoricalBalance.length - 3,
-  );
+  const bottom3 = sortByHistoricalBalance
+    .slice(sortByHistoricalBalance.length - 3)
+    .reverse();
 
   // TODO: calculate stats from sessions/playerSessions
 
