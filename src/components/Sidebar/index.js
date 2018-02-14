@@ -4,31 +4,32 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import SessionList from './SessionList';
-import { sessionsSelector } from '../Overview/selectors';
+import { realmSelector } from '../Overview/selectors';
 
 import css from './style.css';
 
-const Sidebar = ({ sessions }) => {
+const Sidebar = ({ realm }) => {
   return (
     <div className={css.sidebar}>
       <div className={css.header}>
         <h2>Sessions</h2>
-        <Link to="/overview/new" className={css.newSession}>New</Link>
+        <Link to="/overview/new" className={css.newSession}>
+          New
+        </Link>
       </div>
       <hr />
-      <SessionList sessions={sessions} />
+      <SessionList sessions={realm.sessions} />
     </div>
   );
 };
 
 Sidebar.propTypes = {
-  sessions: PropTypes.array,
+  realm: PropTypes.object,
 };
 
 export default connect(
-  (state) => ({
-    sessions: sessionsSelector(state),
+  state => ({
+    realm: realmSelector(state),
   }),
   null,
 )(Sidebar);
-

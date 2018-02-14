@@ -4,10 +4,17 @@ import {
   FETCH_REALM_INFO,
   FETCH_REALM_INFO_SUCCESS,
 } from './actions';
-import { CREATE_PLAYER_SUCCESS, CREATE_SESSION_SUCCESS } from '../Session/actions';
+import {
+  CREATE_PLAYER_SUCCESS,
+  CREATE_SESSION_SUCCESS,
+} from '../Session/actions';
 
 const initialState = {
   sessions: [],
+  realm: {
+    sessions: [],
+    players: [],
+  },
   players: [],
   loading: false,
 };
@@ -31,28 +38,29 @@ export default (state = initialState, action) => {
       return {
         ...state,
         players: [...state.players, newPlayer],
-      }
+      };
     }
     case CREATE_SESSION_SUCCESS: {
       return {
         ...state,
         sessions: [...state.sessions, action.payload],
-      }
+      };
     }
     case FETCH_REALM_INFO: {
       return {
         ...state,
         loading: true,
-      }
+      };
     }
     case FETCH_REALM_INFO_SUCCESS: {
       return {
         ...state,
+        realm: action.payload,
         loading: false,
-      }
+      };
     }
     default: {
       return state;
     }
   }
-}
+};
