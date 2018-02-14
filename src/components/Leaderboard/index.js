@@ -33,7 +33,7 @@ const Leaderboard = ({ loading, realm }) => {
         <div className={css.content}>
           <div className={css.champs}>
             <h3 className={css.title}>TOP 3</h3>
-            {top3.sort((a, b) => b.net - a.net).map((person, index) => (
+            {top3.map((person, index) => (
               <div key={person.id} className={css.highlightField}>
                 <span>{TOP_AWARDS[index]}</span>
                 <h3 className={css.standoutName}>
@@ -46,7 +46,7 @@ const Leaderboard = ({ loading, realm }) => {
           {/* BOTTOM 3 */}
           <div className={css.losers}>
             <h3 className={css.title}>BOTTOM 3</h3>
-            {bottom3.sort((a, b) => a.net - b.net).map((person, index) => (
+            {bottom3.map((person, index) => (
               <div key={person.id} className={css.highlightField}>
                 <span>{BOTTOM_AWARDS[index]}</span>
                 <h3 className={css.standoutName}>
