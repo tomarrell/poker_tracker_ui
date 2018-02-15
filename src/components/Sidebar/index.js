@@ -9,11 +9,13 @@ import { sessionsSelector } from '../Overview/selectors';
 import css from './style.css';
 
 const Sidebar = ({ sessions }) => {
+  const { pathname } = document.location;
+
   return (
     <div className={css.sidebar}>
       <div className={css.header}>
         <h2>Sessions</h2>
-        <Link to="/overview/new" className={css.newSession}>
+        <Link to={`${pathname}/new`} className={css.newSession}>
           New
         </Link>
       </div>
