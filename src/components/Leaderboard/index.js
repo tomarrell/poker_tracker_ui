@@ -20,7 +20,9 @@ const Leaderboard = ({ loading, sessions, players }) => {
     .slice(sortByHistoricalBalance.length - 3)
     .reverse();
 
-  // TODO: calculate stats from sessions/playerSessions
+  const netGains = players.reduce((acc, p) => acc + (p.historicalBalance < 0 ? 0 : p.historicalBalance), 0);
+  const totalBuyins = players.reduce((acc, p) => acc + p.totalBuyins, 0);
+  const largestSess = sessions.reduce((max, p) =>  p.playerSessions.length > max ? p.playerSessions.length : max, 0);
 
   return (
     <div className={css.leaderboard}>
@@ -37,7 +39,7 @@ const Leaderboard = ({ loading, sessions, players }) => {
               <div key={index} className={css.highlightField}>
                 <span>{TOP_AWARDS[index]}</span>
                 <h3 className={css.standoutName}>
-                  {person.name}: {formatCurrency(person.net)}
+                  {person.name}: {formatCurrency(person.historicalBalance)}
                 </h3>
               </div>
             ))}
@@ -50,7 +52,7 @@ const Leaderboard = ({ loading, sessions, players }) => {
               <div key={index} className={css.highlightField}>
                 <span>{BOTTOM_AWARDS[index]}</span>
                 <h3 className={css.standoutName}>
-                  {person.name}: {formatCurrency(person.net)}
+                  {person.name}: {formatCurrency(person.historicalBalance)}
                 </h3>
               </div>
             ))}
@@ -60,9 +62,10 @@ const Leaderboard = ({ loading, sessions, players }) => {
           <ul>
             <li>Sessions Played: {sessions.length}</li>
             <li>Total Player Buyins:</li>
-            <li>Net Money Transferred: </li>
+            <li>Net Money Transferred: {formatCurrency(netGains)} </li>
+            {/* TODO fix dup player issues... */}
             <li>Number Unique Players: {players.length} </li>
-            <li>Largest Session (no. of Players): </li>
+            <li>Largest Session (no. of Players): {largestSess} </li>
           </ul>
         </div>,
       ]}

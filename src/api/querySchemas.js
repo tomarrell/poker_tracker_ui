@@ -57,11 +57,15 @@ export const getRealmSummaryByRealmId = `
         realmId
         name
         time
+        playerSessions {
+          playerId
+        }
       }
       players {
         name
         historicalBalance
         realBalance
+        totalBuyin
       }
     }
   }
