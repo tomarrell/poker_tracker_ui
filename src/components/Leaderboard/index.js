@@ -11,8 +11,8 @@ const TOP_AWARDS = ['first/1st', 'second/2nd', 'third/3rd'];
 
 const BOTTOM_AWARDS = ['last', '2nd/last', '3rd/last'];
 
-const Leaderboard = ({ loading, realm }) => {
-  const sortByHistoricalBalance = realm.players.sort(
+const Leaderboard = ({ loading, sessions, players }) => {
+  const sortByHistoricalBalance = players.sort(
     (p1, p2) => p2.historicalBalance - p1.historicalBalance,
   );
   const top3 = sortByHistoricalBalance.slice(0, 3);
@@ -34,7 +34,7 @@ const Leaderboard = ({ loading, realm }) => {
           <div className={css.champs}>
             <h3 className={css.title}>TOP 3</h3>
             {top3.map((person, index) => (
-              <div key={person.id} className={css.highlightField}>
+              <div key={index} className={css.highlightField}>
                 <span>{TOP_AWARDS[index]}</span>
                 <h3 className={css.standoutName}>
                   {person.name}: {formatCurrency(person.net)}
@@ -47,7 +47,7 @@ const Leaderboard = ({ loading, realm }) => {
           <div className={css.losers}>
             <h3 className={css.title}>BOTTOM 3</h3>
             {bottom3.map((person, index) => (
-              <div key={person.id} className={css.highlightField}>
+              <div key={index} className={css.highlightField}>
                 <span>{BOTTOM_AWARDS[index]}</span>
                 <h3 className={css.standoutName}>
                   {person.name}: {formatCurrency(person.net)}
@@ -58,10 +58,10 @@ const Leaderboard = ({ loading, realm }) => {
         </div>,
         <div className={css.stats}>
           <ul>
-            <li>Sessions Played: {realm.sessions.length}</li>
+            <li>Sessions Played: {sessions.length}</li>
             <li>Total Player Buyins:</li>
             <li>Net Money Transferred: </li>
-            <li>Number Unique Players: {realm.players.length} </li>
+            <li>Number Unique Players: {players.length} </li>
             <li>Largest Session (no. of Players): </li>
           </ul>
         </div>,
@@ -71,11 +71,13 @@ const Leaderboard = ({ loading, realm }) => {
 };
 
 Leaderboard.propTypes = {
-  realm: PropTypes.object,
+  sessions: PropTypes.array,
+  players: PropTypes.array,
   loading: PropTypes.bool,
 };
 
 export default connect(state => ({
   loading: state.overview.loading,
-  realm: state.overview.realm,
+  sessions: state.overview.sessions,
+  players: state.overview.players,
 }))(Leaderboard);

@@ -11,10 +11,6 @@ import {
 
 const initialState = {
   sessions: [],
-  realm: {
-    sessions: [],
-    players: [],
-  },
   players: [],
   loading: false,
 };
@@ -53,9 +49,11 @@ export default (state = initialState, action) => {
       };
     }
     case FETCH_REALM_INFO_SUCCESS: {
+      const { sessions, players } = action.payload;
       return {
         ...state,
-        realm: action.payload,
+        players,
+        sessions,
         loading: false,
       };
     }
