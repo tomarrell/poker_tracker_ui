@@ -49,6 +49,28 @@ export const getSessionsByRealmIdSchema = `
   }
 `;
 
+export const getRealmSummaryByRealmId = `
+  query getRealmSummaryByRealmId($realmId: ID!) {
+    realmById(id: $realmId) {
+      sessions {
+        id
+        realmId
+        name
+        time
+        playerSessions {
+          playerId
+        }
+      }
+      players {
+        name
+        historicalBalance
+        realBalance
+        totalBuyin
+      }
+    }
+  }
+`;
+
 // Get player by player id
 export const getPlayerByIdSchema = `
   query playerById($id: ID!) {

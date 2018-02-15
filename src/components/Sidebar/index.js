@@ -13,7 +13,9 @@ const Sidebar = ({ sessions }) => {
     <div className={css.sidebar}>
       <div className={css.header}>
         <h2>Sessions</h2>
-        <Link to="/overview/new" className={css.newSession}>New</Link>
+        <Link to="/overview/new" className={css.newSession}>
+          New
+        </Link>
       </div>
       <hr />
       <SessionList sessions={sessions} />
@@ -26,9 +28,8 @@ Sidebar.propTypes = {
 };
 
 export default connect(
-  (state) => ({
+  state => ({
     sessions: sessionsSelector(state),
   }),
   null,
 )(Sidebar);
-

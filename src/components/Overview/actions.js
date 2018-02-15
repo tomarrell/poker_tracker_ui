@@ -7,16 +7,17 @@ export const fetchRealmInfo = () => ({
   type: FETCH_REALM_INFO,
 });
 
-export const fetchSessionsSuccess = (sessions) => ({
+export const fetchSessionsSuccess = sessions => ({
   type: FETCH_SESSIONS_SUCCESS,
   payload: sessions,
 });
 
-export const fetchPlayersSuccess = (players) => ({
+export const fetchPlayersSuccess = players => ({
   type: FETCH_PLAYERS_SUCCESS,
   payload: players,
 });
 
-export const fetchRealmInfoSuccess = () => ({
+export const fetchRealmInfoSuccess = realm => ({
   type: FETCH_REALM_INFO_SUCCESS,
+  payload: realm,
 });
