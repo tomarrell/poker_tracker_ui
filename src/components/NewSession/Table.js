@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Autocomplete from 'react-autocomplete';
+import classnames from 'classnames';
 
 import css from './style.css';
 import { DEFAULT_BUYIN } from './constants';
-import { playerNameMatch } from '../../utils/match.js';
-import Autocomplete from 'react-autocomplete';
-import classnames from 'classnames';
+import { playerNameMatch } from '../../utils/match';
 
 const Table = ({
   currentPlayers,
@@ -83,7 +83,9 @@ const Table = ({
                 <div
                   className={classnames(css.player, {[css.highlighted]: isHighlighted})}
                   key={player.id}
-                >{player.name}</div>
+                >
+                  {player.name}
+                </div>
               )}
             />
           </td>

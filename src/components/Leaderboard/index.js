@@ -28,47 +28,52 @@ const Leaderboard = ({ loading, sessions, players }) => {
     <div className={css.leaderboard}>
       <h2>Leaderboard</h2>
       <hr />
-      <Loading isLoading={loading} />
+      <Loading
+        className={css.loadingPosition}
+        isLoading={loading}
+      />
 
       {/* Content */}
-      {!loading && [
-        <div className={css.content}>
-          <div className={css.champs}>
-            <h3 className={css.title}>TOP 3</h3>
-            {top3.map((person, index) => (
-              <div key={index} className={css.highlightField}>
-                <span>{TOP_AWARDS[index]}</span>
-                <h3 className={css.standoutName}>
-                  {person.name}: {formatCurrency(person.historicalBalance)}
-                </h3>
-              </div>
-            ))}
-          </div>
+      {!loading &&
+        <div className={css.wrapper}>
+          <div key={1} className={css.content}>
+            <div className={css.champs}>
+              <h3 className={css.title}>TOP 3</h3>
+              {top3.map((person, index) => (
+                <div key={index} className={css.highlightField}>
+                  <span>{TOP_AWARDS[index]}</span>
+                  <h3 className={css.standoutName}>
+                    {person.name}: {formatCurrency(person.historicalBalance)}
+                  </h3>
+                </div>
+              ))}
+            </div>
 
-          {/* BOTTOM 3 */}
-          <div className={css.losers}>
-            <h3 className={css.title}>BOTTOM 3</h3>
-            {bottom3.map((person, index) => (
-              <div key={index} className={css.highlightField}>
-                <span>{BOTTOM_AWARDS[index]}</span>
-                <h3 className={css.standoutName}>
-                  {person.name}: {formatCurrency(person.historicalBalance)}
-                </h3>
-              </div>
-            ))}
+            {/* BOTTOM 3 */}
+            <div className={css.losers}>
+              <h3 className={css.title}>BOTTOM 3</h3>
+              {bottom3.map((person, index) => (
+                <div key={index} className={css.highlightField}>
+                  <span>{BOTTOM_AWARDS[index]}</span>
+                  <h3 className={css.standoutName}>
+                    {person.name}: {formatCurrency(person.historicalBalance)}
+                  </h3>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>,
-        <div className={css.stats}>
-          <ul>
-            <li>Sessions Played: {sessions.length}</li>
-            <li>Total Player Buyins: {formatCurrency(totalBuyins)}</li>
-            <li>Net Money Transferred: {formatCurrency(netGains)} </li>
-            {/* TODO fix dup player issues... */}
-            <li>Number Unique Players: {players.length} </li>
-            <li>Largest Session (no. of Players): {largestSess} </li>
-          </ul>
-        </div>,
-      ]}
+          <div className={css.stats}>
+            <ul>
+              <li>Sessions Played: {sessions.length}</li>
+              <li>Total Player Buyins: {formatCurrency(totalBuyins)}</li>
+              <li>Net Money Transferred: {formatCurrency(netGains)} </li>
+              {/* TODO fix dup player issues... */}
+              <li>Number Unique Players: {players.length} </li>
+              <li>Largest Session (no. of Players): {largestSess} </li>
+            </ul>
+          </div>
+        </div>
+      }
     </div>
   );
 };
