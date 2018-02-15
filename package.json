@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "classnames": "2.2.5",
-    "frappe-charts": "0.0.8",
+    "frappe-charts": "git+https://github.com/tomarrell/frappe-charts.git",
     "fuse.js": "3.2.0",
     "history": "4.7.2",
     "lodash": "4.17.4",
