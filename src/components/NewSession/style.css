@@ -52,6 +52,24 @@
   }
 }
 
+.player {
+    padding: 1rem 1rem;
+    cursor: default;
+}
+
+.menu {
+    position: absolute;
+    z-index: 10;
+    min-width: 4rem;
+    background-color: white;
+    opacity: 0.90;
+}
+
+.highlighted {
+    color: white;
+    background-color: #4095bf;
+}
+
 .buyin, .walkout {
   text-align: center;
   width: 10rem;

@@ -3,11 +3,16 @@ import PropTypes from 'prop-types';
 
 import css from './style.css';
 import { DEFAULT_BUYIN } from './constants';
+import { playerNameMatch } from '../../utils/match.js';
+import Autocomplete from 'react-autocomplete';
+import classnames from 'classnames';
 
 const Table = ({
-  players,
+  currentPlayers,
+  allPlayers,
   isAddingPerson,
   handleNewPersonChange,
+  handleNewPersonSelect,
   newPlayerName,
   handleChangePerson,
 }) => (
@@ -21,7 +26,7 @@ const Table = ({
       </tr>
     </thead>
     <tbody>
-      {players.map(player => (
+      {currentPlayers.map(player => (
         <tr key={player.id}>
           <td className={css.played}><input type="checkbox" /></td>
           <td className={css.name}>{player.name}</td>
@@ -50,10 +55,10 @@ const Table = ({
         <td className={css.played} />
         <td className={css.name}>Totals:</td>
         <td key="buyin" className={css.buyin}>
-          {players.reduce((acc, cur) => acc + (cur.buyin || 0), 0)}
+          {currentPlayers.reduce((acc, cur) => acc + (cur.buyin || 0), 0)}
         </td>
         <td key="walkout" className={css.walkout}>
-          {players.reduce((acc, cur) => acc + (cur.walkout || 0), 0)}
+          {currentPlayers.reduce((acc, cur) => acc + (cur.walkout || 0), 0)}
         </td>
       </tr>
      
@@ -61,10 +66,25 @@ const Table = ({
         <tr key="newPlayer">
           <td className={css.played} />
           <td className={css.newPersonName}>
-            <input
-              placeholder="Name..."
-              onChange={handleNewPersonChange}
+            <Autocomplete
               value={newPlayerName}
+              inputProps={{ placeholder: "Name..."}}
+              items={allPlayers}
+              getItemValue={(item) => item.name}
+              shouldItemRender={playerNameMatch}
+              onChange={handleNewPersonChange}
+              onSelect={handleNewPersonSelect}
+              renderMenu={children => (
+                <div className={css.menu}>
+                  {children}
+                </div>
+              )}
+              renderItem={(player, isHighlighted) => (
+                <div
+                  className={classnames(css.player, {[css.highlighted]: isHighlighted})}
+                  key={player.id}
+                >{player.name}</div>
+              )}
             />
           </td>
           <td key="buyin" className={css.buyin} />
@@ -76,10 +96,12 @@ const Table = ({
 );
 
 Table.propTypes = {
-  players: PropTypes.array.isRequired,
+  currentPlayers: PropTypes.array.isRequired,
+  allPlayers: PropTypes.array.isRequired,
   isAddingPerson: PropTypes.bool.isRequired,
   newPlayerName: PropTypes.string.isRequired,
   handleNewPersonChange: PropTypes.func.isRequired,
+  handleNewPersonSelect: PropTypes.func.isRequired,
   handleChangePerson: PropTypes.func.isRequired,
 };
 
