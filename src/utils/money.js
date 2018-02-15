@@ -3,5 +3,5 @@ export const formatCurrency = (value) => {
 
   const isNegative = value < 0;
 
-  return `${isNegative ? '-' : ''}$${Math.abs(value).toFixed(2)}`;
+  return `${isNegative ? '-' : ''}$${Math.abs(value / 100).toFixed(2)}`;
 };

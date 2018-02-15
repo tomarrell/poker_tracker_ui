@@ -21,7 +21,7 @@ const Leaderboard = ({ loading, sessions, players }) => {
     .reverse();
 
   const netGains = players.reduce((acc, p) => acc + (p.historicalBalance < 0 ? 0 : p.historicalBalance), 0);
-  const totalBuyins = players.reduce((acc, p) => acc + p.totalBuyins, 0);
+  const totalBuyins = players.reduce((acc, p) => acc + p.totalBuyin, 0);
   const largestSess = sessions.reduce((max, p) =>  p.playerSessions.length > max ? p.playerSessions.length : max, 0);
 
   return (
@@ -61,7 +61,7 @@ const Leaderboard = ({ loading, sessions, players }) => {
         <div className={css.stats}>
           <ul>
             <li>Sessions Played: {sessions.length}</li>
-            <li>Total Player Buyins:</li>
+            <li>Total Player Buyins: {formatCurrency(totalBuyins)}</li>
             <li>Net Money Transferred: {formatCurrency(netGains)} </li>
             {/* TODO fix dup player issues... */}
             <li>Number Unique Players: {players.length} </li>
