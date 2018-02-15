@@ -51,7 +51,7 @@ export function* createSessionRequest({ payload }) {
   const response = yield call(createSession, realmId, name, time, dollarsToCents);
 
   if (response.data) {
-    yield put(createSessionSuccess(response.data.createSession));
+    yield put(createSessionSuccess(response.data.putSession));
   }
 }
 

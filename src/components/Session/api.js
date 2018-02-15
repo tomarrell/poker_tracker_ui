@@ -1,6 +1,6 @@
 import {
   createPlayerSchema,
-  createSessionSchema,
+  putSessionSchema,
 } from '../../api/mutationSchemas';
 
 import { getSessionByIdSchema } from '../../api/querySchemas';
@@ -22,7 +22,7 @@ export const createSession = (realmId, name, time, playerSessions) => {
   if (!time) throw new Error('Time must be present to create session');
   if (!playerSessions) throw new Error('PlayerSessions must be present to create session');
 
-  return postGQL(createSessionSchema, {
+  return postGQL(putSessionSchema, {
     realmId,
     name: time,
     time,
