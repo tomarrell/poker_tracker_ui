@@ -40,6 +40,7 @@ class ViewSession extends Component {
   }
 
   render() {
+    const { match } = this.props;
     const { session } = this.state;
     const { playerSessions = [] } = session;
 
@@ -74,16 +75,21 @@ class ViewSession extends Component {
             {dt.toLocaleString(DateTime.TIME_SIMPLE)}
           </div>
         </form>
-        <Link className={css.close} to="/overview">Close</Link>
+        <Link
+          className={css.close}
+          to={`${match.url.replace(`/${match.params.id}`, '')}`}
+        >
+          Close
+        </Link>
       </div>
     );
   }
 }
 
 ViewSession.propTypes = {
+  fetchCurrentSession: PropTypes.func.isRequired,
   match: PropTypes.object,
   session: PropTypes.object,
-  fetchCurrentSession: PropTypes.func.isRequired,
 };
 
 export default connect(
