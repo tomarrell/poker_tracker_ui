@@ -11,7 +11,6 @@
     "babel-eslint": "8.2.1",
     "babel-loader": "7.1.2",
     "babel-preset-env": "1.6.1",
-    "babel-preset-latest": "6.24.1",
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-2": "6.24.1",
     "css-loader": "0.28.9",
@@ -24,11 +23,14 @@
     "eslint-plugin-react": "7.5.1",
     "file-loader": "1.1.6",
     "postcss-loader": "2.0.10",
+    "precss": "3.1.0",
     "prettier": "1.10.2",
     "react-svg-loader": "2.1.0",
     "resolve-url-loader": "2.2.1",
     "style-loader": "0.19.1",
     "url-loader": "0.6.2",
+    "webpack": "^4.0.0-beta.1",
+    "webpack-cli": "^2.0.6",
     "webpack-dev-server": "2.11.1"
   },
   "dependencies": {
@@ -41,7 +43,6 @@
     "koa-static": "^4.0.2",
     "lodash": "4.17.4",
     "luxon": "^0.3.1",
-    "precss": "3.1.0",
     "prop-types": "15.6.0",
     "react": "16.2.0",
     "react-autocomplete": "^1.8.1",
@@ -56,13 +57,12 @@
     "react-tether": "0.6.1",
     "redux": "3.7.2",
     "redux-saga": "0.16.0",
-    "reselect": "3.0.1",
-    "webpack": "3.10.0"
+    "reselect": "3.0.1"
   },
   "scripts": {
     "start": "PORT=80 node server.js",
     "deploy": "now --public",
     "dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --port 3001",
-    "build": "BABEL_ENV=production webpack --env=prod --progress"
+    "build": "NODE_ENV=production BABEL_ENV=production webpack --env=prod --progress"
   }
 }
