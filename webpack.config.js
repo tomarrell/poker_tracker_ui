@@ -7,8 +7,6 @@ module.exports = {
   // Entry point for Webpack
   entry: './src/index.js',
 
-  mode: 'production',
-
   // Output build directory
   output: {
     path: path.join(__dirname, ''),
@@ -48,12 +46,14 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        use: [{
-          loader: "babel-loader"
-        },
-        {
-          loader: "react-svg-loader",
-        }]
+        use: [
+          {
+            loader: "babel-loader"
+          },
+          {
+            loader: "react-svg-loader",
+          }
+        ]
       },
       {
         test: /\.(jpe?g|pdf|gif|png|wav|mp3)$/,
@@ -97,12 +97,5 @@ module.exports = {
     }
   },
 
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': 'production',
-      },
-    }),
-    new webpack.HotModuleReplacementPlugin(),
-  ],
+  plugins: [new webpack.HotModuleReplacementPlugin()],
 };
