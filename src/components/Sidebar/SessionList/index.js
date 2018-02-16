@@ -3,7 +3,12 @@ import { DateTime } from 'luxon';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import { sortDate } from '../../../utils/date';
+
 import css from './style.css';
+
+
+const sessionSortDate = (a, b) => sortDate(a.time, b.time);
 
 const SessionList = ({ sessions }) => {
   if (!sessions) {
@@ -14,7 +19,7 @@ const SessionList = ({ sessions }) => {
     return <div>No sessions yet!</div>
   }
 
-  return sessions.sort().map(s => {
+  return sessions.sort(sessionSortDate).map(s => {
     const dt = DateTime.fromISO(s.time);
 
     return (
