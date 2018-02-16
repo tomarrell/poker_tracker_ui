@@ -130,6 +130,12 @@ class NewSession extends Component {
     dispatchCreateSessionRequest(null, playDate, playerInfo);
   }
 
+  handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      this.createPlayer();
+    }
+  }
+
   render() {
     const { currentPlayers, allPlayers, isAddingPerson, newPlayerName, date, time } = this.state;
 
@@ -153,6 +159,7 @@ class NewSession extends Component {
           handleNewPersonSelect={this.handleNewPersonSelect}
           newPlayerName={newPlayerName}
           handleChangePerson={this.handleChangePerson}
+          handleKeyPress={this.handleKeyPress}
         />
         <button
           onClick={this.handleAddPerson}

@@ -15,6 +15,7 @@ const Table = ({
   handleNewPersonSelect,
   newPlayerName,
   handleChangePerson,
+  handleKeyPress,
 }) => (
   <table className={css.peopleList}>
     <thead>
@@ -68,7 +69,10 @@ const Table = ({
           <td className={css.newPersonName}>
             <Autocomplete
               value={newPlayerName}
-              inputProps={{ placeholder: "Name..."}}
+              inputProps={{
+                placeholder: "Name...",
+                onKeyPress: handleKeyPress,
+              }}
               items={allPlayers}
               getItemValue={(item) => item.name}
               shouldItemRender={
@@ -108,6 +112,7 @@ Table.propTypes = {
   handleNewPersonChange: PropTypes.func.isRequired,
   handleNewPersonSelect: PropTypes.func.isRequired,
   handleChangePerson: PropTypes.func.isRequired,
+  handleKeyPress: PropTypes.func.isRequired,
 };
 
 export default Table;
