@@ -44,8 +44,8 @@ export function* createSessionRequest({ payload }) {
   // Convert dollar amounts from inputs to cents to send to API
   const dollarsToCents = playerSessions.map(s => ({
     ...s,
-    buyin: s.buyin * 100,
-    walkout: s.walkout * 100,
+    buyin: Number((s.buyin * 100).toFixed(2)),
+    walkout: Number((s.walkout * 100).toFixed(2)),
   }));
 
   const response = yield call(createSession, realmId, name, time, dollarsToCents);

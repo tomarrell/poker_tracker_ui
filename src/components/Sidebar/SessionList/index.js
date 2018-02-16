@@ -14,7 +14,7 @@ const SessionList = ({ sessions }) => {
     return <div>No sessions yet!</div>
   }
 
-  return sessions.reverse().map(s => {
+  return sessions.sort().map(s => {
     const dt = DateTime.fromISO(s.time);
 
     return (
