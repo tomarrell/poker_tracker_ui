@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Loading from '../Loading';
 
 import { formatCurrency } from '../../utils/money';
+import { toTitleCase } from '../../utils/strings';
 import css from './style.css';
 
 const TOP_AWARDS = ['first/1st', 'second/2nd', 'third/3rd'];
@@ -43,7 +44,7 @@ const Leaderboard = ({ loading, sessions, players }) => {
                 <div key={index} className={css.highlightField}>
                   <span>{TOP_AWARDS[index]}</span>
                   <h3 className={css.standoutName}>
-                    {person.name}: {formatCurrency(person.historicalBalance)}
+                    {toTitleCase(person.name)}: {formatCurrency(person.historicalBalance)}
                   </h3>
                 </div>
               ))}
@@ -56,7 +57,7 @@ const Leaderboard = ({ loading, sessions, players }) => {
                 <div key={index} className={css.highlightField}>
                   <span>{BOTTOM_AWARDS[index]}</span>
                   <h3 className={css.standoutName}>
-                    {person.name}: {formatCurrency(person.historicalBalance)}
+                    {toTitleCase(person.name)}: {formatCurrency(person.historicalBalance)}
                   </h3>
                 </div>
               ))}

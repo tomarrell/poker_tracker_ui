@@ -30,13 +30,12 @@ class NewSession extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { currentPlayers, allPlayers } = this.state;
+    const { allPlayers, currentPlayers, isAddingPerson } = this.state;
 
     const allPlayerIds = allPlayers.map(p => p.id);
-    const currentPlayerIds = currentPlayers.map(p => p.id);
     const newPlayersFromStore = nextProps
       .players
-      .filter(p => !allPlayerIds.concat(currentPlayerIds).includes(p.id))
+      .filter(p => !allPlayerIds.includes(p.id))
       .map(p => ({
         ...p,
         buyin: DEFAULT_BUYIN,
@@ -44,8 +43,7 @@ class NewSession extends Component {
       }));
 
     this.setState({
-      currentPlayers: [...currentPlayers, ...newPlayersFromStore]
-        .sort((a, b) => a.name < b.name ? -1 : 1),
+      currentPlayers: [...currentPlayers, ...(isAddingPerson ? newPlayersFromStore : [])],
       allPlayers: [...allPlayers, ...newPlayersFromStore]
     });
   }
@@ -88,16 +86,30 @@ class NewSession extends Component {
     }));
 
     this.setState({
-      players: newPlayers.sort((a, b) => a.name < b.name ? -1 : 1),
+      currentPlayers: newPlayers.sort((a, b) => a.name < b.name ? -1 : 1),
     });
   }
 
   createPlayer = () => {
     const { createPlayer: dispatchCreatePlayer } = this.props;
-    const { newPlayerName } = this.state;
+    const { newPlayerName, currentPlayers, allPlayers } = this.state;
 
-    dispatchCreatePlayer(newPlayerName);
-    this.setState({ newPlayerName: '' });
+    const existingPlayer = allPlayers.find(p => p.name === newPlayerName);
+    const alreadyAdded = currentPlayers.find(p => p.name === newPlayerName);
+
+    if (alreadyAdded) {
+      return;
+    }
+
+    if (existingPlayer) {
+      this.setState({
+        currentPlayers: [...currentPlayers, existingPlayer],
+        newPlayerName: '',
+      });
+    } else {
+      dispatchCreatePlayer(newPlayerName);
+      this.setState({ newPlayerName: '' });
+    }
   }
 
   handleCreateSession = () => {
@@ -121,7 +133,7 @@ class NewSession extends Component {
   render() {
     const { currentPlayers, allPlayers, isAddingPerson, newPlayerName, date, time } = this.state;
 
-    const buttonMessage = isAddingPerson ? 'x Cancel' : '+ Add person';
+    const buttonMessage = isAddingPerson ? 'x Cancel' : '+ Add Person';
 
     return (
       <div className={css.newSession}>
@@ -148,7 +160,7 @@ class NewSession extends Component {
         >
           {buttonMessage}
         </button>
-        {isAddingPerson && <button onClick={this.createPlayer}>Save new user ✔</button>}
+        {isAddingPerson && <button onClick={this.createPlayer}>Add User ✔</button>}
 
         <div>
           <div>
