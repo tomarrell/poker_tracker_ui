@@ -5,7 +5,7 @@ import classnames from 'classnames';
 
 import css from './style.css';
 import { DEFAULT_BUYIN } from './constants';
-import { playerNameMatch } from '../../utils/match';
+import { playerNameMatch, toTitleCase } from '../../utils/strings';
 
 const Table = ({
   currentPlayers,
@@ -29,7 +29,7 @@ const Table = ({
       {currentPlayers.map(player => (
         <tr key={player.id}>
           <td className={css.played}><input type="checkbox" /></td>
-          <td className={css.name}>{player.name}</td>
+          <td className={css.name}>{toTitleCase(player.name)}</td>
           <td key="buyin" className={css.buyin}>
             {'$'}
             <input
@@ -71,7 +71,10 @@ const Table = ({
               inputProps={{ placeholder: "Name..."}}
               items={allPlayers}
               getItemValue={(item) => item.name}
-              shouldItemRender={playerNameMatch}
+              shouldItemRender={
+                (item, term) =>
+                  !currentPlayers.find(p => p.name === item.name) && playerNameMatch(item, term)
+              }
               onChange={handleNewPersonChange}
               onSelect={handleNewPersonSelect}
               renderMenu={children => (
