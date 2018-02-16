@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { DateTime } from 'luxon';
 
 import { fetchCurrentSession } from './actions';
+import { toTitleCase } from '../../utils/strings';
 
 import Table from './Table';
 import Chart from '../Chart';
@@ -43,10 +44,9 @@ class ViewSession extends Component {
     const { playerSessions = [] } = session;
 
     const dt = DateTime.fromISO(session.time);
-    const playerNet = playerSessions.map(ps => (ps.walkout - ps.buyin) / 100);
-    const playerLabels = playerSessions.map(ps => ps.player.name);
-    // console.log(session);
-    // console.log(playerNet, playerLabels);
+    const ps = playerSessions.sort((a, b) => (b.walkout - b.buyin) - (a.walkout - a.buyin));
+    const playerNet = ps.map(p => (p.walkout - p.buyin) / 100);
+    const playerLabels = ps.map(p => toTitleCase(p.player.name));
 
     return (
       <div className={css.newSession}>

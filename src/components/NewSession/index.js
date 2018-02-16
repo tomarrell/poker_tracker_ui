@@ -81,8 +81,8 @@ class NewSession extends Component {
       [key]: event.target.value,
     }].map(p => ({
       ...p,
-      buyin: parseFloat(p.buyin),
-      walkout: parseFloat(p.walkout),
+      buyin: Number(p.buyin) || DEFAULT_BUYIN,
+      walkout: Number(p.walkout),
     }));
 
     this.setState({
