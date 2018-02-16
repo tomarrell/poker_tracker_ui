@@ -33,7 +33,21 @@ export function* fetchRealmInfo() {
   const { id } = yield select(realmSelector);
   const { data } = yield call(fetchRealmSummaryByRealmId, `${id}`);
   const { realmById: realmSummary } = data;
-  yield put(fetchRealmInfoSuccess(realmSummary));
+
+  const parsedRealmSummary = {
+    sessions: realmSummary.sessions.map(s => ({
+      ...s,
+        id: Number(s.id),
+        realmId: Number(s.realmId),
+    })),
+    players: realmSummary.players.map(p => ({
+      ...p,
+        id: Number(p.id),
+    })),
+  };
+
+
+  yield put(fetchRealmInfoSuccess(parsedRealmSummary));
 }
 
 export function* fetchRealmThenInfo() {

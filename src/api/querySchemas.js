@@ -62,6 +62,7 @@ export const getRealmSummaryByRealmId = `
         }
       }
       players {
+        id
         name
         historicalBalance
         realBalance

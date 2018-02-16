@@ -43,7 +43,7 @@ class NewSession extends Component {
       }));
 
     this.setState({
-      currentPlayers: [...currentPlayers, ...(isAddingPerson ? newPlayersFromStore : [])],
+      currentPlayers: [...currentPlayers, ...(isAddingPerson ? newPlayersFromStore : [])].sort((a, b) => a.name < b.name ? -1 : 1),
       allPlayers: [...allPlayers, ...newPlayersFromStore]
     });
   }
@@ -97,13 +97,13 @@ class NewSession extends Component {
     const existingPlayer = allPlayers.find(p => p.name === newPlayerName);
     const alreadyAdded = currentPlayers.find(p => p.name === newPlayerName);
 
-    if (alreadyAdded) {
+    if (alreadyAdded || !newPlayerName.trim()) {
       return;
     }
 
     if (existingPlayer) {
       this.setState({
-        currentPlayers: [...currentPlayers, existingPlayer],
+        currentPlayers: [...currentPlayers, existingPlayer].sort((a, b) => a.name < b.name ? -1 : 1),
         newPlayerName: '',
       });
     } else {
