@@ -56,10 +56,10 @@ const Table = ({
         <td className={css.played} />
         <td className={css.name}>Totals:</td>
         <td key="buyin" className={css.buyin}>
-          {currentPlayers.reduce((acc, cur) => acc + (cur.buyin || 0), 0)}
+          {currentPlayers.reduce((acc, cur) => acc + (cur.buyin || 0), 0).toFixed(2)}
         </td>
         <td key="walkout" className={css.walkout}>
-          {currentPlayers.reduce((acc, cur) => acc + (cur.walkout || 0), 0)}
+          {currentPlayers.reduce((acc, cur) => acc + (cur.walkout || 0), 0).toFixed(2)}
         </td>
       </tr>
      
