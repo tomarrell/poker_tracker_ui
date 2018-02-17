@@ -55,7 +55,7 @@ class ViewSession extends Component {
         <hr />
         {playerNet.length && <Chart
           key={session.id}
-          title="Bar Chart"
+          title="Net Winnings by Player"
           type="bar"
           data={{
             labels: playerLabels,
