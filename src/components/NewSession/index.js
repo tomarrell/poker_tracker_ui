@@ -54,13 +54,9 @@ class NewSession extends Component {
     });
   }
 
-  handleNewPersonChange = (event) => {
-    this.setState({ newPlayerName: event.target.value });
-  }
+  handleNewPersonChange = (event) => this.setState({ newPlayerName: event.target.value });
 
-  handleNewPersonSelect = (name) => {
-    this.setState({ newPlayerName: name });
-  }
+  handleNewPersonSelect = (name) => this.setState({ newPlayerName: name });
 
   handleAddPerson = () => {
     const { isAddingPerson } = this.state;
@@ -97,19 +93,18 @@ class NewSession extends Component {
     const existingPlayer = allPlayers.find(p => p.name === newPlayerName);
     const alreadyAdded = currentPlayers.find(p => p.name === newPlayerName);
 
-    if (alreadyAdded || !newPlayerName.trim()) {
-      return;
-    }
+    if (alreadyAdded || !newPlayerName.trim()) return
 
     if (existingPlayer) {
       this.setState({
         currentPlayers: [...currentPlayers, existingPlayer].sort((a, b) => a.name < b.name ? -1 : 1),
         newPlayerName: '',
       });
-    } else {
-      dispatchCreatePlayer(newPlayerName);
-      this.setState({ newPlayerName: '' });
+      return;
     }
+
+    dispatchCreatePlayer(newPlayerName);
+    this.setState({ newPlayerName: '' });
   }
 
   handleCreateSession = () => {
@@ -131,9 +126,7 @@ class NewSession extends Component {
   }
 
   handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      this.createPlayer();
-    }
+    if (e.key === 'Enter') this.createPlayer();
   }
 
   render() {
