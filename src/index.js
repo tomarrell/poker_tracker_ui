@@ -16,7 +16,7 @@ import rootSaga from './rootSaga';
 import Routes from './routes';
 
 // Root styles
-import './style.css';
+import './styles/style.css';
 
 // React-router-redux setup
 const history = createHistory();

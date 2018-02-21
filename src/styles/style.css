@@ -1,0 +1,23 @@
+/*
+ * Anything coming from ./node_modules will be
+ * excluded from being run through the css-modules
+ * loader. This is configured as a special case in
+ * the webpack.config.js. Therefore, globally
+ * imported styles for packages shall be placed
+ * here.
+ * */
+@import './variables.css';
+
+/* GLOBAL STYLES */
+
+html {
+  font-size: 10px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-primary), serif;
+  color: #333;
+}
+
