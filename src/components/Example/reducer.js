@@ -1,21 +1,21 @@
 import {
-  FETCH_SESSION_SUCCESS,
+  EXAMPLE_ACTION,
 } from './actions';
 
 const initialState = {
-  currentSessions: null,
+  example: [],
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_SESSION_SUCCESS: {
+    case EXAMPLE_ACTION: {
       return {
         ...state,
-        currentSession: action.payload,
+        example: action.payload,
       };
     }
     default: {
       return state;
     }
   }
-}
+};
