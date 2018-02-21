@@ -1,7 +1,10 @@
 export const formatCurrency = (value) => {
-  if (typeof value !== 'number') return 'N/A';
+  let num;
 
-  const isNegative = value < 0;
+  if (typeof value === 'string') num = Number(value);
+  else if (typeof value === 'number') num = value;
 
-  return `${isNegative ? '-' : ''}$${Math.abs(value / 100).toFixed(2)}`;
+  const isNegative = num < 0;
+
+  return `${isNegative ? '-' : ''}$${Math.abs(num / 100).toFixed(2)}`;
 };

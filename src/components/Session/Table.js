@@ -40,8 +40,8 @@ const Table = ({ people }) => {
         <tr key="session_totals">
           <td className={css.played} />
           <td className={css.name}>Totals:</td>
-          <td className={css.buyin}>{buyinAcc}</td>
-          <td className={css.walkout}>{walkoutAcc}</td>
+          <td className={css.buyin}>{formatCurrency(buyinAcc)}</td>
+          <td className={css.walkout}>{formatCurrency(walkoutAcc)}</td>
         </tr>
       </tbody>
     </table>

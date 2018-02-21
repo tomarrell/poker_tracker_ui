@@ -1,0 +1,27 @@
+.peopleList {
+  flex: 1 1 100%;
+  width: 100%;
+  list-style: none;
+  margin: 3rem 0;
+  border-spacing: 0;
+  -webkit-border-horizontal-spacing: 0;
+  -webkit-border-vertical-spacing: 0;
+
+  td {
+    padding: 0.4rem;
+  }
+
+  tbody tr:nth-of-type(odd) {
+    background-color: #ccc;
+  }
+}
+
+.played {
+  width: 2rem;
+  text-align: center;
+}
+
+.buyin, .walkout, .net {
+  text-align: center;
+  width: 12rem;
+}

@@ -3,7 +3,7 @@ import { DateTime } from 'luxon';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { sortDate } from '../../../utils/date';
+import { sortDate } from '../../utils/date';
 
 import css from './style.css';
 
