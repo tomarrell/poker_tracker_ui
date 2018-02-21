@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import SessionList from './SessionList';
+import SessionList from '../SessionList';
 import { sessionsSelector } from '../Overview/selectors';
 
 import css from './style.css';
