@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 import { DateTime } from 'luxon';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -10,7 +11,7 @@ import css from './style.css';
 
 const sessionSortDate = (a, b) => sortDate(a.time, b.time);
 
-const SessionList = ({ sessions }) => {
+const SessionList = ({ sessions, currentSessionId, match }) => {
 
   if (!sessions) return <div>Something went wrong loading sessions!</div>
   if (sessions.length === 0) return <div>No sessions yet!</div>
@@ -23,8 +24,14 @@ const SessionList = ({ sessions }) => {
           const dt = DateTime.fromISO(s.time);
 
           return (
-            <div key={s.id} className={css.session}>
-              <Link to={`${document.location.pathname}/${s.id}`}>{dt.toHTTP()}</Link>
+            <div
+              key={s.id}
+              className={classnames(
+                css.session,
+                { [css.bold]: s.id === Number(currentSessionId) },
+              )}
+            >
+              <Link to={`${match.url}/${s.id}`}>{dt.toHTTP()}</Link>
             </div>
           );
         }
@@ -34,6 +41,8 @@ const SessionList = ({ sessions }) => {
 };
 
 SessionList.propTypes = {
+  match: PropTypes.object.isRequired,
+  currentSessionId: PropTypes.string,
   sessions: PropTypes.array,
 };
 

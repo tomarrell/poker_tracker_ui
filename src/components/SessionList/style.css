@@ -23,6 +23,20 @@
   }
 }
 
+.bold {
+  border-bottom: solid 1px black;
+
+  a {
+    font-weight: bold;
+
+  }
+
+  &::after {
+    content: '>';
+    align-self: center;
+  }
+}
+
 .listWrapper {
   flex: 1;
   overflow-y: scroll;

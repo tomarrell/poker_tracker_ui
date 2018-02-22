@@ -3,7 +3,7 @@ import {
 } from './actions';
 
 const initialState = {
-  currentSessions: null,
+  currentSession: null,
 };
 
 export default (state = initialState, action) => {

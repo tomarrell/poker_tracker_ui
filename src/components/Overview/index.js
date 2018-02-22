@@ -27,12 +27,13 @@ class Overview extends Component {
 
     return (
       <div className={css.overview}>
-        <Sidebar />
+        <Route path={`${match.url}/:realmName`} component={Sidebar} />
         <Switch>
           <Route exact path={`${match.url}/:realmName/new`} component={NewSession} />
           <Route exact path={`${match.url}/:realmName/:id`} component={ViewSession} />
           <Route exact path={`${match.url}/:realmName`} component={Leaderboard} />
         </Switch>
+        <Route path="/" component={null} />
       </div>
     );
   }
