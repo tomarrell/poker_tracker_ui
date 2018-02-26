@@ -39,7 +39,7 @@ const Table = ({
               defaultValue={DEFAULT_BUYIN}
               step={0.10}
               min={0}
-              tabindex={200 + i}
+              tabIndex={200 + i}
             />
           </td>
           <td key="walkout" className={css.walkout}>
@@ -48,7 +48,7 @@ const Table = ({
               onChange={event => handleChangePerson(event, 'walkout', player)}
               type="number"
               step={0.10}
-              tabindex={100 + i}
+              tabIndex={100 + i}
             />
           </td>
         </tr>

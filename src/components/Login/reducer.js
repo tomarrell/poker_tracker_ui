@@ -2,6 +2,7 @@ import { SUCCESS_ENTER_REALM, REALM_LOADING } from './actions';
 
 const initialState = {
   realm: null,
+  loading: false,
 };
 
 export default (state = initialState, action) => {
