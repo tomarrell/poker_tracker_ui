@@ -37,11 +37,6 @@ const Leaderboard = ({ loading, sessions, players }) => {
             title="TOP 3"
             type="top"
           />
-          <Champs
-            champs={bottom3}
-            title="BOTTOM 3"
-            type="bottom"
-          />
 
           <Table
             people={players}
