@@ -31,7 +31,7 @@ const SessionList = ({ sessions, currentSessionId, match }) => {
                 { [css.bold]: s.id === Number(currentSessionId) },
               )}
             >
-              <Link to={`${match.url}/${s.id}`}>{dt.toHTTP()}</Link>
+              <Link to={`${match.url}/${s.id}`}>{dt.setLocale('en-us').toLocaleString(DateTime.DATETIME_MED)}</Link>
             </div>
           );
         }
