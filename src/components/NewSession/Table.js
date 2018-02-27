@@ -27,7 +27,7 @@ const Table = ({
       </tr>
     </thead>
     <tbody>
-      {currentPlayers.map(player => (
+      {currentPlayers.map((player, i) => (
         <tr key={player.id}>
           <td className={css.played}><input type="checkbox" /></td>
           <td className={css.name}>{toTitleCase(player.name)}</td>
@@ -39,6 +39,7 @@ const Table = ({
               defaultValue={DEFAULT_BUYIN}
               step={0.10}
               min={0}
+              tabIndex={200 + i}
             />
           </td>
           <td key="walkout" className={css.walkout}>
@@ -47,6 +48,7 @@ const Table = ({
               onChange={event => handleChangePerson(event, 'walkout', player)}
               type="number"
               step={0.10}
+              tabIndex={100 + i}
             />
           </td>
         </tr>

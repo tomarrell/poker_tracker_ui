@@ -1,4 +1,6 @@
 import { takeLatest, put, call, select } from 'redux-saga/effects';
+import { delay } from 'redux-saga';
+import { push } from 'react-router-redux';
 
 // Actions
 import {
@@ -9,6 +11,8 @@ import {
   FETCH_SESSION,
   fetchSessionSuccess,
 } from './actions';
+
+import { showToast, hideToast } from '../Toast/actions';
 
 // Selectors
 import { realmSelector } from '../Login/selectors';
@@ -51,7 +55,13 @@ export function* createSessionRequest({ payload }) {
   const response = yield call(createSession, realmId, name, time, dollarsToCents);
 
   if (response.data) {
-    yield put(createSessionSuccess(response.data.putSession));
+    const { putSession } = response.data
+    yield put(createSessionSuccess(putSession));
+    const path = location.pathname.replace("new", putSession.id);
+    yield put(push(path));
+    yield put(showToast(`Successfully created session: ${putSession.name}`));
+    yield delay(3000);
+    yield put(hideToast());
   }
 }
 

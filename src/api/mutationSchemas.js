@@ -38,6 +38,9 @@ export const putSessionSchema = `
       realmId
       name
       time
+      playerSessions {
+        playerId
+      }
     }
   }
 `;

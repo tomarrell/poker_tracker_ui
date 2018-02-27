@@ -4,12 +4,14 @@ import { connect } from 'react-redux';
 import { Prompt, Link } from 'react-router-dom';
 
 import Table from './Table';
+import Loading from '../Loading';
 
 import { createPlayer, createSessionRequest } from '../Session/actions';
 import { playersSelector } from '../Overview/selectors';
 
 import css from './style.css';
 import { DEFAULT_BUYIN, LEAVE_PROMPT } from './constants';
+import classnames from 'classnames'
 
 class NewSession extends Component {
   constructor(props) {
@@ -26,6 +28,7 @@ class NewSession extends Component {
       currentPlayers: [],
       time: currentTimeString,
       date: currentDateString,
+      submitted: false,
     };
   }
 
@@ -108,8 +111,10 @@ class NewSession extends Component {
   }
 
   handleCreateSession = () => {
-    const { createSessionRequest: dispatchCreateSessionRequest } = this.props;
-    const { currentPlayers: playerSessions, date, time } = this.state;
+    const { createSessionRequest: dispatchCreateSessionRequest, loading } = this.props;
+    if (loading) return;
+
+    const { currentPlayers: playerSessions, date, time, submitted } = this.state;
 
     const playDate = new Date(`${date}T${time}`);
 
@@ -123,6 +128,9 @@ class NewSession extends Component {
 
     // TODO add name for session and pass it to API, currently just using time
     dispatchCreateSessionRequest(null, playDate, playerInfo);
+    this.setState({
+      submitted: true,
+    });
   }
 
   handleKeyPress = (e) => {
@@ -130,14 +138,15 @@ class NewSession extends Component {
   }
 
   render() {
-    const { currentPlayers, allPlayers, isAddingPerson, newPlayerName, date, time } = this.state;
+    const { currentPlayers, allPlayers, isAddingPerson, newPlayerName, date, time, submitted } = this.state;
+    const { loading } = this.props;
 
     const buttonMessage = isAddingPerson ? 'x Cancel' : '+ Add Person';
 
     return (
       <div className={css.newSession}>
         <Prompt
-          when
+          when={!submitted && loading}
           message={LEAVE_PROMPT}
         />
         <h2>New Session</h2>
@@ -185,10 +194,20 @@ class NewSession extends Component {
           <Link to="/overview" className={css.close}>Close</Link>
           <button
             onClick={this.handleCreateSession}
-            className={css.create}
+            className={
+              classnames(
+                {
+                  [css.create]: true,
+                  [css.loading]: loading,
+                },
+              )}
           >
             Create Session ✔
           </button>
+          <Loading
+            className={css.loadingPosition}
+            isLoading={loading}
+          />
         </div>
       </div>
     );
@@ -204,6 +223,7 @@ NewSession.propTypes = {
 export default connect(
   state => ({
     players: playersSelector(state),
+    loading: state.session.loading,
   }),
   dispatch => ({
     createPlayer: (name) => dispatch(createPlayer(name)),
