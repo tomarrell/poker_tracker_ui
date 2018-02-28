@@ -20,5 +20,8 @@ module.exports = {
     'import/no-named-as-default': 'off',
     'arrow-body-style': 'off',
     'import/prefer-default-export': 'off',
+    'import/no-extraneous-dependencies': 'off',
+    'import/no-unresolved': 'off',
+    'import/extensions': 'off',
   },
 };

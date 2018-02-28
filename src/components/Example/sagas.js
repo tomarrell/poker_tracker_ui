@@ -12,6 +12,6 @@ export function* fetchExampleSaga(id) {
 
 export default function* watchOverview() {
   yield [
-    takeLatest(EXAMPLE_ACTION, fetchExampleSaga),
+    // takeLatest(EXAMPLE_ACTION, fetchExampleSaga),
   ];
 }

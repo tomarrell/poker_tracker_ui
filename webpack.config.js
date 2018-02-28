@@ -67,7 +67,6 @@ module.exports = {
       {
         // Run Babel transpiler on all .JS and .JSX files
         test: /.jsx?$/,
-        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {

@@ -9,6 +9,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case EXAMPLE_ACTION: {
+      console.log('Reducing example action.');
       return {
         ...state,
         example: action.payload,
