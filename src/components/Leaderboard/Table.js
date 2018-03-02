@@ -6,7 +6,6 @@ import { toTitleCase } from '../../utils/strings';
 import css from './Table.css';
 
 const Table = ({ people }) => {
-  const firstNegativeVal = people.findIndex(person => person.historicalBalance < 0);
   return (
     <table className={css.peopleList}>
       <thead>
@@ -18,7 +17,7 @@ const Table = ({ people }) => {
         </tr>
       </thead>
       <tbody>
-        {people.slice(0, firstNegativeVal).map(person => {
+        {people.map(person => {
           const { id, name, historicalBalance, realBalance, totalBuyin } = person;
 
           return (
