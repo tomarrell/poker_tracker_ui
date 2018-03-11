@@ -12,10 +12,14 @@ import css from './style.css';
 const Leaderboard = ({ loading, sessions, players }) => {
   const sortByHistoricalBalance = players
     .sort((p1, p2) => p2.historicalBalance - p1.historicalBalance);
+
   const top3 = sortByHistoricalBalance.slice(0, 3);
+
+  /*
   const bottom3 = sortByHistoricalBalance
     .slice(sortByHistoricalBalance.length - 3)
     .reverse();
+  */
 
   const netGains = players.reduce((acc, p) => acc + (p.historicalBalance < 0 ? 0 : p.historicalBalance), 0);
   const totalBuyins = players.reduce((acc, p) => acc + p.totalBuyin, 0);
