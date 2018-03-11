@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Prompt, Link } from 'react-router-dom';
+import classnames from 'classnames';
 
 import Table from './Table';
 import Loading from '../Loading';
@@ -11,7 +12,6 @@ import { playersSelector } from '../Overview/selectors';
 
 import css from './style.css';
 import { DEFAULT_BUYIN, LEAVE_PROMPT } from './constants';
-import classnames from 'classnames'
 
 class NewSession extends Component {
   constructor(props) {
@@ -111,10 +111,14 @@ class NewSession extends Component {
   }
 
   handleCreateSession = () => {
-    const { createSessionRequest: dispatchCreateSessionRequest, loading } = this.props;
+    const {
+      createSessionRequest: dispatchCreateSessionRequest,
+      loading,
+    } = this.props;
+
     if (loading) return;
 
-    const { currentPlayers: playerSessions, date, time, submitted } = this.state;
+    const { currentPlayers: playerSessions, date, time } = this.state;
 
     const playDate = new Date(`${date}T${time}`);
 
@@ -218,6 +222,7 @@ NewSession.propTypes = {
   players: PropTypes.array.isRequired,
   createPlayer: PropTypes.func.isRequired,
   createSessionRequest: PropTypes.func.isRequired,
+  loading: PropTypes.bool,
 };
 
 export default connect(
