@@ -2,6 +2,7 @@ import {
   FETCH_SESSION_SUCCESS,
   CREATE_SESSION_SUCCESS,
   CREATE_SESSION_REQUEST,
+  CLEAR_CURRENT_SESSION,
 } from './actions';
 
 const initialState = {
@@ -15,6 +16,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         currentSession: action.payload,
+      };
+    }
+    case CLEAR_CURRENT_SESSION: {
+      return {
+        ...state,
+        currentSession: null,
       };
     }
     case CREATE_SESSION_REQUEST: {

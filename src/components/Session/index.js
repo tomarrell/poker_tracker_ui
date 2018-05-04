@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { DateTime } from 'luxon';
 
-import { fetchCurrentSession } from './actions';
+import { fetchCurrentSession, clearCurrentSession } from './actions';
 import { toTitleCase } from '../../utils/strings';
 
 import Table from './Table';
@@ -37,6 +37,11 @@ class ViewSession extends Component {
     this.setState({
       session: nextProps.session,
     });
+  }
+
+  componentWillUnmount() {
+    const { clearSession } = this.props;
+    clearSession();
   }
 
   render() {
@@ -88,6 +93,7 @@ class ViewSession extends Component {
 
 ViewSession.propTypes = {
   fetchCurrentSession: PropTypes.func.isRequired,
+  clearSession: PropTypes.func.isRequired,
   match: PropTypes.object,
   session: PropTypes.object,
 };
@@ -98,5 +104,6 @@ export default connect(
   }),
   dispatch => ({
     fetchCurrentSession: (sessionId) => dispatch(fetchCurrentSession(sessionId)),
+    clearSession: () => dispatch(clearCurrentSession()),
   }),
 )(ViewSession);
