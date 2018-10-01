@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import { formatCurrency } from '../../utils/money';
-import { toTitleCase } from '../../utils/strings';
-import css from './Table.css';
+import { formatCurrency } from "../../utils/money";
+import { toTitleCase } from "../../utils/strings";
+import css from "./Table.css";
 
 const Table = ({ people }) => {
   return (
@@ -18,7 +18,13 @@ const Table = ({ people }) => {
       </thead>
       <tbody>
         {people.map(person => {
-          const { id, name, historicalBalance, realBalance, totalBuyin } = person;
+          const {
+            id,
+            name,
+            historicalBalance,
+            realBalance,
+            totalBuyin
+          } = person;
 
           return (
             <tr key={id}>
@@ -35,7 +41,7 @@ const Table = ({ people }) => {
 };
 
 Table.propTypes = {
-  people: PropTypes.array,
+  people: PropTypes.array
 };
 
 export default Table;

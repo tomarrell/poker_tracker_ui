@@ -1,16 +1,16 @@
 export const postGQL = async (query, variables) => {
-  if (!query) throw new Error('Graphql request requires a query');
+  if (!query) throw new Error("Graphql request requires a query");
 
-  const res = await fetch('https://poker-tracker-api.herokuapp.com/graphql', {
-    method: 'POST',
+  const res = await fetch("https://poker-tracker-api.herokuapp.com/graphql", {
+    method: "POST",
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
       query,
-      variables,
-    }),
+      variables
+    })
   });
 
   return res.json();

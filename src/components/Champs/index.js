@@ -1,14 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import { formatCurrency } from '../../utils/money';
-import { toTitleCase } from '../../utils/strings';
+import { formatCurrency } from "../../utils/money";
+import { toTitleCase } from "../../utils/strings";
 
-import css from './style.css';
+import css from "./style.css";
 
 const labels = {
-  top: ['first/1st', 'second/2nd', 'third/3rd'],
-  bottom: ['last', '2nd/last', '3rd/last'],
+  top: ["first/1st", "second/2nd", "third/3rd"],
+  bottom: ["last", "2nd/last", "3rd/last"]
 };
 
 const Champs = ({ champs, title, type }) => (
@@ -28,7 +28,7 @@ const Champs = ({ champs, title, type }) => (
 Champs.propTypes = {
   champs: PropTypes.array,
   title: PropTypes.string,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired
 };
 
 export default Champs;

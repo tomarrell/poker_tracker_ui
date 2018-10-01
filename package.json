@@ -63,6 +63,9 @@
     "start": "PORT=80 node server.js",
     "deploy": "now --public",
     "dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --port 3001",
-    "build": "BABEL_ENV=production webpack --env=prod --progress"
+    "build": "BABEL_ENV=production webpack --env=prod --progress",
+    "pretty": "prettier --write 'src/**/*.js'",
+    "lint": "eslint src/**/*.js",
+    "check": "npm run pretty && npm run lint"
   }
 }

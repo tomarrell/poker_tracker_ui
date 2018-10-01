@@ -3,12 +3,12 @@ import {
   CREATE_SESSION_SUCCESS,
   CREATE_SESSION_FAILURE,
   CREATE_SESSION_REQUEST,
-  CLEAR_CURRENT_SESSION,
-} from './actions';
+  CLEAR_CURRENT_SESSION
+} from "./actions";
 
 const initialState = {
   currentSession: null,
-  loading: false,
+  loading: false
 };
 
 export default (state = initialState, action) => {
@@ -16,35 +16,35 @@ export default (state = initialState, action) => {
     case FETCH_SESSION_SUCCESS: {
       return {
         ...state,
-        currentSession: action.payload,
+        currentSession: action.payload
       };
     }
     case CLEAR_CURRENT_SESSION: {
       return {
         ...state,
-        currentSession: null,
+        currentSession: null
       };
     }
     case CREATE_SESSION_REQUEST: {
       return {
         ...state,
-        loading: true,
+        loading: true
       };
     }
     case CREATE_SESSION_SUCCESS: {
       return {
         ...state,
-        loading: false,
+        loading: false
       };
     }
     case CREATE_SESSION_FAILURE: {
       return {
         ...state,
-        loading: false,
+        loading: false
       };
     }
     default: {
       return state;
     }
   }
-}
+};

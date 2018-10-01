@@ -1,21 +1,17 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import React from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import classnames from "classnames";
 
-import { hideToast } from './actions';
+import { hideToast } from "./actions";
 
-import css from './style.css';
+import css from "./style.css";
 
-const Toast = ({ show, type='success', message, dispatchHideToast }) => {
+const Toast = ({ show, type = "success", message, dispatchHideToast }) => {
   if (!show) return null;
 
   return (
-    <div className={classnames(
-        css.toast,
-        css[type],
-      )}
-    >
+    <div className={classnames(css.toast, css[type])}>
       <div className={css.text}>{message}</div>
       <i
         onClick={() => dispatchHideToast()}
@@ -23,24 +19,22 @@ const Toast = ({ show, type='success', message, dispatchHideToast }) => {
       />
     </div>
   );
-}
+};
 
 Toast.propTypes = {
   show: PropTypes.bool,
   message: PropTypes.string,
   type: PropTypes.string,
-  dispatchHideToast: PropTypes.func.isRequired,
+  dispatchHideToast: PropTypes.func.isRequired
 };
 
 export default connect(
   state => ({
     show: state.toast.show,
     message: state.toast.message,
-    type: state.toast.type,
+    type: state.toast.type
   }),
   dispatch => ({
-    dispatchHideToast: () => dispatch(hideToast()),
-  }),
+    dispatchHideToast: () => dispatch(hideToast())
+  })
 )(Toast);
-
-

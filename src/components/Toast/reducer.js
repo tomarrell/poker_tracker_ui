@@ -1,11 +1,8 @@
-import {
-  SHOW_TOAST,
-  HIDE_TOAST,
-} from './actions';
+import { SHOW_TOAST, HIDE_TOAST } from "./actions";
 
 const initialState = {
   show: false,
-  message: '',
+  message: ""
 };
 
 export default (state = initialState, action) => {
@@ -15,19 +12,19 @@ export default (state = initialState, action) => {
         ...state,
         show: true,
         message: action.payload.message,
-        type: action.payload.type,
+        type: action.payload.type
       };
     }
     case HIDE_TOAST: {
       return {
         ...state,
         show: false,
-        message: '',
-        type: '',
+        message: "",
+        type: ""
       };
     }
     default: {
       return state;
     }
   }
-}
+};

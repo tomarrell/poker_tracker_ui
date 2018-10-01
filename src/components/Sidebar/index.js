@@ -1,13 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-import SessionList from '../SessionList';
-import { sessionsSelector } from '../Overview/selectors';
-import { currentSession } from '../Session/selectors';
+import SessionList from "../SessionList";
+import { sessionsSelector } from "../Overview/selectors";
+import { currentSession } from "../Session/selectors";
 
-import css from './style.css';
+import css from "./style.css";
 
 const Sidebar = ({ sessions, activeSession, match }) => {
   return (
@@ -31,13 +31,13 @@ const Sidebar = ({ sessions, activeSession, match }) => {
 Sidebar.propTypes = {
   match: PropTypes.object.isRequired,
   activeSession: PropTypes.object,
-  sessions: PropTypes.array,
+  sessions: PropTypes.array
 };
 
 export default connect(
   state => ({
     sessions: sessionsSelector(state),
-    activeSession: currentSession(state),
+    activeSession: currentSession(state)
   }),
-  null,
+  null
 )(Sidebar);

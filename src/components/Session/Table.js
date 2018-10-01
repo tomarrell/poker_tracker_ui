@@ -1,13 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import { formatCurrency } from '../../utils/money';
-import { toTitleCase } from '../../utils/strings';
-import css from './style.css';
+import { formatCurrency } from "../../utils/money";
+import { toTitleCase } from "../../utils/strings";
+import css from "./style.css";
 
 const Table = ({ people }) => {
-  const buyinAcc = people.reduce((acc, curr) => acc + Number(curr.buyin), 0).toFixed(2);
-  const walkoutAcc = people.reduce((acc, curr) => acc + Number(curr.walkout), 0).toFixed(2);
+  const buyinAcc = people
+    .reduce((acc, curr) => acc + Number(curr.buyin), 0)
+    .toFixed(2);
+  const walkoutAcc = people
+    .reduce((acc, curr) => acc + Number(curr.walkout), 0)
+    .toFixed(2);
 
   return (
     <table className={css.peopleList}>
@@ -25,7 +29,7 @@ const Table = ({ people }) => {
           const { name } = playerSession.player;
           const { buyin, walkout } = playerSession;
 
-          const net = (walkout - buyin);
+          const net = walkout - buyin;
 
           return (
             <tr key={playerSession.player.id}>
@@ -49,7 +53,7 @@ const Table = ({ people }) => {
 };
 
 Table.propTypes = {
-  people: PropTypes.array,
+  people: PropTypes.array
 };
 
 export default Table;

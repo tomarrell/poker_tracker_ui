@@ -1,28 +1,28 @@
 const storage = window.localStorage;
-const RECENT_REALMS = 'recent_realms';
+const RECENT_REALMS = "recent_realms";
 const RECENT_REALM_LENGTH = 5;
 
 const setCookie = (key, value) => {
-  if (typeof key !== 'string') {
-    throw new Error('Localstorage key must be string');
+  if (typeof key !== "string") {
+    throw new Error("Localstorage key must be string");
   }
 
   storage.setItem(key, JSON.stringify(value));
-}
+};
 
-const getCookie = (key) => {
-  if (typeof key !== 'string') {
-    throw new Error('Localstorage key must be string');
+const getCookie = key => {
+  if (typeof key !== "string") {
+    throw new Error("Localstorage key must be string");
   }
 
   return JSON.parse(storage.getItem(key));
-}
+};
 
 export const addRecentRealm = (id, name, title) => {
   let recentRealms = getCookie(RECENT_REALMS) || [];
 
   recentRealms = [
-    {id, name, title},
+    { id, name, title },
     ...recentRealms.filter(realm => realm.id !== id)
   ].slice(0, RECENT_REALM_LENGTH);
 
@@ -31,4 +31,4 @@ export const addRecentRealm = (id, name, title) => {
 
 export const getRecentRealms = () => {
   return getCookie(RECENT_REALMS);
-}
+};

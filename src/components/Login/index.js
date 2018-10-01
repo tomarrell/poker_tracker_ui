@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-import { getRecentRealms } from '../../utils/localstorage';
+import { getRecentRealms } from "../../utils/localstorage";
 
-import { createRealm, loginRealm } from './actions';
+import { createRealm, loginRealm } from "./actions";
 
-import Loading from '../Loading';
+import Loading from "../Loading";
 
-import css from './style.css';
+import css from "./style.css";
 
 class Login extends Component {
   constructor() {
-    super()
+    super();
 
     this.state = {
-      realm: '',
+      realm: ""
       // TODO add password for login
       // password: '',
     };
@@ -24,11 +24,11 @@ class Login extends Component {
   }
 
   handleInputChange(name) {
-    return (event) => {
+    return event => {
       this.setState({
-        [name]: event.target.value,
+        [name]: event.target.value
       });
-    }
+    };
   }
 
   loginRealm = async () => {
@@ -36,7 +36,7 @@ class Login extends Component {
     const { dispatchLoginRealm } = this.props;
 
     dispatchLoginRealm(realm);
-  }
+  };
 
   createRealm = async () => {
     const { realm } = this.state;
@@ -44,19 +44,19 @@ class Login extends Component {
 
     // TODO take realm title during realm creation
     dispatchCreateRealm(realm, undefined);
-  }
+  };
 
-  handleRealmSelect = (name) => () => {
+  handleRealmSelect = name => () => {
     this.setState({
-      realm: name,
+      realm: name
     });
-  }
+  };
 
-  handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
+  handleKeyDown = e => {
+    if (e.key === "Enter") {
       this.loginRealm();
     }
-  }
+  };
 
   render() {
     const { realm } = this.state;
@@ -67,15 +67,23 @@ class Login extends Component {
       <div className={css.enterRealm}>
         <div>
           <span>Enter Realm</span>
-          <input onChange={this.handleInputChange('realm')} onKeyPress={this.handleKeyDown} placeholder="Realm" value={realm} />
-          {realm.length > 0 &&
+          <input
+            onChange={this.handleInputChange("realm")}
+            onKeyPress={this.handleKeyDown}
+            placeholder="Realm"
+            value={realm}
+          />
+          {realm.length > 0 && (
             <input
-              onChange={this.handleInputChange('password')}
+              onChange={this.handleInputChange("password")}
               placeholder="Password"
               type="password"
-            />}
+            />
+          )}
           <button onClick={this.loginRealm}>Login</button>
-          <button onClick={this.createRealm} className={css.createRealm}>+ Create</button>
+          <button onClick={this.createRealm} className={css.createRealm}>
+            + Create
+          </button>
           <Loading isLoading={isLoading} small />
         </div>
 
@@ -97,15 +105,15 @@ class Login extends Component {
 Login.propTypes = {
   dispatchLoginRealm: PropTypes.func,
   dispatchCreateRealm: PropTypes.func,
-  isLoading: PropTypes.bool,
+  isLoading: PropTypes.bool
 };
 
 export default connect(
   state => ({
-    isLoading: state.login.loading,
+    isLoading: state.login.loading
   }),
-  (dispatch) => ({
-    dispatchLoginRealm: (name) => dispatch(loginRealm(name)),
-    dispatchCreateRealm: (name, title) => dispatch(createRealm(name, title)),
-  }),
+  dispatch => ({
+    dispatchLoginRealm: name => dispatch(loginRealm(name)),
+    dispatchCreateRealm: (name, title) => dispatch(createRealm(name, title))
+  })
 )(Login);

@@ -1,28 +1,22 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-import css from './style.css';
+import css from "./style.css";
 
 export default class App extends Component {
   constructor() {
-    super()
+    super();
 
-    this.state = {
-    };
+    this.state = {};
   }
 
   render() {
     const { children } = this.props;
 
-    return (
-      <div className={css.app}>
-        {children}
-      </div>
-    );
+    return <div className={css.app}>{children}</div>;
   }
 }
 
 App.propTypes = {
-  children: PropTypes.object,
+  children: PropTypes.object
 };
-

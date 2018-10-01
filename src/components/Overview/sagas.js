@@ -1,18 +1,18 @@
-import { put, call, takeLatest, select } from 'redux-saga/effects';
+import { put, call, takeLatest, select } from "redux-saga/effects";
 
-import { realmSelector } from '../Login/selectors';
-import { SUCCESS_ENTER_REALM, loginRealm } from '../Login/actions';
+import { realmSelector } from "../Login/selectors";
+import { SUCCESS_ENTER_REALM, loginRealm } from "../Login/actions";
 import {
   fetchSessionsByRealmId,
   fetchPlayersByRealmId,
-  fetchRealmSummaryByRealmId,
-} from './api';
+  fetchRealmSummaryByRealmId
+} from "./api";
 import {
   fetchSessionsSuccess,
   fetchPlayersSuccess,
   FETCH_REALM_INFO,
-  fetchRealmInfoSuccess,
-} from './actions';
+  fetchRealmInfoSuccess
+} from "./actions";
 
 export function* fetchSessions(realmId) {
   const { data } = yield call(fetchSessionsByRealmId, realmId);
@@ -37,15 +37,14 @@ export function* fetchRealmInfo() {
   const parsedRealmSummary = {
     sessions: realmSummary.sessions.map(s => ({
       ...s,
-        id: Number(s.id),
-        realmId: Number(s.realmId),
+      id: Number(s.id),
+      realmId: Number(s.realmId)
     })),
     players: realmSummary.players.map(p => ({
       ...p,
-        id: Number(p.id),
-    })),
+      id: Number(p.id)
+    }))
   };
-
 
   yield put(fetchRealmInfoSuccess(parsedRealmSummary));
 }
@@ -56,8 +55,8 @@ export function* fetchRealmThenInfo() {
   // local storage/cookie for auth details when navigating
   // direct via URL
   const realmName = document.location.pathname
-    .replace('/overview/', '')
-    .split('/')[0];
+    .replace("/overview/", "")
+    .split("/")[0];
 
   yield put(loginRealm(realmName));
 }
@@ -65,6 +64,6 @@ export function* fetchRealmThenInfo() {
 export default function* watchOverview() {
   yield [
     takeLatest(SUCCESS_ENTER_REALM, fetchRealmInfo),
-    takeLatest(FETCH_REALM_INFO, fetchRealmThenInfo),
+    takeLatest(FETCH_REALM_INFO, fetchRealmThenInfo)
   ];
 }

@@ -1,40 +1,40 @@
-import React from 'react';
-import { render } from 'react-dom';
+import React from "react";
+import { render } from "react-dom";
 
 // Charts Styling
-import 'frappe-charts/dist/frappe-charts.min.css';
+import "frappe-charts/dist/frappe-charts.min.css";
 
 // React-router-redux
-import createHistory from 'history/createBrowserHistory';
-import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
+import createHistory from "history/createBrowserHistory";
+import {
+  ConnectedRouter,
+  routerReducer,
+  routerMiddleware
+} from "react-router-redux";
 
 // Redux Setup
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
-import createSagaMiddleware from 'redux-saga';
-import combinedReducers from './reducers';
-import rootSaga from './rootSaga';
-
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware, compose } from "redux";
+import createSagaMiddleware from "redux-saga";
+import combinedReducers from "./reducers";
+import rootSaga from "./rootSaga";
 
 // Routes
-import Routes from './routes';
-import Toast from './components/Toast';
+import Routes from "./routes";
+import Toast from "./components/Toast";
 // Root styles
-import './style.css';
+import "./style.css";
 
 // React-router-redux setup
 const history = createHistory();
 const routeMiddleware = routerMiddleware(history);
 
 const sagaMiddleware = createSagaMiddleware();
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ //eslint-disable-line
-  || compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; //eslint-disable-line
 
 const store = createStore(
   combinedReducers(routerReducer),
-  composeEnhancers(
-    applyMiddleware(sagaMiddleware, routeMiddleware),
-  ),
+  composeEnhancers(applyMiddleware(sagaMiddleware, routeMiddleware))
 );
 
 sagaMiddleware.run(rootSaga);
@@ -48,5 +48,5 @@ render(
       </div>
     </ConnectedRouter>
   </Provider>,
-  document.getElementById('root'),
+  document.getElementById("root")
 );

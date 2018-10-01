@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import { Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-import { fetchRealmInfo } from './actions';
+import { fetchRealmInfo } from "./actions";
 
-import Sidebar from '../Sidebar';
-import Leaderboard from '../Leaderboard';
-import ViewSession from '../Session';
-import NewSession from '../NewSession';
+import Sidebar from "../Sidebar";
+import Leaderboard from "../Leaderboard";
+import ViewSession from "../Session";
+import NewSession from "../NewSession";
 
-import css from './style.css';
+import css from "./style.css";
 
 class Overview extends Component {
   constructor(props) {
@@ -29,9 +29,21 @@ class Overview extends Component {
       <div className={css.overview}>
         <Route path={`${match.url}/:realmName`} component={Sidebar} />
         <Switch>
-          <Route exact path={`${match.url}/:realmName/new`} component={NewSession} />
-          <Route exact path={`${match.url}/:realmName/:id`} component={ViewSession} />
-          <Route exact path={`${match.url}/:realmName`} component={Leaderboard} />
+          <Route
+            exact
+            path={`${match.url}/:realmName/new`}
+            component={NewSession}
+          />
+          <Route
+            exact
+            path={`${match.url}/:realmName/:id`}
+            component={ViewSession}
+          />
+          <Route
+            exact
+            path={`${match.url}/:realmName`}
+            component={Leaderboard}
+          />
         </Switch>
         <Route path="/" component={null} />
       </div>
@@ -41,12 +53,9 @@ class Overview extends Component {
 
 Overview.propTypes = {
   fetchRealmInfo: PropTypes.func.isRequired,
-  match: PropTypes.object,
+  match: PropTypes.object
 };
 
-export default connect(
-  null,
-  dispatch => ({
-    fetchRealmInfo: () => dispatch(fetchRealmInfo()),
-  }),
-)(Overview);
+export default connect(null, dispatch => ({
+  fetchRealmInfo: () => dispatch(fetchRealmInfo())
+}))(Overview);
