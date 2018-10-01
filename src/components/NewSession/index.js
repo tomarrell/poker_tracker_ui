@@ -195,7 +195,15 @@ class NewSession extends Component {
               value={time}
             />
           </div>
-          <Link to="/overview" className={css.close}>Close</Link>
+          <Link
+            to={document.location.pathname.slice(
+              0,
+              document.location.pathname.lastIndexOf("/new")
+            )}
+            className={css.close}
+          >
+            Close
+          </Link>
           <button
             onClick={this.handleCreateSession}
             className={
