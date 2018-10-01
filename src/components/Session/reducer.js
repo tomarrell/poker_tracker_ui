@@ -1,6 +1,7 @@
 import {
   FETCH_SESSION_SUCCESS,
   CREATE_SESSION_SUCCESS,
+  CREATE_SESSION_FAILURE,
   CREATE_SESSION_REQUEST,
   CLEAR_CURRENT_SESSION,
 } from './actions';
@@ -31,6 +32,12 @@ export default (state = initialState, action) => {
       };
     }
     case CREATE_SESSION_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+      };
+    }
+    case CREATE_SESSION_FAILURE: {
       return {
         ...state,
         loading: false,

@@ -3,6 +3,7 @@ export const CREATE_PLAYER_SUCCESS = 'session/CREATE_PLAYER_SUCCESS';
 
 export const CREATE_SESSION_REQUEST = 'session/CREATE_NEW_SESSION';
 export const CREATE_SESSION_SUCCESS = 'session/CREATE_SESSION_SUCCESS';
+export const CREATE_SESSION_FAILURE = 'session/CREATE_SESSION_FAILURE';
 
 export const FETCH_SESSION = 'session/FETCH_SESSION';
 export const FETCH_SESSION_SUCCESS = 'session/FETCH_SESSION_SUCCESS';
@@ -34,6 +35,11 @@ export const createSessionRequest = (name, time, playerSessions) => ({
 export const createSessionSuccess = (newSession) => ({
   type: CREATE_SESSION_SUCCESS,
   payload: newSession,
+});
+
+export const createSessionFailure = () => ({
+  type: CREATE_SESSION_FAILURE,
+  payload: {},
 });
 
 export const fetchCurrentSession = (sessionId) => ({
