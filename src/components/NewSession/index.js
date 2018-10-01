@@ -8,6 +8,7 @@ import Table from './Table';
 import Loading from '../Loading';
 
 import { createPlayer, createSessionRequest } from '../Session/actions';
+import { showToast } from '../Toast/actions'
 import { playersSelector } from '../Overview/selectors';
 
 import css from './style.css';
@@ -110,6 +111,34 @@ class NewSession extends Component {
     this.setState({ newPlayerName: '' });
   }
 
+  invalidSession = () => {
+    const { sendErrorToast } = this.props;
+    const { currentPlayers: playerSessions } = this.state;
+
+    if (playerSessions.length === 0) {
+      sendErrorToast("Cannot submit an empty session.")
+        return true
+    }
+
+    const badWalkout = playerSessions.find(p => p.walkout == null)
+    if (badWalkout != null) {
+      sendErrorToast(`Cannot have null walkout for player ${badWalkout.name}.`)
+        return true
+    }
+
+    const { buyIn, walkOut } = playerSessions.reduce(
+      (acc, p) => ({ buyIn: acc.buyIn + p.buyin, walkOut: acc.walkOut + p.walkout }),
+      { buyIn: 0, walkOut: 0 }
+    )
+
+    if (buyIn !== walkOut) {
+      sendErrorToast(`Total buy-in [${buyIn}] doesn't equal walk-out [${walkOut}].`)
+        return true
+    }
+
+    return false;
+  }
+
   handleCreateSession = () => {
     const {
       createSessionRequest: dispatchCreateSessionRequest,
@@ -117,18 +146,17 @@ class NewSession extends Component {
     } = this.props;
 
     if (loading) return;
+    if (this.invalidSession()) return;
 
     const { currentPlayers: playerSessions, date, time } = this.state;
 
+
     const playDate = new Date(`${date}T${time}`);
 
-    const playerInfo = playerSessions.map(player => {
-      if (player.walkout === null) throw new Error('Cannot have null walkout for player');
-      return {
-        ...player,
-        playerId: player.id,
-      };
-    });
+    const playerInfo = playerSessions.map(player => ({
+      ...player,
+      playerId: player.id,
+    }));
 
     // TODO add name for session and pass it to API, currently just using time
     dispatchCreateSessionRequest(null, playDate, playerInfo);
@@ -195,7 +223,15 @@ class NewSession extends Component {
               value={time}
             />
           </div>
-          <Link to="/overview" className={css.close}>Close</Link>
+          <Link
+            to={document.location.pathname.slice(
+              0,
+              document.location.pathname.lastIndexOf("/new")
+            )}
+            className={css.close}
+          >
+            Close
+          </Link>
           <button
             onClick={this.handleCreateSession}
             className={
@@ -222,6 +258,7 @@ NewSession.propTypes = {
   players: PropTypes.array.isRequired,
   createPlayer: PropTypes.func.isRequired,
   createSessionRequest: PropTypes.func.isRequired,
+  sendErrorToast: PropTypes.func.isRequired,
   loading: PropTypes.bool,
 };
 
@@ -234,5 +271,6 @@ export default connect(
     createPlayer: (name) => dispatch(createPlayer(name)),
     createSessionRequest: (name, time, playerSessions) =>
       dispatch(createSessionRequest(name, time, playerSessions)),
+    sendErrorToast: (msg) => dispatch(showToast(msg, 'error')),
   }),
 )(NewSession);
