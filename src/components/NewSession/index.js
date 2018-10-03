@@ -1,35 +1,39 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Prompt, Link } from 'react-router-dom';
-import classnames from 'classnames';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Prompt, Link } from "react-router-dom";
+import classnames from "classnames";
 
-import Table from './Table';
-import Loading from '../Loading';
+import Table from "./Table";
+import Loading from "../Loading";
 
-import { createPlayer, createSessionRequest } from '../Session/actions';
-import { showToast } from '../Toast/actions'
-import { playersSelector } from '../Overview/selectors';
+import { createPlayer, createSessionRequest } from "../Session/actions";
+import { showToast } from "../Toast/actions";
+import { playersSelector } from "../Overview/selectors";
 
-import css from './style.css';
-import { DEFAULT_BUYIN, LEAVE_PROMPT } from './constants';
+import css from "./style.css";
+import { DEFAULT_BUYIN, LEAVE_PROMPT } from "./constants";
 
 class NewSession extends Component {
   constructor(props) {
     super(props);
 
     const localDate = new Date();
-    const currentDateString = localDate.toLocaleDateString().split('/').reverse().join('-');
+    const currentDateString = localDate
+      .toLocaleDateString()
+      .split("/")
+      .reverse()
+      .join("-");
     const currentTimeString = localDate.toLocaleTimeString();
 
     this.state = {
       isAddingPerson: false,
-      newPlayerName: '',
+      newPlayerName: "",
       allPlayers: props.players,
       currentPlayers: [],
       time: currentTimeString,
       date: currentDateString,
-      submitted: false,
+      submitted: false
     };
   }
 
@@ -37,38 +41,41 @@ class NewSession extends Component {
     const { allPlayers, currentPlayers, isAddingPerson } = this.state;
 
     const allPlayerIds = allPlayers.map(p => p.id);
-    const newPlayersFromStore = nextProps
-      .players
+    const newPlayersFromStore = nextProps.players
       .filter(p => !allPlayerIds.includes(p.id))
       .map(p => ({
         ...p,
         buyin: DEFAULT_BUYIN,
-        walkout: null,
+        walkout: null
       }));
 
     this.setState({
-      currentPlayers: [...currentPlayers, ...(isAddingPerson ? newPlayersFromStore : [])].sort((a, b) => a.name < b.name ? -1 : 1),
+      currentPlayers: [
+        ...currentPlayers,
+        ...(isAddingPerson ? newPlayersFromStore : [])
+      ].sort((a, b) => (a.name < b.name ? -1 : 1)),
       allPlayers: [...allPlayers, ...newPlayersFromStore]
     });
   }
 
   handleInputChange = (event, key) => {
     this.setState({
-      [key]: event.target.value,
+      [key]: event.target.value
     });
-  }
+  };
 
-  handleNewPersonChange = (event) => this.setState({ newPlayerName: event.target.value });
+  handleNewPersonChange = event =>
+    this.setState({ newPlayerName: event.target.value });
 
-  handleNewPersonSelect = (name) => this.setState({ newPlayerName: name });
+  handleNewPersonSelect = name => this.setState({ newPlayerName: name });
 
   handleAddPerson = () => {
     const { isAddingPerson } = this.state;
 
     this.setState({
-      isAddingPerson: !isAddingPerson,
+      isAddingPerson: !isAddingPerson
     });
-  }
+  };
 
   handleChangePerson = (event, key, player) => {
     const { currentPlayers } = this.state;
@@ -76,19 +83,22 @@ class NewSession extends Component {
     const oldPlayerInfo = currentPlayers.find(p => p.id === player.id);
     const filteredPlayers = currentPlayers.filter(p => p.id !== player.id);
 
-    const newPlayers = [...filteredPlayers, {
-      ...oldPlayerInfo,
-      [key]: event.target.value,
-    }].map(p => ({
+    const newPlayers = [
+      ...filteredPlayers,
+      {
+        ...oldPlayerInfo,
+        [key]: event.target.value
+      }
+    ].map(p => ({
       ...p,
       buyin: Number(p.buyin) || DEFAULT_BUYIN,
-      walkout: Number(p.walkout),
+      walkout: Number(p.walkout)
     }));
 
     this.setState({
-      currentPlayers: newPlayers.sort((a, b) => a.name < b.name ? -1 : 1),
+      currentPlayers: newPlayers.sort((a, b) => (a.name < b.name ? -1 : 1))
     });
-  }
+  };
 
   createPlayer = () => {
     const { createPlayer: dispatchCreatePlayer } = this.props;
@@ -97,52 +107,59 @@ class NewSession extends Component {
     const existingPlayer = allPlayers.find(p => p.name === newPlayerName);
     const alreadyAdded = currentPlayers.find(p => p.name === newPlayerName);
 
-    if (alreadyAdded || !newPlayerName.trim()) return
+    if (alreadyAdded || !newPlayerName.trim()) return;
 
     if (existingPlayer) {
       this.setState({
-        currentPlayers: [...currentPlayers, existingPlayer].sort((a, b) => a.name < b.name ? -1 : 1),
-        newPlayerName: '',
+        currentPlayers: [...currentPlayers, existingPlayer].sort(
+          (a, b) => (a.name < b.name ? -1 : 1)
+        ),
+        newPlayerName: ""
       });
       return;
     }
 
     dispatchCreatePlayer(newPlayerName);
-    this.setState({ newPlayerName: '' });
-  }
+    this.setState({ newPlayerName: "" });
+  };
 
   invalidSession = () => {
     const { sendErrorToast } = this.props;
     const { currentPlayers: playerSessions } = this.state;
 
     if (playerSessions.length === 0) {
-      sendErrorToast("Cannot submit an empty session.")
-        return true
+      sendErrorToast("Cannot submit an empty session.");
+      return true;
     }
 
-    const badWalkout = playerSessions.find(p => p.walkout == null)
+    const badWalkout = playerSessions.find(p => p.walkout == null);
     if (badWalkout != null) {
-      sendErrorToast(`Cannot have null walkout for player ${badWalkout.name}.`)
-        return true
+      sendErrorToast(`Cannot have null walkout for player ${badWalkout.name}.`);
+      return true;
     }
 
     const { buyIn, walkOut } = playerSessions.reduce(
-      (acc, p) => ({ buyIn: acc.buyIn + p.buyin, walkOut: acc.walkOut + p.walkout }),
+      (acc, p) => ({
+        buyIn: acc.buyIn + p.buyin,
+        walkOut: acc.walkOut + p.walkout
+      }),
       { buyIn: 0, walkOut: 0 }
-    )
+    );
 
     if (buyIn !== walkOut) {
-      sendErrorToast(`Total buy-in [${buyIn}] doesn't equal walk-out [${walkOut}].`)
-        return true
+      sendErrorToast(
+        `Total buy-in [${buyIn}] doesn't equal walk-out [${walkOut}].`
+      );
+      return true;
     }
 
     return false;
-  }
+  };
 
   handleCreateSession = () => {
     const {
       createSessionRequest: dispatchCreateSessionRequest,
-      loading,
+      loading
     } = this.props;
 
     if (loading) return;
@@ -150,37 +167,41 @@ class NewSession extends Component {
 
     const { currentPlayers: playerSessions, date, time } = this.state;
 
-
     const playDate = new Date(`${date}T${time}`);
 
     const playerInfo = playerSessions.map(player => ({
       ...player,
-      playerId: player.id,
+      playerId: player.id
     }));
 
     // TODO add name for session and pass it to API, currently just using time
     dispatchCreateSessionRequest(null, playDate, playerInfo);
     this.setState({
-      submitted: true,
+      submitted: true
     });
-  }
+  };
 
-  handleKeyPress = (e) => {
-    if (e.key === 'Enter') this.createPlayer();
-  }
+  handleKeyPress = e => {
+    if (e.key === "Enter") this.createPlayer();
+  };
 
   render() {
-    const { currentPlayers, allPlayers, isAddingPerson, newPlayerName, date, time, submitted } = this.state;
+    const {
+      currentPlayers,
+      allPlayers,
+      isAddingPerson,
+      newPlayerName,
+      date,
+      time,
+      submitted
+    } = this.state;
     const { loading } = this.props;
 
-    const buttonMessage = isAddingPerson ? 'x Cancel' : '+ Add Person';
+    const buttonMessage = isAddingPerson ? "x Cancel" : "+ Add Person";
 
     return (
       <div className={css.newSession}>
-        <Prompt
-          when={!submitted && loading}
-          message={LEAVE_PROMPT}
-        />
+        <Prompt when={!submitted && loading} message={LEAVE_PROMPT} />
         <h2>New Session</h2>
 
         <hr />
@@ -195,19 +216,18 @@ class NewSession extends Component {
           handleChangePerson={this.handleChangePerson}
           handleKeyPress={this.handleKeyPress}
         />
-        <button
-          onClick={this.handleAddPerson}
-          className={css.newPerson}
-        >
+        <button onClick={this.handleAddPerson} className={css.newPerson}>
           {buttonMessage}
         </button>
-        {isAddingPerson && <button onClick={this.createPlayer}>Add User ✔</button>}
+        {isAddingPerson && (
+          <button onClick={this.createPlayer}>Add User ✔</button>
+        )}
 
         <div>
           <div>
             <span>Session Date:* </span>
             <input
-              onChange={event => this.handleInputChange(event, 'date')}
+              onChange={event => this.handleInputChange(event, "date")}
               type="date"
               className={css.dateField}
               value={date}
@@ -217,7 +237,7 @@ class NewSession extends Component {
           <div>
             <span>Session Time: </span>
             <input
-              onChange={event => this.handleInputChange(event, 'time')}
+              onChange={event => this.handleInputChange(event, "time")}
               type="time"
               className={css.dateField}
               value={time}
@@ -234,20 +254,14 @@ class NewSession extends Component {
           </Link>
           <button
             onClick={this.handleCreateSession}
-            className={
-              classnames(
-                {
-                  [css.create]: true,
-                  [css.loading]: loading,
-                },
-              )}
+            className={classnames({
+              [css.create]: true,
+              [css.loading]: loading
+            })}
           >
             Create Session ✔
           </button>
-          <Loading
-            className={css.loadingPosition}
-            isLoading={loading}
-          />
+          <Loading className={css.loadingPosition} isLoading={loading} />
         </div>
       </div>
     );
@@ -259,18 +273,18 @@ NewSession.propTypes = {
   createPlayer: PropTypes.func.isRequired,
   createSessionRequest: PropTypes.func.isRequired,
   sendErrorToast: PropTypes.func.isRequired,
-  loading: PropTypes.bool,
+  loading: PropTypes.bool
 };
 
 export default connect(
   state => ({
     players: playersSelector(state),
-    loading: state.session.loading,
+    loading: state.session.loading
   }),
   dispatch => ({
-    createPlayer: (name) => dispatch(createPlayer(name)),
+    createPlayer: name => dispatch(createPlayer(name)),
     createSessionRequest: (name, time, playerSessions) =>
       dispatch(createSessionRequest(name, time, playerSessions)),
-    sendErrorToast: (msg) => dispatch(showToast(msg, 'error')),
-  }),
+    sendErrorToast: msg => dispatch(showToast(msg, "error"))
+  })
 )(NewSession);

@@ -1,31 +1,31 @@
 import {
   getSessionsByRealmIdSchema,
   getRealmSummaryByRealmId,
-  getPlayersByRealmIdSchema,
-} from '../../api/querySchemas';
+  getPlayersByRealmIdSchema
+} from "../../api/querySchemas";
 
-import { postGQL } from '../../api/utils';
+import { postGQL } from "../../api/utils";
 
 export const fetchSessionsByRealmId = realmId => {
-  if (!realmId) throw new Error('RealmId must be present to fetch sessions');
+  if (!realmId) throw new Error("RealmId must be present to fetch sessions");
 
   return postGQL(getSessionsByRealmIdSchema, {
-    realmId,
+    realmId
   });
 };
 
 export const fetchRealmSummaryByRealmId = realmId => {
-  if (!realmId) throw new Error('RealmId must be present to fetch sessions');
+  if (!realmId) throw new Error("RealmId must be present to fetch sessions");
 
   return postGQL(getRealmSummaryByRealmId, {
-    realmId,
+    realmId
   });
 };
 
 export const fetchPlayersByRealmId = realmId => {
-  if (!realmId) throw new Error('RealmId must be present to fetch players');
+  if (!realmId) throw new Error("RealmId must be present to fetch players");
 
   return postGQL(getPlayersByRealmIdSchema, {
-    realmId,
+    realmId
   });
 };

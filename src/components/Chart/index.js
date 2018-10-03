@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Frappe from 'frappe-charts/dist/frappe-charts.min.esm';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import Frappe from "frappe-charts/dist/frappe-charts.min.esm";
 
 export default class Chart extends Component {
   componentDidMount() {
     const {
       title,
       data,
-      type = 'bar',
+      type = "bar",
       height = 250,
       onSelect,
       ...rest
@@ -24,7 +24,7 @@ export default class Chart extends Component {
     });
 
     if (onSelect) {
-      this.c.parent.addEventListener('data-select', onSelect);
+      this.c.parent.addEventListener("data-select", onSelect);
     }
   }
 
@@ -33,18 +33,23 @@ export default class Chart extends Component {
   }
 
   render() {
-    return <div ref={chart => { this.chart = chart }} />
+    return (
+      <div
+        ref={chart => {
+          this.chart = chart;
+        }}
+      />
+    );
   }
 }
 
 Chart.propTypes = {
   data: PropTypes.shape({
     datasets: PropTypes.array.isRequired,
-    labels: PropTypes.array,
+    labels: PropTypes.array
   }),
   title: PropTypes.string,
   type: PropTypes.string,
   height: PropTypes.number,
-  onSelect: PropTypes.func,
-}
-
+  onSelect: PropTypes.func
+};

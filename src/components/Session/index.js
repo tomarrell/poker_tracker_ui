@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { DateTime } from 'luxon';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { DateTime } from "luxon";
 
-import { fetchCurrentSession, clearCurrentSession } from './actions';
-import { toTitleCase } from '../../utils/strings';
+import { fetchCurrentSession, clearCurrentSession } from "./actions";
+import { toTitleCase } from "../../utils/strings";
 
-import Table from './Table';
-import Chart from '../Chart';
-import css from './style.css';
+import Table from "./Table";
+import Chart from "../Chart";
+import css from "./style.css";
 
 class ViewSession extends Component {
   constructor(props) {
@@ -18,8 +18,8 @@ class ViewSession extends Component {
     const { match, fetchCurrentSession: fetchSession } = props;
 
     this.state = {
-      session: {},
-    }
+      session: {}
+    };
 
     fetchSession(match.params.id);
   }
@@ -35,7 +35,7 @@ class ViewSession extends Component {
     }
 
     this.setState({
-      session: nextProps.session,
+      session: nextProps.session
     });
   }
 
@@ -50,7 +50,9 @@ class ViewSession extends Component {
     const { playerSessions = [] } = session;
 
     const dt = DateTime.fromISO(session.time);
-    const ps = playerSessions.sort((a, b) => (b.walkout - b.buyin) - (a.walkout - a.buyin));
+    const ps = playerSessions.sort(
+      (a, b) => b.walkout - b.buyin - (a.walkout - a.buyin)
+    );
     const playerNet = ps.map(p => (p.walkout - p.buyin) / 100);
     const playerLabels = ps.map(p => toTitleCase(p.player.name));
 
@@ -58,17 +60,21 @@ class ViewSession extends Component {
       <div className={css.newSession}>
         <h2>Session Info</h2>
         <hr />
-        {playerNet.length && <Chart
-          key={session.id}
-          title="Net Winnings by Player"
-          type="bar"
-          data={{
-            labels: playerLabels,
-            datasets: [{
-              values: playerNet,
-            }],
-          }}
-        />}
+        {playerNet.length && (
+          <Chart
+            key={session.id}
+            title="Net Winnings by Player"
+            type="bar"
+            data={{
+              labels: playerLabels,
+              datasets: [
+                {
+                  values: playerNet
+                }
+              ]
+            }}
+          />
+        )}
         <Table people={playerSessions || []} />
         <form>
           <div>
@@ -82,7 +88,7 @@ class ViewSession extends Component {
         </form>
         <Link
           className={css.close}
-          to={`${match.url.replace(`/${match.params.id}`, '')}`}
+          to={`${match.url.replace(`/${match.params.id}`, "")}`}
         >
           Close
         </Link>
@@ -95,15 +101,15 @@ ViewSession.propTypes = {
   fetchCurrentSession: PropTypes.func.isRequired,
   clearSession: PropTypes.func.isRequired,
   match: PropTypes.object,
-  session: PropTypes.object,
+  session: PropTypes.object
 };
 
 export default connect(
   state => ({
-    session: state.session.currentSession,
+    session: state.session.currentSession
   }),
   dispatch => ({
-    fetchCurrentSession: (sessionId) => dispatch(fetchCurrentSession(sessionId)),
-    clearSession: () => dispatch(clearCurrentSession()),
-  }),
+    fetchCurrentSession: sessionId => dispatch(fetchCurrentSession(sessionId)),
+    clearSession: () => dispatch(clearCurrentSession())
+  })
 )(ViewSession);

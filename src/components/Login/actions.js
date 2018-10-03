@@ -1,25 +1,25 @@
-export const CREATE_REALM = 'login/CREATE_REALM';
-export const LOGIN_REALM = 'login/LOGIN_REALM';
-export const SUCCESS_ENTER_REALM = 'login/SUCCESS_ENTER_REALM';
-export const REALM_LOADING = 'login/REALM_LOADING';
+export const CREATE_REALM = "login/CREATE_REALM";
+export const LOGIN_REALM = "login/LOGIN_REALM";
+export const SUCCESS_ENTER_REALM = "login/SUCCESS_ENTER_REALM";
+export const REALM_LOADING = "login/REALM_LOADING";
 
 export const createRealm = (name, title) => ({
   type: CREATE_REALM,
   payload: {
     name,
-    title,
-  },
+    title
+  }
 });
 
-export const loginRealm = (name) => ({
+export const loginRealm = name => ({
   type: LOGIN_REALM,
   payload: {
-    name,
-  },
+    name
+  }
 });
 
 export const enterRealmLoading = () => ({
-  type: REALM_LOADING,
+  type: REALM_LOADING
 });
 
 export const successEnterRealm = (id, name, title) => ({
@@ -27,6 +27,6 @@ export const successEnterRealm = (id, name, title) => ({
   payload: {
     id,
     name,
-    title,
-  },
+    title
+  }
 });

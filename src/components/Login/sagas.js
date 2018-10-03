@@ -1,16 +1,21 @@
-import { delay } from 'redux-saga';
-import { takeLatest, call, put } from 'redux-saga/effects';
-import { push } from 'react-router-redux';
+import { delay } from "redux-saga";
+import { takeLatest, call, put } from "redux-saga/effects";
+import { push } from "react-router-redux";
 
 // Utils
-import { addRecentRealm } from '../../utils/localstorage';
+import { addRecentRealm } from "../../utils/localstorage";
 
 // Actions
-import { CREATE_REALM, LOGIN_REALM, successEnterRealm, enterRealmLoading } from './actions';
-import { showToast, hideToast } from '../Toast/actions';
+import {
+  CREATE_REALM,
+  LOGIN_REALM,
+  successEnterRealm,
+  enterRealmLoading
+} from "./actions";
+import { showToast, hideToast } from "../Toast/actions";
 
 // Api
-import { createRealm, loginRealm } from './api';
+import { createRealm, loginRealm } from "./api";
 
 // Sagas
 export function* createRealmRequest({ payload }) {
@@ -21,7 +26,7 @@ export function* createRealmRequest({ payload }) {
   const response = yield call(createRealm, name, title);
 
   if (response.errors) {
-    yield put(showToast('Failed to create realm. May already exist', 'error'));
+    yield put(showToast("Failed to create realm. May already exist", "error"));
     yield delay(3000);
     yield put(hideToast());
     return;
@@ -29,8 +34,8 @@ export function* createRealmRequest({ payload }) {
 
   const { createRealm: realm } = response.data;
 
-  yield call(addRecentRealm, realm.id, realm.name, realm.title)
-  yield put(successEnterRealm(parseInt(realm.id, 10), realm.name, realm.title))
+  yield call(addRecentRealm, realm.id, realm.name, realm.title);
+  yield put(successEnterRealm(parseInt(realm.id, 10), realm.name, realm.title));
 }
 
 export function* loginRealmRequest({ payload }) {
@@ -41,7 +46,7 @@ export function* loginRealmRequest({ payload }) {
   const response = yield call(loginRealm, name);
 
   if (response.errors) {
-    yield put(showToast('Failed to login to realm', 'error'));
+    yield put(showToast("Failed to login to realm", "error"));
     yield delay(3000);
     yield put(hideToast());
     return;
@@ -62,6 +67,6 @@ export function* loginRealmRequest({ payload }) {
 export default function* watchEnterActions() {
   yield [
     takeLatest(CREATE_REALM, createRealmRequest),
-    takeLatest(LOGIN_REALM, loginRealmRequest),
+    takeLatest(LOGIN_REALM, loginRealmRequest)
   ];
 }

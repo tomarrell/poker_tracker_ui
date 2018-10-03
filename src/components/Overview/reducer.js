@@ -2,17 +2,17 @@ import {
   FETCH_SESSIONS_SUCCESS,
   FETCH_PLAYERS_SUCCESS,
   FETCH_REALM_INFO,
-  FETCH_REALM_INFO_SUCCESS,
-} from './actions';
+  FETCH_REALM_INFO_SUCCESS
+} from "./actions";
 import {
   CREATE_PLAYER_SUCCESS,
-  CREATE_SESSION_SUCCESS,
-} from '../Session/actions';
+  CREATE_SESSION_SUCCESS
+} from "../Session/actions";
 
 const initialState = {
   sessions: [],
   players: [],
-  loading: false,
+  loading: false
 };
 
 export default (state = initialState, action) => {
@@ -20,32 +20,32 @@ export default (state = initialState, action) => {
     case FETCH_SESSIONS_SUCCESS: {
       return {
         ...state,
-        sessions: action.payload,
+        sessions: action.payload
       };
     }
     case FETCH_PLAYERS_SUCCESS: {
       return {
         ...state,
-        players: action.payload,
+        players: action.payload
       };
     }
     case CREATE_PLAYER_SUCCESS: {
       const newPlayer = action.payload;
       return {
         ...state,
-        players: [...state.players, newPlayer],
+        players: [...state.players, newPlayer]
       };
     }
     case CREATE_SESSION_SUCCESS: {
       return {
         ...state,
-        sessions: [...state.sessions, action.payload],
+        sessions: [...state.sessions, action.payload]
       };
     }
     case FETCH_REALM_INFO: {
       return {
         ...state,
-        loading: true,
+        loading: true
       };
     }
     case FETCH_REALM_INFO_SUCCESS: {
@@ -54,7 +54,7 @@ export default (state = initialState, action) => {
         ...state,
         players,
         sessions,
-        loading: false,
+        loading: false
       };
     }
     default: {

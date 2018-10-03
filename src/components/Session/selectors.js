@@ -1,1 +1,1 @@
-export const currentSession = state => state.session.currentSession
+export const currentSession = state => state.session.currentSession;
